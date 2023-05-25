@@ -7,9 +7,8 @@ class SesionModel{
         $this->database = $database;
     }
 
-    public function validar($usuario, $clave){
-        $sql = "SELECT *  FROM usuario WHERE dni='".$usuario."' AND pass='".$clave."' AND activo='1'";
-        //$sql = "SELECT * FROM empleados where dni='$usuario' and pass='$clave'";
+    public function validar($email, $clave){
+        $sql = "SELECT *  FROM usuario WHERE email='".$email."' AND pass='".$clave."' AND activo='1'";
         return $this->database->query($sql);
     }
 
