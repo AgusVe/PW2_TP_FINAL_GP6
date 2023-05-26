@@ -19,72 +19,71 @@
 	<h4 class="card-title mt-2">Formulario de registro</h4>
 </header>
 <article class="card-body">
-<form>
+<form action="/registro/procesarFormulario " method="POST">
 	<div class="form-row">
 		<div class="col form-group">
-			<label>Nombre </label>
-		  	<input type="text" class="form-control" placeholder="">
+			<label for="nombre">Nombre </label>
+		  	<input type="text" class="form-control" placeholder="" name="nombre">
 		</div> <!-- form-group end.// -->
 		<div class="col form-group">
-			<label>Apellido</label>
-		  	<input type="text" class="form-control" placeholder=" ">
+			<label for="apellido">Apellido</label>
+		  	<input type="text" class="form-control" placeholder=" "name="apellido">
 		</div> <!-- form-group end.// -->
 	</div> <!-- form-row end.// -->
 	<div class="form-group">
-		<label>Email</label>
-		<input type="email" class="form-control" placeholder="">
+		<label for="email">Email</label>
+		<input type="email" name="email" class="form-control" placeholder="">
 	</div> <!-- form-group end.// -->
-	<label>Genero</label>
+	<label for="genero">Genero</label>
 	<div class="form-group">
 		<label class="form-check form-check-inline">
-		  <input class="form-check-input" type="radio" name="gender" value="option1">
+		  <input class="form-check-input" type="radio" name="genero" value="option1">
 		  <span class="form-check-label"> Hombre </span>
 		</label>
 		<label class="form-check form-check-inline">
-		  <input class="form-check-input" type="radio" name="gender" value="option2">
+		  <input class="form-check-input" type="radio" name="genero" value="option2">
 		  <span class="form-check-label"> Mujer</span>
 		</label>
 		<label class="form-check form-check-inline">
-          <input class="form-check-input" type="radio" name="gender" value="option2">
+          <input class="form-check-input" type="radio" name="genero" value="option3">
           <span class="form-check-label"> Sin indicar</span>
         </label>
         <div class="form-group">
-            <label>Fecha de nacimiento</label>
-            <input type="date" class="form-control" id="fecha">
+            <label for="fechaNac">Fecha de nacimiento</label>
+            <input type="date" class="form-control" id="fecha" name="fechaNac">
             <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"></script>
         </div>
 	</div> <!-- form-group end.// -->
 	<div class="form-row">
 		<div class="form-group col-md-6">
-		  <label>Ciudad</label>
-		  <input type="text" class="form-control">
+		  <label for="ciudad">Ciudad</label>
+		  <input type="text" class="form-control" name="ciudad">
 		</div> <!-- form-group end.// -->
 		<div class="form-group col-md-6">
-		  <label>Pais</label>
-		  <select id="inputState" class="form-control">
-		    <option> Choose...</option>
-		      <option>Uzbekistan</option>
-		      <option>Russia</option>
-		      <option>United States</option>
-		      <option>India</option>
+		  <label for="pais">Pais</label>
+		  <select id="inputState" class="form-control" name="pais">
+		      <option>Brasil</option>
+		      <option>Uruguay</option>
+		      <option>Paraguay</option>
+		      <option>Chile</option>
 		      <option selected="">Argentina</option>
 		  </select>
 		</div> <!-- form-group end.// -->
 	</div> <!-- form-row.// -->
 	<div class="form-group">
-        <label>Usuario</label>
-        <input type="text" class="form-control" placeholder="">
+        <label for="usuario">Usuario</label>
+        <input type="text" name="usuario" class="form-control" placeholder="">
     </div>
 	<div class="form-group">
-		<label>Contraseña</label>
-	    <input class="form-control" type="password">
+		<label for="contrasenia">Contraseña</label>
+	    <input class="form-control" type="password" name="contrasenia">
 	</div> <!-- form-group end.// -->
 	<div class="form-group">
-    		<label>Repetir Contraseña</label>
-    	    <input class="form-control" type="password">
+    		<label for="contraseniaRepe">Repetir Contraseña</label>
+    	    <input class="form-control" type="password" name="contraseniaRepe">
     	</div> <!-- form-group end.// -->
     <div class="form-group">
-        <button type="submit" class="btn btn-primary btn-block"> Registrarme</button>
+        <button type="submit" class="btn btn-primary btn-block" name="enviarRegistro"> Registrarme</button>
     </div> <!-- form-group// -->
     <div class="form-group">
         <a href="/" class="btn btn-primary btn-block">Cancelar</a>

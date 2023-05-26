@@ -12,4 +12,11 @@ class RegistroController{
     public function execute(){
         echo $this->renderer->render("registro");
     }
+
+    public function procesarFormulario(){
+
+
+
+
+    }
 }
