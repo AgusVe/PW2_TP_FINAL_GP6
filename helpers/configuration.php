@@ -53,7 +53,7 @@ class configuration{
     }
 
     public function getRegistroController(){
-        return new RegistroController(new RegistroModel($this->getDataBase()));
+        return new RegistroController(new RegistroModel($this->getDataBase()),$this->getRenderer());
     }
 
 }

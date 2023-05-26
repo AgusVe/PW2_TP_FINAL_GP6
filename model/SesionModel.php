@@ -8,7 +8,7 @@ class SesionModel{
     }
 
     public function validar($email, $clave){
-        $sql = "SELECT *  FROM usuario WHERE email='".$email."' AND pass='".$clave."' AND activo='1'";
+        $sql = "SELECT *  FROM usuario WHERE email='".$email."' AND contrasenia='".$clave."' AND estado='1'";
         return $this->database->query($sql);
     }
 
