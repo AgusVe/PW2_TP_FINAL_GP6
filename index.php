@@ -8,4 +8,5 @@ $router = $configuration->getRouter();
 $module = $_GET['module'] ?? 'home';
 $action = $_GET['action'] ?? 'execute';
 
+
 $router->executeActionFromModule($action, $module);

@@ -5,7 +5,7 @@ class SesionController{
     private $sesionModel;
 
     public function __construct($sesionModel){
-        $this->$sesionModel = $sesionModel;
+        $this->sesionModel = $sesionModel;
     }
 
     public function iniciarSesion(){
@@ -22,10 +22,10 @@ class SesionController{
                         header("location: /homeAdmin");
                         break;
                     case "2":
-                        header("location: /homechofer");
+                        header("location: /homeEditor");
                         break;
                     default:
-                        header("location: /home");
+                        header("location: /homeUsuario");
                 }
             }else{
                 session_destroy();
