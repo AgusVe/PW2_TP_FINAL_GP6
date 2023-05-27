@@ -27,6 +27,7 @@ class SesionController{
                         break;
                     default:
                         header("location: /homeUsuario");
+                        break;
                 }
             }else{
                 session_destroy();
