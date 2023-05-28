@@ -8,12 +8,12 @@ class SesionModel{
     }
 
     public function validar($email, $clave){
-        $consultaSQL = "SELECT * FROM usuario WHERE email='".$email."' AND estado='1'";
-        $saveQuery=$this->database->query($consultaSQL);
-        $contraseniaHashedaObtenida=$saveQuery["0"]["contrasenia"];
+        $consultaContra = "SELECT * FROM usuario WHERE email='".$email."' AND estado='1'";
+        $saveQuery=$this->database->query($consultaContra);
+        $HashObtenido=$saveQuery["0"]["contrasenia"];
 
-        if(password_verify($clave,$contraseniaHashedaObtenida)) {
-            $sql = "SELECT * FROM usuario WHERE contrasenia='" . $contraseniaHashedaObtenida ."'";
+        if(password_verify($clave,$HashObtenido)) {
+            $sql = "SELECT *  FROM usuario WHERE email='".$email."' AND contrasenia='" . $HashObtenido ."' AND estado='1'";
             return $this->database->query($sql);
 
         }
