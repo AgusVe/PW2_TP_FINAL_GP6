@@ -57,11 +57,14 @@ body {
   line-height: 1.5;
   color: #212529;
   text-align: left;
-  background-color: #fff;
-  background-image: url("../images/fondo.jpg"); }
+  background-image: url("http://localhost/view/images/fondo.png");
+  background-size: contain;
+
+}
 
 [tabindex="-1"]:focus {
   outline: 0 !important; }
+
 
 hr {
   -webkit-box-sizing: content-box;
@@ -304,7 +307,7 @@ template {
 h1, h2, h3, h4, h5, h6,
 .h1, .h2, .h3, .h4, .h5, .h6 {
   margin-bottom: 0.5rem;
-  font-weight: 500;
+  font-weight: 600;
   line-height: 1.2; }
 
 h1, .h1 {
@@ -8163,7 +8166,7 @@ h1, h2, h3, h4, h5,
   background: #f35588 !important; }
 
 .ftco-section {
-  padding: 7em 0; }
+  padding: 4em 0; }
 
 .ftco-no-pt {
   padding-top: 0; }
@@ -8212,8 +8215,7 @@ h1, h2, h3, h4, h5,
 .login-wrap {
   position: relative;
   background: #fff; }
-  .login-wrap h3 {
-    font-weight: 300; }
+
 
 .form-group {
   position: relative; }

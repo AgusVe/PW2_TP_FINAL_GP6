@@ -15,8 +15,5 @@ class RegistroController{
 
     public function procesarFormulario(){
 
-
-
-
     }
 }
