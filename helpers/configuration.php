@@ -49,7 +49,7 @@ class configuration{
     }
 
     public function getSesionController(){
-        return new SesionController(new SesionModel($this->getDataBase()));
+        return new SesionController(new SesionModel($this->getDataBase()),$this->getRenderer());
     }
 
     public function getRegistroController(){

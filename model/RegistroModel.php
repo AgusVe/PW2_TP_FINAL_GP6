@@ -16,6 +16,6 @@ class RegistroModel{
 
     public function verificarSiExisteUsuario($usuario){
         $sql = "SELECT *  FROM usuario WHERE usuario='".$usuario."'";
-        return $resultado = $this->database->query($sql);
+        return $this->database->query($sql);
     }
 }
