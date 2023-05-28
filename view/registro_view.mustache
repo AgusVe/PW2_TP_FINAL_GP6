@@ -1,15 +1,7 @@
-<script src="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
-<script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-<!------ Include the above in your HEAD tag ---------->
-
-<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.8/css/all.css">
-
-<link rel="stylesheet" href="view/css/style.css">
-
+{{> header}}
 <div class="container">
 <br>  <h2 class="text-center" style="color:#fff; font-weight:900;">UNLAM TRIVIA 2023</h2>
 <hr>
-
 
 <div class="row justify-content-center" style="margin-bottom:5em;">
 <div class="col-md-6">
@@ -20,19 +12,22 @@
 </header>
 <article class="card-body">
 <form action="/registro/procesarFormulario " method="POST">
-	<div class="form-row">
+        <div class="form-row">
 		<div class="col form-group">
 			<label for="nombre">Nombre </label>
-		  	<input type="text" class="form-control" placeholder="" name="nombre">
+		  	<input type="text" class="form-control" placeholder="" name="nombre" required>
 		</div> <!-- form-group end.// -->
 		<div class="col form-group">
 			<label for="apellido">Apellido</label>
-		  	<input type="text" class="form-control" placeholder=" "name="apellido">
+		  	<input type="text" class="form-control" placeholder=" "name="apellido" required>
 		</div> <!-- form-group end.// -->
 	</div> <!-- form-row end.// -->
 	<div class="form-group">
 		<label for="email">Email</label>
 		<input type="email" name="email" class="form-control" placeholder="">
+    {{#errors}}
+        <p style="color:red">{{email}}</p>
+    {{/errors}}
 	</div> <!-- form-group end.// -->
 	<label for="genero">Genero</label>
 	<div class="form-group">
@@ -45,19 +40,19 @@
 		  <span class="form-check-label"> Mujer</span>
 		</label>
 		<label class="form-check form-check-inline">
-          <input class="form-check-input" type="radio" name="genero" value="X">
+          <input class="form-check-input" type="radio" name="genero" value="X" checked>
           <span class="form-check-label"> Sin indicar</span>
         </label>
         <div class="form-group">
             <label for="fechaNac">Fecha de nacimiento</label>
-            <input type="date" class="form-control" id="fecha" name="fechaNac">
+            <input type="date" class="form-control" id="fecha" name="fechaNac" required>
             <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"></script>
         </div>
 	</div> <!-- form-group end.// -->
 	<div class="form-row">
 		<div class="form-group col-md-6">
 		  <label for="ciudad">Ciudad</label>
-		  <input type="text" class="form-control" name="ciudad">
+		  <input type="text" class="form-control" name="ciudad" required>
 		</div> <!-- form-group end.// -->
 		<div class="form-group col-md-6">
 		  <label for="pais">Pais</label>
@@ -72,22 +67,29 @@
 	</div> <!-- form-row.// -->
 	<div class="form-group">
         <label for="usuario">Usuario</label>
-        <input type="text" name="usuario" class="form-control" placeholder="">
+        <input type="text" name="usuario" class="form-control" placeholder="" required>
+        {{#errors}}
+            <p style="color:red">{{usuario}}</p>
+        {{/errors}}
     </div>
 	<div class="form-group">
 		<label for="contrasenia">Contraseña</label>
-	    <input class="form-control" type="password" name="contrasenia">
+	    <input class="form-control" type="password" name="contrasenia" required>
 	</div> <!-- form-group end.// -->
 	<div class="form-group">
     		<label for="contraseniaRepe">Repetir Contraseña</label>
-    	    <input class="form-control" type="password" name="contraseniaRepe">
-    	</div> <!-- form-group end.// -->
+    	    <input class="form-control" type="password" name="contraseniaRepe" required>
+        {{#errors}}
+            <p style="color:red">{{contraseña}}</p>
+        {{/errors}}
+    </div> <!-- form-group end.// -->
     <div class="form-group">
         <button type="submit" class="btn btn-primary btn-block" name="enviarRegistro"> Registrarme</button>
     </div> <!-- form-group// -->
     <div class="form-group">
         <a href="/" class="btn btn-primary btn-block">Cancelar</a>
     </div> <!-- form-group// -->
+
 </form>
 </article> <!-- card-body end .// -->
 </div> <!-- card.// -->
@@ -98,3 +100,5 @@
 
 </div>
 <!--container end.//-->
+
+{{> footer}}
