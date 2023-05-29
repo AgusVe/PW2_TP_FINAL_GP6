@@ -69,4 +69,12 @@ class SesionController{
         }
     }
 
+    public function recordarpassword(){
+        $this->renderer->render("sesion_contrasenia");
+    }
+
+    public function enviarEmailContra (){
+
+    }
+
 }
