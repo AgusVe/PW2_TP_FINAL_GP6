@@ -4,6 +4,8 @@ class SesionController{
 
     private $sesionModel;
     private $renderer;
+    public static $datosDelUsuario;
+
 
     public function __construct($sesionModel,$renderer){
         $this->sesionModel = $sesionModel;
@@ -38,12 +40,15 @@ class SesionController{
                 exit;
             }
             if($resultado){
-
-                $rol = $resultado["0"]["idRol"];
-                $_SESSION['email']= $resultado["0"]["email"];
-                $_SESSION['rol']=$rol;
                 session_start();
-                switch ($rol){
+
+                $_SESSION['email']= $resultado["0"]["email"];
+                $_SESSION['rol']=$resultado["0"]["idRol"];
+                $idUsuario=$resultado["0"]["idUsuario"];
+                $datos=$resultado["0"];
+
+                $_SESSION["usuario"] = array('datosUsur' => $datos);
+                switch ( $_SESSION['rol']){
                     case "1":
                         header("location: /homeAdmin");
                         break;
@@ -51,7 +56,7 @@ class SesionController{
                         header("location: /homeEditor");
                         break;
                     default:
-                        header("location: /lobbyUsuario");
+                        header("location: /lobbyUsuario?id=$idUsuario");
 
                         break;
                 }
