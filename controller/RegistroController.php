@@ -64,10 +64,14 @@ class RegistroController
             $valores = "VALUES ('$nombre', '$apellido', '$fechaNac', '$genero', '$pais', '$ciudad', '$email', '$contraseniaHasheada', '$usuario', '$estado', '$fechaRegistro', '$idRol')";
             $this->registroModel->altaUsuario($valores);
 
-            header('location: /home');
+            header('location: /registro/confirmacion');
             exit();
         }
 
+    }
+
+    public function confirmacion(){
+        $this->renderer->render("registro_pendiente");
     }
 
 }
