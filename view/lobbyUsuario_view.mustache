@@ -9,14 +9,15 @@
 </head>
 <body>
 <div class="lobby-container">
-    <h1>Mi Lobby - Puntaje: 1000</h1>
-
+{{#datosUsur}}
+        <h1>{{usuario}} - Puntaje: 1000</h1>
+{{/datosUsur}}
     <div class="btn-container">
         <button class="btn btn-primary">Crear Nueva Partida</button>
         <button class="btn btn-primary">Ver Ranking</button>
-        {{#usuarioCompleto}}
+        {{#datosUsur}}
         <img src="http://localhost/view/images/{{usuario}}.jpeg">
-        {{/usuarioCompleto}}
+        {{/datosUsur}}
     </div>
 
     <h2>Partidas Jugadas</h2>
