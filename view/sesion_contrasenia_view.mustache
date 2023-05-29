@@ -1,0 +1,40 @@
+{{> header}}
+<div class="container">
+<br>  <h2 class="text-center" style="color:#fff; font-weight:900;">UNLAM TRIVIA 2023</h2>
+<hr>
+
+<div class="row justify-content-center" style="margin-bottom:5em;">
+<div class="col-md-6">
+<div class="card">
+<header class="card-header">
+	<h4 class="card-title mt-2">Olvidaste tu contraseña?</h4>
+</header>
+<article class="card-body">
+<form action="/sesion/enviarEmailContra" method="POST">
+    <h5>Ingresa tu email y te enviaremos un link para recuperar la contraseña</h5>
+	<div class="form-group">
+		<label for="email">Email</label>
+		<input type="email" name="email" class="form-control" placeholder="">
+    {{#errors}}
+        <p style="color:red">{{email}}</p>
+    {{/errors}}
+	</div> <!-- form-group end.// -->
+    <div class="form-group">
+        <button type="submit" class="btn btn-primary btn-block" name="enviarRegistro">Enviar</button>
+    </div> <!-- form-group// -->
+    <div class="form-group">
+        <a href="/" class="btn btn-primary btn-block">Cancelar</a>
+    </div> <!-- form-group// -->
+
+</form>
+</article> <!-- card-body end .// -->
+</div> <!-- card.// -->
+</div> <!-- col.//-->
+
+</div> <!-- row.//-->
+
+
+</div>
+<!--container end.//-->
+
+{{> footer}}

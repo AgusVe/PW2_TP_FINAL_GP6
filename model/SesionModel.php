@@ -16,12 +16,14 @@ class SesionModel
         $consultaContra = "SELECT contrasenia FROM usuario WHERE email='" . $email . "' AND estado='1'";
         $saveQuery = $this->database->query($consultaContra);
 
-        $HashObtenido = $saveQuery;
+        $HashObtenido = $saveQuery["0"]["0"];
+
         if ($HashObtenido != null) {
+            var_dump($clave);
+            var_dump($HashObtenido);
             if (password_verify($clave, $HashObtenido)) {
                 $sql = "SELECT *  FROM usuario WHERE email='" . $email . "' AND contrasenia='" . $HashObtenido . "' AND estado='1'";
                 return $this->database->query($sql);
-
             }
         } else {
             return 1;
