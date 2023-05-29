@@ -9,6 +9,7 @@ include_once('third-party/mustache/src/Mustache/Autoloader.php');
 include_once('controller/SesionController.php');
 include_once('controller/RegistroController.php');
 include_once('controller/HomeController.php');
+include_once('controller/LobbyUsuarioController.php');
 
 include_once('model/SesionModel.php');
 include_once('model/RegistroModel.php');
@@ -46,6 +47,9 @@ class configuration{
 
     public function getHomeController(){
         return new HomeController($this->getRenderer());
+    }
+    public function getLobbyUsuarioController(){
+        return new LobbyUsuarioController($this->getRenderer());
     }
 
     public function getSesionController(){
