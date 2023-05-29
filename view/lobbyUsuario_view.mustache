@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css">
+    <link rel="stylesheet" href="http://localhost/view/css/style_lobby.css">
+    <title>Lobby</title>
+</head>
+<body>
+<div class="lobby-container">
+    <h1>Mi Lobby - Puntaje: 1000</h1>
+
+    <div class="btn-container">
+        <button class="btn btn-primary">Crear Nueva Partida</button>
+        <button class="btn btn-primary">Ver Ranking</button>
+        {{#usuarioCompleto}}
+        <img src="http://localhost/view/images/{{usuario}}.jpeg">
+        {{/usuarioCompleto}}
+    </div>
+
+    <h2>Partidas Jugadas</h2>
+    <table>
+        <thead>
+        <tr>
+            <th>Partida</th>
+            <th>Resultado</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr>
+            <td>Partida 1</td>
+            <td class="win">Ganada</td>
+        </tr>
+        <tr>
+            <td>Partida 2</td>
+            <td class="loss">Perdida</td>
+        </tr>
+        <!-- Agrega más filas según las partidas jugadas -->
+        </tbody>
+    </table>
+</div>
+</body>
+</html>

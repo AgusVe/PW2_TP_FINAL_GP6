@@ -38,6 +38,7 @@ class SesionController{
                 exit;
             }
             if($resultado){
+
                 $rol = $resultado["0"]["idRol"];
                 $_SESSION['email']= $resultado["0"]["email"];
                 $_SESSION['rol']=$rol;
@@ -50,7 +51,8 @@ class SesionController{
                         header("location: /homeEditor");
                         break;
                     default:
-                        header("location: /homeUsuario");
+                        header("location: /lobbyUsuario");
+
                         break;
                 }
             }else{
