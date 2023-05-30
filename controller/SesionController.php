@@ -10,27 +10,26 @@ class SesionController{
     public function __construct($sesionModel,$renderer){
         $this->sesionModel = $sesionModel;
         $this->renderer = $renderer;
-
-
     }
 
     public function iniciarSesion(){
         if(isset($_POST['email']) && isset ($_POST['password'])){
             $errors = array();
 
-
             $email= $_POST['email'];
             $pass = $_POST['password'];
             $emailValidado=$this->sesionModel->validarEmail($email);
+
             if($emailValidado==0){
                 $errors['email'] = 'El email ingresado no coincide con usuario registrado';
             }
 
             $resultado = $this->sesionModel->validar($email,$pass);
 
-            if(count($resultado) < 0){
+            if(empty($resultado)){
                 $errors['contraseña'] = 'La contraseña ingresada no coincide con usuario registrado';
             }
+
             // VERIFICO SI HAY ERRORES Y LOS MANDO A LA VISTA
             if (count($errors) > 0) {
                 $erroresEncontrados = $errors;
