@@ -48,12 +48,12 @@ class RegistroController
                 $errors['contraseña'] = 'La contraseñas deben ser iguales';
             }
             /*LE APLICO HASH A LA CONTRASEÑA*/
-            $contraseniaHasheada = password_hash($contrasenia, PASSWORD_DEFAULT);
+            $contraseniaHasheada = md5($contrasenia);
 
             /*VERIFICO SI EL USUARIO EXISTE*/
             $usuarioBuscado = $this->registroModel->verificarSiExisteUsuario($usuario);
             if (count($usuarioBuscado) >= 1) {
-                $errors['usuario'] = 'El campo usuario es obligatorio';
+                $errors['usuario'] = 'El usuario ya existe';
 
             }
             /*VERIFICO SI EL EMAIL ESTA EN UN FORMATO CORRECTO*/
@@ -70,7 +70,9 @@ class RegistroController
                 exit;
             }
 
-            $valores = "VALUES ('$nombre', '$apellido', '$fechaNac', '$genero', '$pais', '$ciudad', '$email', '$contraseniaHasheada', '$usuario', '$estado', '$fechaRegistro', '$idRol')";
+            $hash_de_registro = hash("md5", time());
+
+            $valores = "VALUES ('$nombre', '$apellido', '$fechaNac', '$genero', '$pais', '$ciudad', '$email', '$contraseniaHasheada','$hash_de_registro', '$usuario', '$estado', '$fechaRegistro', '$idRol')";
             $this->registroModel->altaUsuario($valores);
 
             /*Envio de email de confirmacion*/
@@ -101,8 +103,7 @@ class RegistroController
                     ------------------------</br>
                      </br>
                     Por favor, clickee este link para activar su cuenta:</br>
-                    <a href="http://localhost/verificacion.php?email='.$email.'&hash='.$contraseniaHasheada.'" > Activación </a>
-                     
+                    <a href="http://localhost/registro/verificacion?email='.$email.'&hash='.$hash_de_registro.'" > Activación </a>
                     ';
 
             $mail->msgHTML($cuerpo);
@@ -113,13 +114,30 @@ class RegistroController
                 header('location: /registro/confirmacion');
                 exit();
             }
-
         }
-
     }
 
     public function confirmacion(){
         $this->renderer->render("registro_pendiente");
+    }
+
+    public function verificacion(){
+        if(isset($_GET['email']) && !empty($_GET['email']) AND isset($_GET['hash']) && !empty($_GET['hash'])) {
+            $email = $_GET['email'];
+            $hash = $_GET['hash'];
+
+            $finalizar = $this->registroModel->finalizarRegistro($email, $hash);
+
+            if($finalizar == 1){
+                $mensaje = "Su cuenta ha sido activada, ahora puede ingresar.";
+            }else{
+                $mensaje= "La url es inválida o ustded ya ha activado su cuenta.";
+            }
+
+            $data = array('mensaje' => $mensaje);
+
+            $this->renderer->render("registro_finalizar",$data);
+        }
     }
 
 }
