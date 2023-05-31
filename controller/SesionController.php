@@ -42,19 +42,18 @@ class SesionController{
                 $_SESSION['email']= $resultado["0"]["email"];
                 $_SESSION['rol']=$resultado["0"]["idRol"];
                 $_SESSION['url_imagen']=$resultado["0"]["url_imagen"];
-                $idUsuario=$resultado["0"]["idUsuario"];
                 $datos=$resultado["0"];
 
                 $_SESSION["usuario"] = array('datosUsur' => $datos);
                 switch ( $_SESSION['rol']){
                     case "1":
-                        header("location: /homeAdmin");
+                        header("location: /lobbyAdmin");
                         break;
                     case "2":
-                        header("location: /homeEditor");
+                        header("location: /lobbyEditor");
                         break;
                     default:
-                        header("location: /lobbyUsuario?id=$idUsuario");
+                        header("location: /lobbyUsuario");
                         break;
                 }
             }else{
@@ -72,6 +71,12 @@ class SesionController{
 
     public function enviarEmailContra (){
 
+    }
+
+    public function cerrarSesion(){
+        session_unset();
+        session_destroy();
+        header("location: /");
     }
 
 }

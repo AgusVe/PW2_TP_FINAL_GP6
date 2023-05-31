@@ -80,3 +80,15 @@ th {
 text-align: inherit;
     margin-left: 0.5em;
 }
+
+.navbar{
+    background-color: #f35559;
+}
+
+.footerGral{
+    background-color: #14c993ab;
+}
+
+.textoFooter{
+    color: #ffffff;
+}
