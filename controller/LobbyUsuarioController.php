@@ -12,6 +12,7 @@ class LobbyUsuarioController{
     public function execute()
     {
         $datos=$_SESSION["usuario"];
+        
         echo $this->renderer->render("lobbyUsuario",$datos);
     }
 
