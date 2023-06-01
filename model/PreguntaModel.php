@@ -10,31 +10,10 @@ class PreguntaModel{
     public function obtenerPregunta(){
         $preguntaEncontrada = false;
 
-        while(!$preguntaEncontrada){
-            $numeroPregunta = rand(1, 5);
+        $sql = "SELECT preguntas.*, categoria.color  FROM preguntas JOIN categoria ON preguntas.categoria_id = categoria.categoria_id WHERE pregunta_id='13'";
+        $resultado = $this->database->query($sql);;
+        return $resultado;
 
-            $sql = "SELECT * FROM preguntas WHERE pregunta_id = $numeroPregunta";
-            $resultado = $this->database->query($sql);
-
-            return $resultado;
-            echo "$resultado";
-
-            /*
-            if (mysqli_num_rows($resultado) > 0) {
-                // Mostrar la pregunta y marcarla como mostrada
-                $row = mysqli_fetch_assoc($resultado);
-                $pregunta = $row['pregunta'];
-                echo "Pregunta: $pregunta";
-
-                // Actualizar el estado de la pregunta como mostrada en la base de datos
-                $actualizarConsulta = "UPDATE preguntas SET mostrada = 1 WHERE id = $numeroPregunta";
-                mysqli_query($conexion, $actualizarConsulta);
-
-                // Salir del ciclo
-                $preguntaMostrada = true;
-            }*/
-
-        }
 
     }
 

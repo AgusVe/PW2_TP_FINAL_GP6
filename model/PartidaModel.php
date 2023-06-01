@@ -9,8 +9,10 @@ class PartidaModel{
     }
 
     public function generarPartida($valores){
-        $insert = "INSERT INTO 'partida' (idUsuario, puntosObtenidos, fecha)".$valores.";";
-        $this->database->execute($insert);
+        $insert = 'INSERT INTO `partida`
+                   (idUsuario, puntosObtenidos, fecha)' . $valores . ";";
+
+        return $this->database->execute($insert);
     }
 
 }
