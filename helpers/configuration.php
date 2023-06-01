@@ -10,9 +10,13 @@ include_once('controller/SesionController.php');
 include_once('controller/RegistroController.php');
 include_once('controller/HomeController.php');
 include_once('controller/LobbyUsuarioController.php');
+include_once('controller/PartidaController.php');
+include_once('controller/PreguntaController.php');
 
 include_once('model/SesionModel.php');
 include_once('model/RegistroModel.php');
+include_once('model/PreguntaModel.php');
+include_once('model/PartidaModel.php');
 
 
 class configuration{
@@ -58,6 +62,14 @@ class configuration{
 
     public function getRegistroController(){
         return new RegistroController(new RegistroModel($this->getDataBase()),$this->getRenderer());
+    }
+
+    public function getPartidaController(){
+        return new PartidaController(new PartidaModel($this->getDataBase()),$this->getRenderer());
+    }
+
+    public function getPreguntaController(){
+        return new PreguntaController(new PreguntaModel($this->getDataBase()),$this->getRenderer());
     }
 
 }
