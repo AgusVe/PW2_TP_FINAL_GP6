@@ -27,7 +27,7 @@ class SesionController{
             $resultado = $this->sesionModel->validar($email,$pass);
 
             if(empty($resultado)){
-                $errors['contraseña'] = 'La contraseña ingresada no coincide con usuario registrado';
+                $errors['contraseña'] = 'La contraseña ingresada es incorrecta';
             }
 
             // VERIFICO SI HAY ERRORES Y LOS MANDO A LA VISTA
@@ -35,7 +35,7 @@ class SesionController{
                 $erroresEncontrados = $errors;
 
                 $data = array('errors' => $erroresEncontrados);
-                $this->renderer->render("home", $data);
+                $this->renderer->render("login", $data);
                 exit;
             }
             if($resultado){
@@ -76,7 +76,7 @@ class SesionController{
     public function cerrarSesion(){
         session_unset();
         session_destroy();
-        header("location: /");
+        header("location: /login");
     }
 
 }

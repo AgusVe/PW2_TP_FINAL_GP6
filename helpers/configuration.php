@@ -8,8 +8,9 @@ include_once('third-party/mustache/src/Mustache/Autoloader.php');
 
 include_once('controller/SesionController.php');
 include_once('controller/RegistroController.php');
-include_once('controller/HomeController.php');
+include_once('controller/LoginController.php');
 include_once('controller/LobbyUsuarioController.php');
+include_once('controller/JuegoController.php');
 
 include_once('model/SesionModel.php');
 include_once('model/RegistroModel.php');
@@ -45,8 +46,8 @@ class configuration{
         return new MustacheRender('view/partial');
     }
 
-    public function getHomeController(){
-        return new HomeController($this->getRenderer());
+    public function getLoginController(){
+        return new LoginController($this->getRenderer());
     }
     public function getLobbyUsuarioController(){
         return new LobbyUsuarioController($this->getRenderer());
@@ -58,6 +59,10 @@ class configuration{
 
     public function getRegistroController(){
         return new RegistroController(new RegistroModel($this->getDataBase()),$this->getRenderer());
+    }
+
+    public function getJuegoController(){
+        return new JuegoController($this->getRenderer());
     }
 
 }
