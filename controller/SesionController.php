@@ -42,6 +42,7 @@ class SesionController{
                 $_SESSION['email']= $resultado["0"]["email"];
                 $_SESSION['rol']=$resultado["0"]["idRol"];
                 $_SESSION['url_imagen']=$resultado["0"]["url_imagen"];
+                $_SESSION['id']=$resultado["0"]["idUsuario"];
                 $datos=$resultado["0"];
 
                 $_SESSION["usuario"] = array('datosUsur' => $datos);
