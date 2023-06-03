@@ -8,16 +8,15 @@ include_once('third-party/mustache/src/Mustache/Autoloader.php');
 
 include_once('controller/SesionController.php');
 include_once('controller/RegistroController.php');
-include_once('controller/HomeController.php');
+include_once('controller/LoginController.php');
 include_once('controller/LobbyUsuarioController.php');
 include_once('controller/PartidaController.php');
-include_once('controller/PreguntaController.php');
+
 
 include_once('model/SesionModel.php');
 include_once('model/RegistroModel.php');
 include_once('model/PreguntaModel.php');
 include_once('model/PartidaModel.php');
-
 
 class configuration{
 
@@ -29,7 +28,7 @@ class configuration{
     public function getRouter() {
         return new Router(
             $this,
-            "getHomeController",
+            "getLoginController",
             "execute");
     }
     private function getArrayConfig(){
@@ -49,8 +48,8 @@ class configuration{
         return new MustacheRender('view/partial');
     }
 
-    public function getHomeController(){
-        return new HomeController($this->getRenderer());
+    public function getLoginController(){
+        return new LoginController($this->getRenderer());
     }
     public function getLobbyUsuarioController(){
         return new LobbyUsuarioController($this->getRenderer());
@@ -66,10 +65,6 @@ class configuration{
 
     public function getPartidaController(){
         return new PartidaController(new PartidaModel($this->getDataBase()),new PreguntaModel($this->getDataBase()),$this->getRenderer());
-    }
-
-    public function getPreguntaController(){
-        return new PreguntaController(new PreguntaModel($this->getDataBase()),$this->getRenderer());
     }
 
 }

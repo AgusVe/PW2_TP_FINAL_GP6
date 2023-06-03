@@ -279,6 +279,7 @@ class Mustache_Parser
             throw new Mustache_Exception_SyntaxException('Illegal content in < parent tag', $token);
         }
     }
+
     /**
      * Split a tag name into name and filters.
      *

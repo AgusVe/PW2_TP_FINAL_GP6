@@ -1,18 +1,22 @@
 <?php
-class PartidaController {
+
+class PartidaController
+{
     private $partidaModel;
     private $preguntaModel;
     private $renderer;
 
-    public function __construct($partidaModel, $preguntaModel, $renderer){
+    public function __construct($partidaModel, $preguntaModel, $renderer)
+    {
         $this->partidaModel = $partidaModel;
         $this->preguntaModel = $preguntaModel;
         $this->renderer = $renderer;
     }
 
-    public function nuevaPartida(){
+    public function nuevaPartida()
+    {
 
-        if(!isset($_SESSION['email'])){
+        if (!isset($_SESSION['email'])) {
             header("location: /");
             exit();
         }
@@ -23,15 +27,18 @@ class PartidaController {
 
 
         $this->partidaModel->generarPartida($valores);
-        $primerPregunta = $this->obtenerPrimeraPregunta();
-        $data = array('color' => $primerPregunta["0"]["color"]);
-        $this->renderer->render("partida_encurso",$data);
+        $this->renderer->render("partida");
 
 
     }
 
-    public function obtenerPrimeraPregunta(){
-        return $this->preguntaModel->obtenerPregunta();
+    public function obtenerPreguntas()
+    {
+        $preguntas = $this->preguntaModel->obtenerPreguntas();
+        header('Content-Type: application/json');
+        echo json_encode($preguntas);
+        exit();
     }
+
 
 }

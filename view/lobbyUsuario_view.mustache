@@ -9,32 +9,7 @@
     <title>Lobby</title>
 </head>
 <body>
-<header>
-    <nav class="navbar navbar-expand-lg navbar-light">
-
-        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav"
-                aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-        </button>
-        <div class="collapse navbar-collapse" id="navbarNav">
-            <ul class="navbar-nav ml-auto">
-                <li class="nav-item">
-                    <a class="nav-link" href="#">Inicio</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="#">Acerca de</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="#">Contacto</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="/sesion/cerrarSesion">Cerrar Sesion</a>
-                </li>
-            </ul>
-        </div>
-    </nav>
-</header>
-
+{{> header_logueado}}
 <div class="container">
     <div class="lobby-container">
         <div class="containerImgPuntaje">
@@ -47,7 +22,7 @@
             <h1 class="nombreUsuario">{{usuario}}</h1>
         {{/datosUsur}}
         <div class="btn-container">
-            <a href="/partida/nuevaPartida" class="btn btn-primary">Crear Nueva Partida</a>
+            <button class="btn btn-primary"><a id="nuevaPartida"href="/partida/nuevaPartida">Crear Nueva Partida</a></button>
             <button class="btn btn-primary">Ver Ranking</button>
         </div>
 
