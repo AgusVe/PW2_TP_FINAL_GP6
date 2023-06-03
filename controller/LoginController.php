@@ -1,6 +1,6 @@
 <?php
 
-class HomeController{
+class LoginController{
     private $renderer;
 
     public function __construct($renderer){
@@ -9,6 +9,6 @@ class HomeController{
 
     public function execute()
     {
-        echo $this->renderer->render("home");
+        echo $this->renderer->render("login");
     }
 }
