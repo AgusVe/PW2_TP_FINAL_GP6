@@ -21,8 +21,10 @@ include_once('model/PartidaModel.php');
 class configuration{
 
     private $configFile = 'config/config.ini';
+    private $arrData;
 
     public function __construct() {
+        $this->arrData = parse_ini_file($this->configFile);
     }
 
     public function getRouter() {
@@ -31,16 +33,21 @@ class configuration{
             "getLoginController",
             "execute");
     }
-    private function getArrayConfig(){
-        return parse_ini_file($this->configFile);
-    }
+
     public function getDataBase(){
-        $config = $this->getArrayConfig();
+        $config =  $this->arrData;
         return new MySqlDatabase(
             $config['servername'],
             $config['username'],
             $config['password'],
             $config['database']);
+    }
+
+    public function getConfigParameter($strField){
+        if(isset($this->arrData[$strField])){
+            return $this->arrData[$strField];
+        }
+        return null;
     }
 
 

@@ -1,123 +1,189 @@
+let tiempo_valor = 10;
+let tiempo_contador;
+let time;
+let strRespuestaUsuario = null;
+let arrDatosPregunta = null;
 
-// Realizar una petición AJAX para obtener los datos de preguntas JSON
-var xhr = new XMLHttpRequest();
-xhr.open('GET', '/index.php?module=partida&action=obtenerPreguntas', true);
-xhr.onload = function () {
-    if (xhr.status >= 200 && xhr.status < 400) {
-        var preguntas = JSON.parse(xhr.responseText);
-
-        const quiz_box = document.querySelector(".quiz-box");
-        const opciones_lista = document.querySelector(".opciones-lista");
-        const boton_siguiente = quiz_box.querySelector(".siguiente-preg");
-        const timeCount = quiz_box.querySelector(".tiempo .tiempo-segundos");
+next();
 
 
-        let index_conteo = 0;
-        let tiempo_contador;
-        let tiempo_valor = 10;
-        mostrarPreguntas(0);
-        startTimer(tiempo_valor);
+function next() {
+    let url_string = location.href;
+    let url = new URL(url_string);
+    let idPartida = url.searchParams.get("id");
+    // Realizar una petición AJAX para obtener los datos de preguntas JSON
+    var xhr = new XMLHttpRequest();
 
-        /* SI SE CLICKEA EN SIGUIENTE */
-        boton_siguiente.onclick = () => {
-            if (index_conteo < preguntas.length - 1) {
-                index_conteo++;
-                mostrarPreguntas(index_conteo);
-                clearInterval(tiempo_contador);
-                startTimer(tiempo_valor);
-            }
-        };
+    let strURL = '/partida/next?id='+idPartida;
+    if(arrDatosPregunta != null) {
+        strURL = strURL + "&id_pregunta="+arrDatosPregunta['pregunta_id']+"&respuesta="+strRespuestaUsuario;
+    }
 
-        function mostrarPreguntas(index) {
-            const pregunta = document.querySelector(".pregunta");
-            let pregunta_tag = '<span>' + preguntas[index].enunciado + '</span>';
-            let opcion_tag =
-                '<div class="opcion">' +
-                preguntas[index].respuestaA +
-                '<span></span></div>' +
-                '<div class="opcion">' +
-                preguntas[index].respuestaB +
-                '<span></span></div>' +
-                '<div class="opcion">' +
-                preguntas[index].respuestaC +
-                '<span></span></div>' +
-                '<div class="opcion">' +
-                preguntas[index].respuestaD +
-                '<span></span></div>';
-            pregunta.innerHTML = pregunta_tag;
-            opciones_lista.innerHTML = opcion_tag;
+    xhr.open('GET', strURL, true);
+    xhr.onload = function () {
+        if (xhr.status >= 200 && xhr.status < 400) {
+            var devolucion = JSON.parse(xhr.responseText);
 
-            const opcion = opciones_lista.querySelectorAll(".opcion");
-            for (let i = 0; i < opcion.length; i++) {
-                opcion[i].addEventListener("click", function() {
-                    opcionSeleccionada(this);
-                });
-            }
-        }
+            const quiz_box = document.querySelector(".quiz-box");
+            const boton_siguiente = quiz_box.querySelector(".siguiente-preg");
 
-        let cruzIcon = '<div class="icon tick"><i class="fas fa-check"></i></div>';
-        let equisIcon = '<div class="icon cross"><i class="fas fa-times"></i></div>';
+            arrDatosPregunta = devolucion.pregunta_nueva;
+            
+            //Actualizo puntaje
+            let elemPuntos=document.getElementById('elem_puntos');
+            elemPuntos.innerHTML=devolucion.puntos;
 
-        /* RESPUESTA DEL USUARIO */
-        function opcionSeleccionada(respuesta) {
-            clearInterval(tiempo_contador);
-            let userRespuesta = respuesta.textContent;
-            let respuestaCorrecta = preguntas[index_conteo].respuesta_correcta;
-            let todasOpciones = opciones_lista.children.length;
-            if (userRespuesta == respuestaCorrecta) {
-                respuesta.classList.add("correcto");
-                respuesta.insertAdjacentHTML("beforeend", cruzIcon);
+            if(devolucion.pregunta_anterior == null) {
+                mostrarPregunta();
             } else {
-                respuesta.classList.add("incorrecto");
-                respuesta.insertAdjacentHTML("beforeend", equisIcon);
+                if(devolucion.pregunta_anterior.respuesta_correcta) {
+                    let cruzIcon = '<div class="icon tick"><i class="fas fa-check"></i></div>';
+                    let equisIcon = '<div class="icon cross"><i class="fas fa-times"></i></div>';
+                    const opciones_lista = document.querySelector(".opciones-lista");
+              
+                    let todasOpciones = opciones_lista.children.length;
 
-                /* SI LA RESPUESTA ES INCORRECTA MOSTRAR LA QUE ES CORRECTA */
-                for (let i = 0; i < todasOpciones; i++) {
-                    if (opciones_lista.children[i].textContent == respuestaCorrecta) {
-                        opciones_lista.children[i].setAttribute("class", "opcion correcto");
+                    // SI LA RESPUESTA ES INCORRECTA MOSTRAR LA QUE ES CORRECTA
+                    for (let i = 0; i < todasOpciones; i++) {
+                        if (opciones_lista.children[i].textContent == devolucion.pregunta_anterior.respuesta_correcta) {
+                            opciones_lista.children[i].setAttribute("class", "opcion correcto");
+//                            respuesta.classList.add("correcto");
+//                            respuesta.insertAdjacentHTML("beforeend", cruzIcon);
+                        }
+                        if (opciones_lista.children[i].textContent == strRespuestaUsuario && devolucion.pregunta_anterior.resultado != true) {
+                            opciones_lista.children[i].setAttribute("class", "opcion incorrecto");
+                        }
+
+                    }        
+                    
+                    if(devolucion.pregunta_anterior.resultado == true) {
+                        setTimeout(mostrarPregunta, 1500);
+                    } else {
+                        setTimeout(function redirigir(){
+                            window.location.href="/login";
+                        }, 3000);
                     }
+
+                   
                 }
             }
 
-            /* UNA VEZ QUE ELIJE LA OPCION DESABILITA LAS DEMAS */
-            for (let i = 0; i < todasOpciones; i++) {
-                opciones_lista.children[i].classList.add("desabilitar");
+            /* SI SE CLICKEA EN SIGUIENTE */
+            boton_siguiente.onclick = () => {
+                next();
+            };
+        }
+    };
+    xhr.send();
+}
+
+
+
+function mostrarPregunta() {
+    const pregunta = document.querySelector(".pregunta");
+    const opciones_lista = document.querySelector(".opciones-lista");
+    let pregunta_tag = '<span>' + arrDatosPregunta.enunciado + '</span>';
+    pregunta.innerHTML = pregunta_tag;
+    opciones_lista.innerHTML = "";
+    strRespuestaUsuario = "";
+
+    clearInterval(tiempo_contador);
+    startTimer(tiempo_valor);
+    
+    arrDatosPregunta.respuestas.forEach(function(element) {
+        let opcion_tag =
+        '<div class="opcion">' +
+        element +
+        '<span></span></div>' ;
+        opciones_lista.innerHTML = opciones_lista.innerHTML + opcion_tag;
+
+    });
+
+
+    const opcion = opciones_lista.querySelectorAll(".opcion");
+    for (let i = 0; i < opcion.length; i++) {
+        opcion[i].addEventListener("click", function() {
+            opcionSeleccionada(this);
+        });
+    }
+}
+
+
+/* RESPUESTA DEL USUARIO */
+function opcionSeleccionada(respuesta) {
+    strRespuestaUsuario = respuesta.textContent;
+    next();
+    /*
+    const opciones_lista = document.querySelector(".opciones-lista");
+
+    clearInterval(tiempo_contador);
+    let cruzIcon = '<div class="icon tick"><i class="fas fa-check"></i></div>';
+    let equisIcon = '<div class="icon cross"><i class="fas fa-times"></i></div>';
+
+    let userRespuesta = respuesta.textContent;
+    //let respuestaCorrecta = preguntas[index_conteo].respuesta_correcta;
+    let respuestaCorrecta = "";
+    let todasOpciones = opciones_lista.children.length;
+    if (userRespuesta == respuestaCorrecta) {
+        respuesta.classList.add("correcto");
+        respuesta.insertAdjacentHTML("beforeend", cruzIcon);
+    } else {
+        respuesta.classList.add("incorrecto");
+        respuesta.insertAdjacentHTML("beforeend", equisIcon);
+
+        // SI LA RESPUESTA ES INCORRECTA MOSTRAR LA QUE ES CORRECTA
+        for (let i = 0; i < todasOpciones; i++) {
+            if (opciones_lista.children[i].textContent == respuestaCorrecta) {
+                opciones_lista.children[i].setAttribute("class", "opcion correcto");
             }
         }
+    }
 
-        /* CONTADOR DE TIEMPO */
-        function startTimer(time) {
-            tiempo_contador = setInterval(timer, 1000);
+    // UNA VEZ QUE ELIJE LA OPCION DESABILITA LAS DEMAS
+    for (let i = 0; i < todasOpciones; i++) {
+        opciones_lista.children[i].classList.add("desabilitar");
+    }
+    */
+}
 
-            function timer() {
-                timeCount.textContent = time;
-                time--;
-                if (time < 0) {
-                    clearInterval(tiempo_contador);
-                    timeCount.textContent = "00";
+/* CONTADOR DE TIEMPO */
+function startTimer(tiempo_valor) {
+    time = tiempo_valor;
+    tiempo_contador = setInterval(timer, 1000);
+}
 
-                    // SELECCIONA LA OPCION INCCORRECTA SI SE TERMINA EL TIEMPO
-                    seleccionarOpcionIncorrecta();
+function timer() {
+    const quiz_box = document.querySelector(".quiz-box");
+    const timeCount = quiz_box.querySelector(".tiempo .tiempo-segundos");
+    timeCount.textContent = time;
+    time--;
 
-                }
-            }
-        }
+    if (time < 0) {
+        clearInterval(tiempo_contador);
+        timeCount.textContent = "0";
+
+        next();
+
+        // SELECCIONA LA OPCION INCCORRECTA SI SE TERMINA EL TIEMPO
+        //seleccionarOpcionIncorrecta();
+
+    }
+}
+
 
 // SELECCIONA LA OPCION INCCORRECTA SI SE TERMINA EL TIEMPO
-        function seleccionarOpcionIncorrecta() {
-            const opciones = opciones_lista.querySelectorAll(".opcion");
-            const respuestaCorrecta = preguntas[index_conteo].respuesta_correcta;
+function seleccionarOpcionIncorrecta() {
+    const opciones = opciones_lista.querySelectorAll(".opcion");
+    const opciones_lista = document.querySelector(".opciones-lista");
+    //const respuestaCorrecta = preguntas[index_conteo].respuesta_correcta;
 
-            for (let i = 0; i < opciones.length; i++) {
-                const opcion = opciones[i];
-                if (opcion.textContent !== respuestaCorrecta) {
-                    opcionSeleccionada(opcion);
-                    break;
-                }
-            }
+    for (let i = 0; i < opciones.length; i++) {
+        const opcion = opciones[i];
+        /*
+        if (opcion.textContent !== respuestaCorrecta) {
+            opcionSeleccionada(opcion);
+            break;
         }
-
-        ;
+        */
     }
-};
-xhr.send();
+}
