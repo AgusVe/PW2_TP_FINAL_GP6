@@ -24,7 +24,17 @@ class MySqlDatabase {
         return mysqli_fetch_all($result, MYSQLI_BOTH);
     }
 
+    public function getOne($sql) {
+        $result = mysqli_query($this->connection, $sql);
+        return mysqli_fetch_assoc($result);
+    }    
+
     public function execute($insert){
         mysqli_query($this->connection, $insert);
+    }
+
+    public function getLastInsertId() {
+        
+        return mysqli_insert_id($this->connection);
     }
 }

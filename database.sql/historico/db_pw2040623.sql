@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 05-06-2023 a las 02:51:55
+-- Tiempo de generación: 03-06-2023 a las 01:08:18
 -- Versión del servidor: 10.4.27-MariaDB
 -- Versión de PHP: 8.2.0
 
@@ -54,89 +54,55 @@ CREATE TABLE `partida` (
   `idPartida` int(11) NOT NULL,
   `idUsuario` int(11) NOT NULL,
   `puntosObtenidos` int(11) NOT NULL,
-  `fecha` date NOT NULL,
-  `idPreguntaActual` int(11) DEFAULT NULL,
-  `terminada` tinyint(1) NOT NULL
+  `fecha` date NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Volcado de datos para la tabla `partida`
 --
 
-INSERT INTO `partida` (`idPartida`, `idUsuario`, `puntosObtenidos`, `fecha`, `idPreguntaActual`, `terminada`) VALUES
-(1, 16, 0, '2023-06-04', 0, 0),
-(2, 16, 0, '2023-06-04', 0, 0),
-(3, 16, 0, '2023-06-04', 0, 0),
-(4, 16, 0, '2023-06-04', 0, 0),
-(5, 16, 0, '2023-06-04', 0, 0),
-(6, 16, 0, '2023-06-04', 0, 0),
-(7, 16, 0, '2023-06-04', 0, 0),
-(8, 16, 0, '2023-06-04', 0, 0),
-(9, 16, 0, '2023-06-04', 0, 0),
-(10, 16, 0, '2023-06-04', 0, 0),
-(11, 16, 0, '2023-06-04', 0, 0),
-(12, 16, 0, '2023-06-04', 0, 0),
-(13, 16, 0, '2023-06-04', 0, 0),
-(14, 16, 0, '2023-06-04', 0, 0),
-(15, 16, 0, '2023-06-04', 0, 0),
-(16, 16, 0, '2023-06-04', 0, 0),
-(17, 16, 0, '2023-06-04', 0, 0),
-(18, 16, 0, '2023-06-04', 0, 0),
-(19, 16, 0, '2023-06-04', 0, 0),
-(20, 16, 0, '2023-06-04', 0, 0),
-(21, 16, 0, '2023-06-04', 0, 0),
-(22, 16, 0, '2023-06-04', 0, 0),
-(23, 16, 0, '2023-06-04', 0, 0),
-(24, 16, 0, '2023-06-04', 0, 0),
-(25, 16, 0, '2023-06-04', 0, 0),
-(26, 16, 0, '2023-06-04', 0, 0),
-(27, 16, 0, '2023-06-04', 0, 0),
-(28, 16, 0, '2023-06-04', 0, 0),
-(29, 16, 0, '2023-06-04', 0, 0),
-(30, 16, 0, '2023-06-04', 0, 0),
-(31, 16, 0, '2023-06-04', 0, 0),
-(32, 16, 0, '2023-06-04', 0, 0),
-(33, 16, 0, '2023-06-04', 0, 0),
-(34, 16, 0, '2023-06-04', 0, 0),
-(35, 16, 0, '2023-06-04', 0, 0),
-(36, 16, 0, '2023-06-04', 0, 0),
-(37, 16, 0, '2023-06-04', 0, 0),
-(38, 16, 0, '2023-06-04', 0, 0),
-(39, 16, 0, '2023-06-04', 0, 0),
-(40, 16, 0, '2023-06-04', 0, 0),
-(41, 16, 0, '2023-06-04', 0, 0),
-(42, 16, 0, '2023-06-04', 0, 0),
-(43, 16, 0, '2023-06-04', 0, 0),
-(44, 16, 0, '2023-06-04', 0, 0),
-(45, 16, 0, '2023-06-04', 0, 0),
-(46, 16, 0, '2023-06-04', 0, 0),
-(47, 16, 0, '2023-06-04', 0, 0),
-(48, 16, 0, '2023-06-04', 0, 0),
-(49, 16, 0, '2023-06-04', 0, 0),
-(50, 16, 0, '2023-06-04', 0, 0),
-(51, 16, 0, '2023-06-04', 0, 0),
-(52, 16, 0, '2023-06-04', 0, 0),
-(53, 16, 0, '2023-06-04', 0, 0),
-(54, 16, 0, '2023-06-04', 0, 0),
-(55, 16, 0, '2023-06-04', 0, 0),
-(56, 16, 0, '2023-06-04', 0, 0),
-(57, 16, 0, '2023-06-04', 0, 0),
-(58, 16, 0, '2023-06-04', 13, 1),
-(59, 16, 0, '2023-06-05', 27, 1),
-(60, 16, 0, '2023-06-05', 16, 1),
-(61, 16, 0, '2023-06-05', 16, 0),
-(62, 16, 0, '2023-06-05', 22, 0),
-(63, 16, 0, '2023-06-05', 16, 1),
-(64, 16, 0, '2023-06-05', 39, 1),
-(65, 16, 0, '2023-06-05', 33, 1),
-(66, 16, 0, '2023-06-05', 41, 1),
-(67, 16, 0, '2023-06-05', 29, 1),
-(68, 16, 4, '2023-06-05', 39, 1),
-(69, 16, 1, '2023-06-05', 21, 1),
-(70, 16, 1, '2023-06-05', 22, 1),
-(71, 16, 2, '2023-06-05', 27, 1),
-(72, 16, 0, '2023-06-05', 17, 1),
-(73, 16, 0, '2023-06-05', 23, 1);
+INSERT INTO `partida` (`idPartida`, `idUsuario`, `puntosObtenidos`, `fecha`) VALUES
+(73, 21, 0, '2023-06-02'),
+(75, 22, 0, '2023-06-02'),
+(79, 22, 0, '2023-06-02'),
+(80, 22, 0, '2023-06-02'),
+(81, 22, 0, '2023-06-02'),
+(82, 22, 0, '2023-06-02'),
+(83, 22, 0, '2023-06-02'),
+(84, 22, 0, '2023-06-02'),
+(85, 22, 0, '2023-06-02'),
+(86, 22, 0, '2023-06-02'),
+(87, 22, 0, '2023-06-02'),
+(88, 22, 0, '2023-06-02'),
+(89, 22, 0, '2023-06-02'),
+(90, 22, 0, '2023-06-02'),
+(91, 22, 0, '2023-06-02'),
+(92, 22, 0, '2023-06-02'),
+(93, 22, 0, '2023-06-02'),
+(94, 22, 0, '2023-06-02'),
+(95, 22, 0, '2023-06-02'),
+(96, 22, 0, '2023-06-02'),
+(97, 22, 0, '2023-06-02'),
+(98, 22, 0, '2023-06-02'),
+(99, 22, 0, '2023-06-02'),
+(100, 22, 0, '2023-06-02'),
+(101, 22, 0, '2023-06-02'),
+(102, 22, 0, '2023-06-03'),
+(103, 22, 0, '2023-06-03'),
+(104, 22, 0, '2023-06-03'),
+(105, 22, 0, '2023-06-03'),
+(106, 22, 0, '2023-06-03'),
+(107, 22, 0, '2023-06-03'),
+(108, 22, 0, '2023-06-03'),
+(109, 22, 0, '2023-06-03'),
+(110, 22, 0, '2023-06-03'),
+(111, 22, 0, '2023-06-03'),
+(112, 22, 0, '2023-06-03'),
+(113, 22, 0, '2023-06-03'),
+(114, 22, 0, '2023-06-03'),
+(115, 22, 0, '2023-06-03'),
+(116, 22, 0, '2023-06-03'),
+(117, 22, 0, '2023-06-03');
 
 -- --------------------------------------------------------
 
@@ -188,10 +154,10 @@ INSERT INTO `preguntas` (`pregunta_id`, `enunciado`, `respuestaA`, `respuestaB`,
 (35, '¿Cuál es el país más grande del mundo en términos de superficie?', 'Estados Unidos', 'Rusia', 'China', 'Canadá', 'Rusia', 5, 0, 0, ''),
 (36, '¿Cuál es el océano más grande del mundo?', 'Océano Pacífico', 'Océano Atlántico', 'Océano Índico', 'Océano Ártico', 'Océano Pacífico', 5, 0, 0, ''),
 (37, '¿Quién descubrió América?', 'Cristóbal Colón', 'Fernando de Magallanes', 'Vasco da Gama', 'Hernán Cortés', 'Cristóbal Colón', 5, 0, 0, ''),
-(38, '¿Cuál es el símbolo químico del oro?', 'Ag', 'Au', 'Pt', 'Hg', 'Au', 5, 0, 0, ''),
-(39, '¿Cuál es el autor de la obra \"Romeo y Julieta\"?', 'William Shakespeare', 'Charles Dickens', 'Jane Austen', 'Fyodor Dostoyevsky', 'William Shakespeare', 5, 0, 0, ''),
-(40, '¿Cuál es el planeta más grande del sistema solar?', 'Mercurio', 'Venus', 'Júpiter', 'Saturno', 'Júpiter', 5, 0, 0, ''),
-(41, '¿Cuál es la fórmula química del agua?', 'H2O', 'CO2', 'NaCl', 'CH4', 'H2O', 5, 0, 0, '');
+(38, '¿Cuál es el símbolo químico del oro?', 'Ag', 'Au', 'Pt', 'Hg', 'Au', NULL, 0, 0, ''),
+(39, '¿Cuál es el autor de la obra \"Romeo y Julieta\"?', 'William Shakespeare', 'Charles Dickens', 'Jane Austen', 'Fyodor Dostoyevsky', 'William Shakespeare', NULL, 0, 0, ''),
+(40, '¿Cuál es el planeta más grande del sistema solar?', 'Mercurio', 'Venus', 'Júpiter', 'Saturno', 'Júpiter', NULL, 0, 0, ''),
+(41, '¿Cuál es la fórmula química del agua?', 'H2O', 'CO2', 'NaCl', 'CH4', 'H2O', NULL, 0, 0, '');
 
 -- --------------------------------------------------------
 
@@ -201,43 +167,10 @@ INSERT INTO `preguntas` (`pregunta_id`, `enunciado`, `respuestaA`, `respuestaB`,
 
 CREATE TABLE `pregunta_usuario` (
   `id_pregunta_usuario` int(11) NOT NULL,
-  `idPartida` int(11) NOT NULL,
   `idPregunta` int(11) NOT NULL,
   `idUsuario` int(11) NOT NULL,
-  `respuesta` varchar(100) DEFAULT NULL,
   `estadoRespuesta` tinyint(1) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
-
---
--- Volcado de datos para la tabla `pregunta_usuario`
---
-
-INSERT INTO `pregunta_usuario` (`id_pregunta_usuario`, `idPartida`, `idPregunta`, `idUsuario`, `respuesta`, `estadoRespuesta`) VALUES
-(1, 59, 27, 16, NULL, 0),
-(2, 60, 16, 16, NULL, 0),
-(3, 61, 16, 16, NULL, 0),
-(4, 62, 22, 16, NULL, 0),
-(5, 63, 16, 16, 'Carbono', 0),
-(6, 64, 34, 16, 'Miguel de Cervantes', 0),
-(7, 64, 23, 16, 'Cristóbal Colón', 0),
-(8, 64, 39, 16, NULL, 0),
-(9, 65, 33, 16, '', 0),
-(10, 66, 41, 16, '', 0),
-(11, 67, 29, 16, '', 0),
-(12, 68, 17, 16, 'Leonardo da Vinci', 0),
-(13, 68, 34, 16, 'Miguel de Cervantes', 0),
-(14, 68, 14, 16, 'París', 0),
-(15, 68, 20, 16, 'Miguel de Cervantes', 0),
-(16, 68, 39, 16, '', 0),
-(17, 69, 16, 16, 'Oxígeno', 0),
-(18, 69, 21, 16, '', 0),
-(19, 70, 39, 16, 'William Shakespeare', 0),
-(20, 70, 22, 16, 'Océano Atlántico', 0),
-(21, 71, 19, 16, 'Yen', 0),
-(22, 71, 30, 16, 'Oxígeno', 0),
-(23, 71, 27, 16, 'NaCl', 0),
-(24, 72, 17, 16, '', 0),
-(25, 73, 23, 16, '', 0);
 
 -- --------------------------------------------------------
 
@@ -290,7 +223,8 @@ CREATE TABLE `usuario` (
 
 INSERT INTO `usuario` (`idUsuario`, `nombre`, `apellido`, `nacimiento`, `genero`, `pais`, `ciudad`, `email`, `contrasenia`, `hashRegistro`, `usuario`, `estado`, `qr`, `fecha_registro`, `idRol`, `url_imagen`) VALUES
 (1, 'pablo', 'Perez', '2000-10-10', 'X', 'Argentina', 'Buenos Aires', 'pabloP@gmail.com', '1234', '', 'admin', 1, '', '2023-05-23', 1, ''),
-(16, 'Ale', 'Paz', '1991-12-19', 'M', 'Argentina', 'Lomas del Mirador', 'alejandrodanielpaz92@gmail.com', '81dc9bdb52d04dc20036dbd8313ed055', 'a11b4b285bfc222f8f4635b80b9cd39a', 'Aleee', 1, '', '2023-05-31', 3, './uploads/Aleee.png');
+(21, 'Ivan', 'Dp', '1992-03-01', 'M', 'Argentina', 'Ramos Mejia', 'ivangdelpino4@gmail.com', '81dc9bdb52d04dc20036dbd8313ed055', '2d299bf03bf64cf4c011c786e4bc53e4', 'ivandp', 1, '', '2023-05-31', 3, './uploads/ivandp.png'),
+(22, 'Luis Agustin', 'Vega Dobal', '2023-06-15', 'X', 'Argentina', 'Hurlingham', 'agus_1201@hotmail.com', '81dc9bdb52d04dc20036dbd8313ed055', '2f59aeef6c3b8e5804519db69a41daa1', 'fello', 1, '', '2023-06-02', 3, './uploads/fello.jpeg');
 
 --
 -- Índices para tablas volcadas
@@ -306,19 +240,23 @@ ALTER TABLE `categoria`
 -- Indices de la tabla `partida`
 --
 ALTER TABLE `partida`
-  ADD PRIMARY KEY (`idPartida`);
+  ADD PRIMARY KEY (`idPartida`),
+  ADD KEY `idUsuario` (`idUsuario`);
 
 --
 -- Indices de la tabla `preguntas`
 --
 ALTER TABLE `preguntas`
-  ADD PRIMARY KEY (`pregunta_id`);
+  ADD PRIMARY KEY (`pregunta_id`),
+  ADD KEY `categoria_id` (`categoria_id`);
 
 --
 -- Indices de la tabla `pregunta_usuario`
 --
 ALTER TABLE `pregunta_usuario`
-  ADD PRIMARY KEY (`id_pregunta_usuario`);
+  ADD PRIMARY KEY (`id_pregunta_usuario`),
+  ADD KEY `idPregunta` (`idPregunta`),
+  ADD KEY `idUsuario` (`idUsuario`);
 
 --
 -- Indices de la tabla `rol`
@@ -338,16 +276,28 @@ ALTER TABLE `usuario`
 --
 
 --
+-- AUTO_INCREMENT de la tabla `categoria`
+--
+ALTER TABLE `categoria`
+  MODIFY `categoria_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+
+--
 -- AUTO_INCREMENT de la tabla `partida`
 --
 ALTER TABLE `partida`
-  MODIFY `idPartida` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=74;
+  MODIFY `idPartida` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=118;
+
+--
+-- AUTO_INCREMENT de la tabla `preguntas`
+--
+ALTER TABLE `preguntas`
+  MODIFY `pregunta_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=42;
 
 --
 -- AUTO_INCREMENT de la tabla `pregunta_usuario`
 --
 ALTER TABLE `pregunta_usuario`
-  MODIFY `id_pregunta_usuario` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=26;
+  MODIFY `id_pregunta_usuario` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT de la tabla `rol`
@@ -359,11 +309,30 @@ ALTER TABLE `rol`
 -- AUTO_INCREMENT de la tabla `usuario`
 --
 ALTER TABLE `usuario`
-  MODIFY `idUsuario` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
+  MODIFY `idUsuario` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=23;
 
 --
 -- Restricciones para tablas volcadas
 --
+
+--
+-- Filtros para la tabla `partida`
+--
+ALTER TABLE `partida`
+  ADD CONSTRAINT `partida_ibfk_1` FOREIGN KEY (`idUsuario`) REFERENCES `usuario` (`idUsuario`);
+
+--
+-- Filtros para la tabla `preguntas`
+--
+ALTER TABLE `preguntas`
+  ADD CONSTRAINT `preguntas_ibfk_1` FOREIGN KEY (`categoria_id`) REFERENCES `categoria` (`categoria_id`);
+
+--
+-- Filtros para la tabla `pregunta_usuario`
+--
+ALTER TABLE `pregunta_usuario`
+  ADD CONSTRAINT `pregunta_usuario_ibfk_1` FOREIGN KEY (`idPregunta`) REFERENCES `preguntas` (`pregunta_id`),
+  ADD CONSTRAINT `pregunta_usuario_ibfk_2` FOREIGN KEY (`idUsuario`) REFERENCES `usuario` (`idUsuario`);
 
 --
 -- Filtros para la tabla `usuario`
