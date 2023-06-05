@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lobby</title>
+    <link  rel="stylesheet"  href="http://localhost/view/css/style_juego.css">
+<!--FontAwesome-->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css" />
+    <link href="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+
+</head>
+<body>
+<div class="quiz-box">
+    <header>
+        <div class="tituloJuego"> Unlam Trivia</div>
+        <div class="tiempo">
+            <div class="texto-tiempo">Tiempo Restante: </div>
+            <div class="tiempo-segundos">10</div>
+        </div>
+    </header>
+<section>
+<div class="pregunta">
+<!--
+    <span>¿Cuantas patas tiene el pato?</span>
+-->
+</div>
+    <div class="opciones-lista">
+        <!--<div class="opcion">
+            <span>6</span>
+            <div class="icon cross"><i class="fas fa-times"></i></div>
+        </div>
+        <div class="opcion">
+            <span>5</span>
+            <div class="icon cross"><i class="fas fa-times"></i></div>
+        </div>
+        <div class="opcion">
+            <span>3</span>
+            <div class="icon cross"><i class="fas fa-times"></i></div>
+        </div>
+        <div class="opcion">
+            <span>2</span>
+            <div class="icon tick"><i class="fas fa-check"></i></div>
+        </div>
+-->
+    </div>
+</section>
+
+    <!--FOOTER DE LA BOX-->
+    <footer>
+        <div class="total-puntos">
+            <p>Puntos: <span id='elem_puntos'>0</span></p>
+        </div>
+        <button class="report">REPORTAR</button>
+        <button class="siguiente-preg">Siguiente</button>
+    </footer>
+
+</div>
+
+<!-- BOX RESULTADOS-->
+<div class="result-box">
+    <div class="icon">
+        <i class="fas fa-crown"></i>
+    </div>
+    <div class="juego-terminado">GAME OVER :(</div>
+    <div class="puntajeFinal">
+        <!-- Here I've inserted Score Result from JavaScript -->
+    <span>Tus puntaje final fue de:</span>
+    </div>
+    <div class="botones">
+        <button class="restart">Jugar de nuevo</button>
+        <button class="quit">Volver al lobby</button>
+    </div>
+</div>
+
+<script src="http://localhost/view/js/script_juego_preguntas.js"></script>
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.3/dist/umd/popper.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"></script>
+
+
+</body>
+</html>
+

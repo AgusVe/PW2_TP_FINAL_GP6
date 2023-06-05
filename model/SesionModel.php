@@ -30,4 +30,8 @@ class SesionModel
         }
         return 0;
     }
+    public function cerrarSesion()
+    {
+        session_destroy();
+    }
 }

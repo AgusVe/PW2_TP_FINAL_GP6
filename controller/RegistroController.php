@@ -46,8 +46,13 @@ class RegistroController
             if ($contrasenia != $contraseniaRepe) {
                 $errors['contraseña'] = 'La contraseñas deben ser iguales';
             }
+
+
+
             /*LE APLICO HASH A LA CONTRASEÑA*/
             $contraseniaHasheada = md5($contrasenia);
+
+
 
             /*VERIFICO SI EL USUARIO EXISTE*/
             $usuarioBuscado = $this->registroModel->verificarSiExisteUsuario($usuario);
@@ -55,10 +60,15 @@ class RegistroController
                 $errors['usuario'] = 'El usuario ya existe';
             }
 
+
+
             /*VERIFICO SI EL EMAIL ESTA EN UN FORMATO CORRECTO*/
             if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
                 $errors['email'] = 'El correo electrónico no tiene un formato válido';
             }
+
+
+
             // VERIFICO SI HAY ERRORES Y LOS MANDO A LA VISTA
             if (count($errors) > 0) {
                 $erroresEncontrados = $errors;
@@ -69,24 +79,20 @@ class RegistroController
                 exit;
             }
 
-
             $target_dir = "./uploads/";
             $target_file = $target_dir . basename($_FILES["foto"]["name"]);
             $uploadOk = 1;
             $imageFileType = strtolower(pathinfo($target_file,PATHINFO_EXTENSION));
             $target_file = $target_dir . $_REQUEST["usuario"] . "." . $imageFileType;
 
-            // Allow certain file formats
             if($imageFileType != "jpg" && $imageFileType != "png" && $imageFileType != "jpeg"
                 && $imageFileType != "gif" ) {
                 echo "Sorry, only JPG, JPEG, PNG & GIF files are allowed.";
                 $uploadOk = 0;
             }
 
-            // Check if $uploadOk is set to 0 by an error
             if ($uploadOk == 0) {
                 echo "Sorry, your file was not uploaded.";
-            // if everything is ok, try to upload file
             } else {
                 if (move_uploaded_file($_FILES["foto"]["tmp_name"], $target_file)) {
                     echo "The file ". htmlspecialchars( basename( $_FILES["foto"]["name"])). " has been uploaded.";
