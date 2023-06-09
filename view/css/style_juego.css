@@ -22,6 +22,7 @@ body{
     transform: translate(-50%, -50%);
     box-shadow: 0px 4px 8px 0 rgba(0,0,0,0.2),
     0px 6px 20px 0 rgba(0,0,0,0.19);
+    z-index: 999;
 }
 
 .quiz-box {
@@ -224,13 +225,13 @@ footer .report:hover {
     border-radius: 5px;
     display: flex;
     text-align: center;
-align-items: center;
+    align-items: center;
     flex-direction: column;
     justify-content: space-between;
     opacity: 0;
     pointer-events: none;
     transform: translate(-50%, -50%) scale(0.9);
-
+    z-index: 9999;
 
 }
 .result-box .icon{
@@ -241,10 +242,9 @@ align-items: center;
 .result-box .juego-terminado{
     font-size: 20px;
     font-weight: 500;
-
 }
 .result-box .puntajeFinal span{
-display: flex;
+    /*display: flex;*/
 }
 
 .result-box .botones{
@@ -264,17 +264,17 @@ display: flex;
     color: #007bff;
 }
 .result-box .botones button .quit:hover {
-color: #fff;
+    color: #fff;
     background: #007bff;
 }
 
 .result-box .botones button {
-margin: 0 10px;
+    margin: 0 10px;
     height: 40px;
     padding: 0 20px;
     border: none;
     outline: none;
-    font-size: 18px;
+    font-size: 17px;
     font-weight: 500;
     border-radius: 5px;
     border: 1px solid #007bff;

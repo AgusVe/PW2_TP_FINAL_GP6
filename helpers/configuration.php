@@ -11,18 +11,22 @@ include_once('controller/RegistroController.php');
 include_once('controller/LoginController.php');
 include_once('controller/LobbyUsuarioController.php');
 include_once('controller/PartidaController.php');
+include_once('controller/RankingController.php');
 
 
 include_once('model/SesionModel.php');
 include_once('model/RegistroModel.php');
 include_once('model/PreguntaModel.php');
 include_once('model/PartidaModel.php');
+include_once('model/RankingModel.php');
 
 class configuration{
 
     private $configFile = 'config/config.ini';
+    private $arrData;
 
     public function __construct() {
+        $this->arrData = parse_ini_file($this->configFile);
     }
 
     public function getRouter() {
@@ -31,16 +35,21 @@ class configuration{
             "getLoginController",
             "execute");
     }
-    private function getArrayConfig(){
-        return parse_ini_file($this->configFile);
-    }
+
     public function getDataBase(){
-        $config = $this->getArrayConfig();
+        $config =  $this->arrData;
         return new MySqlDatabase(
             $config['servername'],
             $config['username'],
             $config['password'],
             $config['database']);
+    }
+
+    public function getConfigParameter($strField){
+        if(isset($this->arrData[$strField])){
+            return $this->arrData[$strField];
+        }
+        return null;
     }
 
 
@@ -67,4 +76,7 @@ class configuration{
         return new PartidaController(new PartidaModel($this->getDataBase()),new PreguntaModel($this->getDataBase()),$this->getRenderer());
     }
 
+    public function getRankingController(){
+        return new RankingController(new RankingModel($this->getDataBase()),$this->getRenderer());
+    }
 }
