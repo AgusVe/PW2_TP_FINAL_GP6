@@ -1,6 +1,7 @@
 <?php
 
 include_once('helpers/MySqlDatabase.php');
+include_once("third-party/phpqrcode/qrlib.php");
 include_once('Router.php');
 
 include_once('helpers/MustacheRender.php');
@@ -12,6 +13,7 @@ include_once('controller/LoginController.php');
 include_once('controller/LobbyUsuarioController.php');
 include_once('controller/PartidaController.php');
 include_once('controller/RankingController.php');
+include_once('controller/PerfilController.php');
 
 
 include_once('model/SesionModel.php');
@@ -19,6 +21,7 @@ include_once('model/RegistroModel.php');
 include_once('model/PreguntaModel.php');
 include_once('model/PartidaModel.php');
 include_once('model/RankingModel.php');
+include_once('model/PerfilModel.php');
 
 class configuration{
 
@@ -78,5 +81,9 @@ class configuration{
 
     public function getRankingController(){
         return new RankingController(new RankingModel($this->getDataBase()),$this->getRenderer());
+    }
+
+    public function getPerfilController(){
+        return new PerfilController(new PerfilModel($this->getDataBase()),$this->getRenderer());
     }
 }

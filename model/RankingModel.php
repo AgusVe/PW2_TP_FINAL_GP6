@@ -9,9 +9,9 @@ class RankingModel{
     }
 
     public function listar(){
-        $resultado = $this->database->query('SELECT usuario, puntosTotales FROM usuario ORDER BY  puntosTotales DESC');
+        $sql = 'SELECT idUsuario, usuario, puntosTotales FROM usuario ORDER BY  puntosTotales DESC';
 
-        return $resultado;
+        return $this->database->query($sql);
     }
 
 }

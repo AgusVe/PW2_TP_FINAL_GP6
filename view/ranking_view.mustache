@@ -2,42 +2,35 @@
 <html>
 <head>
     <meta charset="UTF-8">
-    <title>Tabla de usuarios</title>
-    <style>
-        .responsive-table {
-            width: 100%;
-            border-collapse: collapse;
-        }
-        .responsive-table th,
-        .responsive-table td {
-            padding: 8px;
-            border: 1px solid #ddd;
-        }
-        .responsive-table tr:hover {
-            background-color: #f5f5f5;
-            cursor: pointer;
-        }
-    </style>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css">
+    <link rel="stylesheet" href="http://localhost/view/css/style.css">
+    <link rel="stylesheet" href="http://localhost/view/css/style_lobby.css">
+    <link rel="stylesheet" href="http://localhost/view/css/ranking.css">
     <script src="http://localhost/view/js/ranking.js"></script>
 </head>
-
 <body>
-<table id="ranking-tabla" class="responsive-table">
-    <thead>
-    <tr>
-        <th>Usuario</th>
-        <th>Puntaje</th>
-    </tr>
-    </thead>
-    <tbody>
-    </tbody>
-    {{#usuarios}}
-        <tr>
-            <!-- <tr onclick="redirectToProfile('')">-->
-            <td>{{usuario}}</td>
-            <td>{{puntosTotales}}</td>
-        </tr>
-    {{/usuarios}}
-</table>
+{{> header_logueado}}
+<div class="container">
+    <div class="lobby-container">
+        <table id="ranking-tabla" class="responsive-table">
+            <thead>
+            <tr>
+                <th>Usuario</th>
+                <th>Puntaje</th>
+            </tr>
+            </thead>
+            <tbody>
+            </tbody>
+            {{#usuarios}}
+                <tr>
+                <tr onclick="redireccionar('{{idUsuario}}')">
+                    <td>{{usuario}}</td>
+                    <td>{{puntosTotales}}</td>
+                </tr>
+            {{/usuarios}}
+        </table>
+    </div>
+</div>
 </body>
 </html>

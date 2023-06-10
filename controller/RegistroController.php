@@ -105,6 +105,7 @@ class RegistroController
 
             $valores = "VALUES ('$nombre', '$apellido', '$fechaNac', '$genero', '$pais', '$ciudad', '$email', '$contraseniaHasheada','$hash_de_registro', '$usuario', '$estado', '$fechaRegistro', '$idRol', '$target_file')";
             $this->registroModel->altaUsuario($valores);
+            $this->generarQr($usuario);
 
             /*Envio de email de confirmacion*/
 
@@ -169,6 +170,13 @@ class RegistroController
 
             $this->renderer->render("registro_finalizar",$data);
         }
+    }
+
+    public function generarQr($usuario){
+        $contenidoQR = "http://localhost/perfil/verPerfil?usuario=$usuario";
+        $nombreArchivoQR = 'qrcode_' . $usuario . '.png';
+        $rutaQR = './uploads/' . $nombreArchivoQR;
+        QRcode::png($contenidoQR, $rutaQR, QR_ECLEVEL_L, 10);
     }
 
 }

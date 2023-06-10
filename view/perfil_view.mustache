@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css">
+    <link rel="stylesheet" href="http://localhost/view/css/style.css">
+    <link rel="stylesheet" href="http://localhost/view/css/style_lobby.css">
+    <title>Lobby</title>
+</head>
+<body>
+{{> header_logueado}}
+<div class="container">
+    <div class="lobby-container">
+    {{#usuarios}}
+            <h1 class="nombreUsuario">{{usuario}}</h1>
+        <div>
+            <h1 class="puntaje">Puntaje Total: {{puntosTotales}}</h1>
+        </div>
+        <div class="btn-container">
+            <div id="mapa"></div>
+            <img src='/uploads/qrcode_{{usuario}}.png' alt="Código QR">
+        </div>
+
+        <h2>Partidas Jugadas</h2>
+        <table class="table table-hover">
+            <thead class="thead-light">
+            <tr>
+                <th scope="col">Partida</th>
+                <th scope="col">Resultado</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr>
+                <td>Partida 1</td>
+                <td class="win">Ganada</td>
+            </tr>
+            <tr>
+                <td>Partida 2</td>
+                <td class="loss">Perdida</td>
+            </tr>
+            </tbody>
+        </table>
+    {{/usuarios}}
+    </div>
+</div>
+{{> footer}}
