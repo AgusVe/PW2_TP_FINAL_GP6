@@ -54,6 +54,13 @@ class PartidaModel{
         $sql = 'UPDATE `partida` SET puntosObtenidos = puntosObtenidos + 1 WHERE idPartida='.$idPartida;
 
         $this->database->execute($sql);        
-    }    
+
+    }
+
+    public function sumarPuntosTotales($idUsuario, $puntos){
+        $sql = "UPDATE `usuario` SET puntosTotales = puntosTotales + $puntos WHERE idUsuario = $idUsuario";
+
+        $this->database->execute($sql);
+    }
 
 }
