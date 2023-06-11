@@ -200,4 +200,13 @@ class PartidaController
         }            
     }
 
+    public function acumularpuntos(){
+        $requestData = json_decode(file_get_contents('php://input'), true);
+
+        $idUsuario = $_SESSION['id'];
+        $puntos = $requestData['puntos'];
+
+        $this->partidaModel->sumarPuntosTotales($idUsuario, $puntos);
+    }
+
 }
