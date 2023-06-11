@@ -8,8 +8,8 @@ class PerfilModel{
         $this->database = $database;
     }
 
-    public function obtenerDatos($idUsuario){
-        $sql = "SELECT *  FROM usuario WHERE idUsuario='$idUsuario'";
+    public function obtenerDatos($usuario){
+        $sql = "SELECT *  FROM usuario WHERE usuario='$usuario'";
         return $this->database->query($sql);
     }
 

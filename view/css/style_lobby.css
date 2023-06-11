@@ -73,11 +73,11 @@ th {
     border-radius:150px;
 }
 .containerImgPuntaje{
-    display: flex;
+    text-align: center;
     justify-content: space-between;
 }
 .nombreUsuario{
-text-align: inherit;
+    text-align: center;
     margin-left: 0.2em;
 }
 
