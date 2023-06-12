@@ -6,7 +6,6 @@ let arrDatosPregunta = null;
 
 next();
 
-
 function next() {
     let url_string = location.href;
     let url = new URL(url_string);

@@ -16,6 +16,7 @@ class PerfilController {
         if(isset($_GET['usuario'])) {
             $idUsuario = $_GET['usuario'];
             $datos['usuarios'] = $this->perfilModel->obtenerDatos($idUsuario);
+            $datos['userPartidas'] = $this->perfilModel->obtenerDatosPartidas($idUsuario);
             $this->renderer->render("perfil", $datos);
         }else{
             header("location: /");

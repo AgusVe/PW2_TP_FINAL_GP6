@@ -145,7 +145,7 @@ class PartidaController
 
             //Marco como terminada la partida si la respuesta es incorrecta
             if($bRespuestaCorrecta == false) {
-                $this->partidaModel->marcarComoTerminada($idPartida);
+                $this->partidaModel->marcarComoTerminada($idPartida,$idUsuario);
             }
 
             //Configuro datos para devolver al frontend
