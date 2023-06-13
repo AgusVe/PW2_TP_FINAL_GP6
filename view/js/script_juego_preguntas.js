@@ -6,7 +6,6 @@ let arrDatosPregunta = null;
 
 next();
 
-
 function next() {
     let url_string = location.href;
     let url = new URL(url_string);
@@ -28,7 +27,7 @@ function next() {
             const boton_siguiente = quiz_box.querySelector(".siguiente-preg");
 
             arrDatosPregunta = devolucion.pregunta_nueva;
-            
+
             //Actualizo puntaje
             let elemPuntos=document.getElementById('elem_puntos');
             elemPuntos.innerHTML=devolucion.puntos;
@@ -40,7 +39,7 @@ function next() {
                     let cruzIcon = '<div class="icon tick"><i class="fas fa-check"></i></div>';
                     let equisIcon = '<div class="icon cross"><i class="fas fa-times"></i></div>';
                     const opciones_lista = document.querySelector(".opciones-lista");
-              
+
                     let todasOpciones = opciones_lista.children.length;
 
                     // SI LA RESPUESTA ES INCORRECTA MOSTRAR LA QUE ES CORRECTA
@@ -54,8 +53,8 @@ function next() {
                             opciones_lista.children[i].setAttribute("class", "opcion incorrecto");
                         }
 
-                    }        
-                    
+                    }
+
                     if(devolucion.pregunta_anterior.resultado == true) {
                         setTimeout(mostrarPregunta, 1500);
                     } else {
@@ -65,7 +64,7 @@ function next() {
                         }, 3000);
                     }
 
-                   
+
                 }
             }
 
@@ -89,13 +88,32 @@ function mostrarGameOver(puntos) {
     resultBox.style.opacity = 1;
     resultBox.style.display = "block";
     resultBox.style.pointerEvents = 'auto';
+
+    const data = {
+        puntos: puntos
+    };
+
+    $.ajax({
+        url: '/partida/acumularpuntos',
+        type: 'POST',
+        contentType: 'application/json',
+        data: JSON.stringify(data),
+        success: function() {
+            console.log('Puntos enviados exitosamente');
+        },
+        error: function() {
+            console.error('Error al enviar los puntos');
+        }
+    });
 }
 
 function mostrarPregunta() {
     const pregunta = document.querySelector(".pregunta");
     const opciones_lista = document.querySelector(".opciones-lista");
+
     const color_seccion = document.querySelector(".tipo_pregunta");
     color_seccion.style.backgroundColor = arrDatosPregunta.color;
+
     let pregunta_tag = '<span>' + arrDatosPregunta.enunciado + '</span>';
     pregunta.innerHTML = pregunta_tag;
     opciones_lista.innerHTML = "";
@@ -103,12 +121,12 @@ function mostrarPregunta() {
 
     clearInterval(tiempo_contador);
     startTimer(tiempo_valor);
-    
+
     arrDatosPregunta.respuestas.forEach(function(element) {
         let opcion_tag =
-        '<div class="opcion">' +
-        element +
-        '<span></span></div>' ;
+            '<div class="opcion">' +
+            element +
+            '<span></span></div>' ;
         opciones_lista.innerHTML = opciones_lista.innerHTML + opcion_tag;
 
     });

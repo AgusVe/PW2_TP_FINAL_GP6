@@ -1,11 +1,18 @@
 -- phpMyAdmin SQL Dump
--- version 5.2.0
+-- version 5.2.1
 -- https://www.phpmyadmin.net/
 --
+<<<<<<< HEAD
 -- Servidor: 127.0.0.1
 -- Tiempo de generación: 05-06-2023 a las 02:51:55
 -- Versión del servidor: 10.4.27-MariaDB
 -- Versión de PHP: 8.2.0
+=======
+-- Host: 127.0.0.1
+-- Generation Time: Jun 09, 2023 at 08:54 PM
+-- Server version: 10.4.28-MariaDB
+-- PHP Version: 8.2.4
+>>>>>>> 8c7c1f7102920bbb683d797cc923d6914d3304cc
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -18,13 +25,13 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8mb4 */;
 
 --
--- Base de datos: `db_pw2`
+-- Database: `db_pw2`
 --
 
 -- --------------------------------------------------------
 
 --
--- Estructura de tabla para la tabla `categoria`
+-- Table structure for table `categoria`
 --
 
 CREATE TABLE `categoria` (
@@ -34,20 +41,20 @@ CREATE TABLE `categoria` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
--- Volcado de datos para la tabla `categoria`
+-- Dumping data for table `categoria`
 --
 
 INSERT INTO `categoria` (`categoria_id`, `nombre`, `color`) VALUES
-(1, 'Historia', 'Amarillo'),
-(2, 'Entretenimiento', 'Rosa'),
-(3, 'Arte', 'Rojo'),
-(4, 'Ciencia', 'Verde'),
-(5, 'Geografía', 'blue');
+(1, 'Historia', 'lightgoldenrodyellow'),
+(2, 'Entretenimiento', 'lightsalmon'),
+(3, 'Arte', 'lightpink'),
+(4, 'Ciencia', 'lightgreen'),
+(5, 'Geografía', 'lightblue');
 
 -- --------------------------------------------------------
 
 --
--- Estructura de tabla para la tabla `partida`
+-- Table structure for table `partida`
 --
 
 CREATE TABLE `partida` (
@@ -60,7 +67,7 @@ CREATE TABLE `partida` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
--- Volcado de datos para la tabla `partida`
+-- Dumping data for table `partida`
 --
 
 INSERT INTO `partida` (`idPartida`, `idUsuario`, `puntosObtenidos`, `fecha`, `idPreguntaActual`, `terminada`) VALUES
@@ -136,12 +143,33 @@ INSERT INTO `partida` (`idPartida`, `idUsuario`, `puntosObtenidos`, `fecha`, `id
 (70, 16, 1, '2023-06-05', 22, 1),
 (71, 16, 2, '2023-06-05', 27, 1),
 (72, 16, 0, '2023-06-05', 17, 1),
+<<<<<<< HEAD
 (73, 16, 0, '2023-06-05', 23, 1);
+=======
+(73, 16, 0, '2023-06-05', 23, 1),
+(74, 17, 6, '2023-06-08', 15, 1),
+(75, 17, 3, '2023-06-09', 33, 1),
+(76, 17, 3, '2023-06-09', 19, 1),
+(77, 17, 2, '2023-06-09', 29, 1),
+(78, 17, 2, '2023-06-09', 16, 1),
+(79, 17, 0, '2023-06-09', 22, 1),
+(80, 17, 3, '2023-06-09', 18, 1),
+(81, 17, 2, '2023-06-09', 18, 1),
+(82, 17, 3, '2023-06-09', 16, 1),
+(83, 17, 2, '2023-06-09', 35, 1),
+(84, 17, 2, '2023-06-09', 18, 1),
+(85, 17, 2, '2023-06-09', 32, 1),
+(86, 17, 1, '2023-06-09', 37, 1),
+(87, 17, 2, '2023-06-09', 32, 1),
+(88, 17, 3, '2023-06-09', 14, 1),
+(89, 17, 2, '2023-06-09', 18, 1),
+(90, 17, 4, '2023-06-09', 37, 1);
+>>>>>>> 8c7c1f7102920bbb683d797cc923d6914d3304cc
 
 -- --------------------------------------------------------
 
 --
--- Estructura de tabla para la tabla `preguntas`
+-- Table structure for table `preguntas`
 --
 
 CREATE TABLE `preguntas` (
@@ -159,7 +187,7 @@ CREATE TABLE `preguntas` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
--- Volcado de datos para la tabla `preguntas`
+-- Dumping data for table `preguntas`
 --
 
 INSERT INTO `preguntas` (`pregunta_id`, `enunciado`, `respuestaA`, `respuestaB`, `respuestaC`, `respuestaD`, `respuesta_correcta`, `categoria_id`, `veces_correcta`, `veces_respondida`, `dificultad`) VALUES
@@ -196,7 +224,7 @@ INSERT INTO `preguntas` (`pregunta_id`, `enunciado`, `respuestaA`, `respuestaB`,
 -- --------------------------------------------------------
 
 --
--- Estructura de tabla para la tabla `pregunta_usuario`
+-- Table structure for table `pregunta_usuario`
 --
 
 CREATE TABLE `pregunta_usuario` (
@@ -209,7 +237,11 @@ CREATE TABLE `pregunta_usuario` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
+<<<<<<< HEAD
 -- Volcado de datos para la tabla `pregunta_usuario`
+=======
+-- Dumping data for table `pregunta_usuario`
+>>>>>>> 8c7c1f7102920bbb683d797cc923d6914d3304cc
 --
 
 INSERT INTO `pregunta_usuario` (`id_pregunta_usuario`, `idPartida`, `idPregunta`, `idUsuario`, `respuesta`, `estadoRespuesta`) VALUES
@@ -237,12 +269,75 @@ INSERT INTO `pregunta_usuario` (`id_pregunta_usuario`, `idPartida`, `idPregunta`
 (22, 71, 30, 16, 'Oxígeno', 0),
 (23, 71, 27, 16, 'NaCl', 0),
 (24, 72, 17, 16, '', 0),
+<<<<<<< HEAD
 (25, 73, 23, 16, '', 0);
+=======
+(25, 73, 23, 16, '', 0),
+(26, 74, 34, 17, 'Miguel de Cervantes', 0),
+(27, 74, 35, 17, 'Rusia', 0),
+(28, 74, 26, 17, 'Júpiter', 0),
+(29, 74, 32, 17, 'Monte Everest', 0),
+(30, 74, 15, 17, '', 0),
+(31, 74, 19, 17, 'Yen', 0),
+(32, 74, 15, 17, '', 0),
+(33, 75, 25, 17, 'William Shakespeare', 0),
+(34, 75, 26, 17, 'Júpiter', 0),
+(35, 75, 19, 17, 'Yen', 0),
+(36, 75, 33, 17, 'Libra esterlina', 0),
+(37, 76, 23, 17, 'Cristóbal Colón', 0),
+(38, 76, 34, 17, 'Miguel de Cervantes', 0),
+(39, 76, 30, 17, 'Oxígeno', 0),
+(40, 76, 19, 17, 'Libra esterlina', 0),
+(41, 77, 16, 17, 'Oxígeno', 0),
+(42, 77, 23, 17, 'Cristóbal Colón', 0),
+(43, 77, 29, 17, 'Misisipi', 0),
+(44, 78, 27, 17, 'H2O', 0),
+(45, 78, 38, 17, 'Au', 0),
+(46, 78, 16, 17, 'Carbono', 0),
+(47, 79, 22, 17, 'Océano Atlántico', 0),
+(48, 80, 35, 17, 'Rusia', 0),
+(49, 80, 35, 17, 'Rusia', 0),
+(50, 80, 33, 17, 'Yen', 0),
+(51, 80, 18, 17, 'K2', 0),
+(52, 81, 17, 17, 'Leonardo da Vinci', 0),
+(53, 81, 29, 17, 'Nilo', 0),
+(54, 81, 18, 17, 'Mont Blanc', 0),
+(55, 82, 30, 17, 'Oxígeno', 0),
+(56, 82, 27, 17, 'H2O', 0),
+(57, 82, 29, 17, 'Nilo', 0),
+(58, 82, 16, 17, 'Hierro', 0),
+(59, 83, 29, 17, 'Nilo', 0),
+(60, 83, 22, 17, 'Océano Pacífico', 0),
+(61, 83, 35, 17, 'Canadá', 0),
+(62, 84, 26, 17, 'Júpiter', 0),
+(63, 84, 19, 17, 'Yen', 0),
+(64, 84, 18, 17, '', 0),
+(65, 85, 20, 17, 'Miguel de Cervantes', 0),
+(66, 85, 14, 17, 'París', 0),
+(67, 85, 32, 17, 'Mont Blanc', 0),
+(68, 86, 20, 17, 'Miguel de Cervantes', 0),
+(69, 86, 37, 17, 'Hernán Cortés', 0),
+(70, 87, 18, 17, 'Monte Everest', 0),
+(71, 87, 21, 17, 'Rusia', 0),
+(72, 87, 32, 17, 'Mont Blanc', 0),
+(73, 88, 33, 17, 'Yen', 0),
+(74, 88, 25, 17, 'William Shakespeare', 0),
+(75, 88, 37, 17, 'Cristóbal Colón', 0),
+(76, 88, 14, 17, 'Londres', 0),
+(77, 89, 24, 17, 'Au', 0),
+(78, 89, 22, 17, 'Océano Pacífico', 0),
+(79, 89, 18, 17, 'Mont Blanc', 0),
+(80, 90, 29, 17, 'Nilo', 0),
+(81, 90, 30, 17, 'Oxígeno', 0),
+(82, 90, 27, 17, 'H2O', 0),
+(83, 90, 30, 17, 'Oxígeno', 0),
+(84, 90, 37, 17, 'Hernán Cortés', 0);
+>>>>>>> 8c7c1f7102920bbb683d797cc923d6914d3304cc
 
 -- --------------------------------------------------------
 
 --
--- Estructura de tabla para la tabla `rol`
+-- Table structure for table `rol`
 --
 
 CREATE TABLE `rol` (
@@ -251,7 +346,7 @@ CREATE TABLE `rol` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
--- Volcado de datos para la tabla `rol`
+-- Dumping data for table `rol`
 --
 
 INSERT INTO `rol` (`idRol`, `nombre`) VALUES
@@ -262,7 +357,7 @@ INSERT INTO `rol` (`idRol`, `nombre`) VALUES
 -- --------------------------------------------------------
 
 --
--- Estructura de tabla para la tabla `usuario`
+-- Table structure for table `usuario`
 --
 
 CREATE TABLE `usuario` (
@@ -281,63 +376,72 @@ CREATE TABLE `usuario` (
   `qr` varchar(140) NOT NULL,
   `fecha_registro` date NOT NULL,
   `idRol` int(11) NOT NULL,
-  `url_imagen` varchar(250) NOT NULL
+  `url_imagen` varchar(250) NOT NULL,
+  `puntosTotales` int(11) NOT NULL DEFAULT 0
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
--- Volcado de datos para la tabla `usuario`
+-- Dumping data for table `usuario`
 --
 
+<<<<<<< HEAD
 INSERT INTO `usuario` (`idUsuario`, `nombre`, `apellido`, `nacimiento`, `genero`, `pais`, `ciudad`, `email`, `contrasenia`, `hashRegistro`, `usuario`, `estado`, `qr`, `fecha_registro`, `idRol`, `url_imagen`) VALUES
 (1, 'pablo', 'Perez', '2000-10-10', 'X', 'Argentina', 'Buenos Aires', 'pabloP@gmail.com', '1234', '', 'admin', 1, '', '2023-05-23', 1, ''),
 (16, 'Ale', 'Paz', '1991-12-19', 'M', 'Argentina', 'Lomas del Mirador', 'alejandrodanielpaz92@gmail.com', '81dc9bdb52d04dc20036dbd8313ed055', 'a11b4b285bfc222f8f4635b80b9cd39a', 'Aleee', 1, '', '2023-05-31', 3, './uploads/Aleee.png');
+=======
+INSERT INTO `usuario` (`idUsuario`, `nombre`, `apellido`, `nacimiento`, `genero`, `pais`, `ciudad`, `email`, `contrasenia`, `hashRegistro`, `usuario`, `estado`, `qr`, `fecha_registro`, `idRol`, `url_imagen`, `puntosTotales`) VALUES
+(1, 'pablo', 'Perez', '2000-10-10', 'X', 'Argentina', 'Buenos Aires', 'pabloP@gmail.com', '1234', '', 'admin', 1, '', '2023-05-23', 1, '', 0),
+(16, 'Ale', 'Paz', '1991-12-19', 'M', 'Argentina', 'Lomas del Mirador', 'alejandrodanielpaz92@gmail.com', '81dc9bdb52d04dc20036dbd8313ed055', 'a11b4b285bfc222f8f4635b80b9cd39a', 'Aleee', 1, '', '2023-05-31', 3, './uploads/Aleee.png', 0),
+(17, 'Ivan', 'Dp', '1992-01-03', 'M', 'Argentina', 'Ramos Mejia', 'ivangdelpino4@gmail.com', '81dc9bdb52d04dc20036dbd8313ed055', '5f3ef04d6af3a8dc400b6fa4b6fade78', 'ivandp', 1, '', '2023-06-08', 3, './uploads/ivandp.png', 4);
+>>>>>>> 8c7c1f7102920bbb683d797cc923d6914d3304cc
 
 --
--- Índices para tablas volcadas
+-- Indexes for dumped tables
 --
 
 --
--- Indices de la tabla `categoria`
+-- Indexes for table `categoria`
 --
 ALTER TABLE `categoria`
   ADD PRIMARY KEY (`categoria_id`);
 
 --
--- Indices de la tabla `partida`
+-- Indexes for table `partida`
 --
 ALTER TABLE `partida`
   ADD PRIMARY KEY (`idPartida`);
 
 --
--- Indices de la tabla `preguntas`
+-- Indexes for table `preguntas`
 --
 ALTER TABLE `preguntas`
   ADD PRIMARY KEY (`pregunta_id`);
 
 --
--- Indices de la tabla `pregunta_usuario`
+-- Indexes for table `pregunta_usuario`
 --
 ALTER TABLE `pregunta_usuario`
   ADD PRIMARY KEY (`id_pregunta_usuario`);
 
 --
--- Indices de la tabla `rol`
+-- Indexes for table `rol`
 --
 ALTER TABLE `rol`
   ADD PRIMARY KEY (`idRol`);
 
 --
--- Indices de la tabla `usuario`
+-- Indexes for table `usuario`
 --
 ALTER TABLE `usuario`
   ADD PRIMARY KEY (`idUsuario`),
   ADD KEY `idRol` (`idRol`);
 
 --
--- AUTO_INCREMENT de las tablas volcadas
+-- AUTO_INCREMENT for dumped tables
 --
 
 --
+<<<<<<< HEAD
 -- AUTO_INCREMENT de la tabla `partida`
 --
 ALTER TABLE `partida`
@@ -348,25 +452,45 @@ ALTER TABLE `partida`
 --
 ALTER TABLE `pregunta_usuario`
   MODIFY `id_pregunta_usuario` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=26;
+=======
+-- AUTO_INCREMENT for table `partida`
+--
+ALTER TABLE `partida`
+  MODIFY `idPartida` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=91;
 
 --
--- AUTO_INCREMENT de la tabla `rol`
+-- AUTO_INCREMENT for table `pregunta_usuario`
+--
+ALTER TABLE `pregunta_usuario`
+  MODIFY `id_pregunta_usuario` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=85;
+>>>>>>> 8c7c1f7102920bbb683d797cc923d6914d3304cc
+
+--
+-- AUTO_INCREMENT for table `rol`
 --
 ALTER TABLE `rol`
   MODIFY `idRol` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
--- AUTO_INCREMENT de la tabla `usuario`
+-- AUTO_INCREMENT for table `usuario`
 --
 ALTER TABLE `usuario`
+<<<<<<< HEAD
   MODIFY `idUsuario` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
+=======
+  MODIFY `idUsuario` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=18;
+>>>>>>> 8c7c1f7102920bbb683d797cc923d6914d3304cc
 
 --
--- Restricciones para tablas volcadas
+-- Constraints for dumped tables
 --
 
 --
+<<<<<<< HEAD
 -- Filtros para la tabla `usuario`
+=======
+-- Constraints for table `usuario`
+>>>>>>> 8c7c1f7102920bbb683d797cc923d6914d3304cc
 --
 ALTER TABLE `usuario`
   ADD CONSTRAINT `usuario_ibfk_1` FOREIGN KEY (`idRol`) REFERENCES `rol` (`idRol`);

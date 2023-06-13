@@ -3,6 +3,7 @@
 class PartidaModel{
 
     private $database;
+    private $resultadoCantidadpartidas;
     public function __construct($database)
     {
         $this->database = $database;
@@ -43,17 +44,34 @@ class PartidaModel{
         return $this->database->getOne($query);
     }
 
-    public function marcarComoTerminada($idPartida){
-        $sql = 'UPDATE `partida` SET terminada = 1 WHERE idPartida='.$idPartida;
+    public function contarPartidasQuetieneElJugador($idUsuario){
 
-        $this->database->execute($sql);        
+        $sql = 'SELECT count(*) numeroPartidas FROM `partida` WHERE idUsuario ='.$idUsuario.' AND terminada= 1';
+        return $this->database->getOne($sql);
+
+    }
+
+    public function marcarComoTerminada($idPartida,$idUsuario){
+
+        $numPartida=$this->contarPartidasQuetieneElJugador($idUsuario);
+
+        $sql = 'UPDATE `partida` SET terminada = 1, numPartidaDelJugador='.$numPartida['numeroPartidas'].' + 1 WHERE idPartida='.$idPartida;
+
+        $this->database->execute($sql);
     }
 
 
     public function actualizarPuntaje($idPartida){
         $sql = 'UPDATE `partida` SET puntosObtenidos = puntosObtenidos + 1 WHERE idPartida='.$idPartida;
 
-        $this->database->execute($sql);        
-    }    
+        $this->database->execute($sql);
+
+    }
+
+    public function sumarPuntosTotales($idUsuario, $puntos){
+        $sql = "UPDATE `usuario` SET puntosTotales = puntosTotales + $puntos WHERE idUsuario = $idUsuario";
+
+        $this->database->execute($sql);
+    }
 
 }

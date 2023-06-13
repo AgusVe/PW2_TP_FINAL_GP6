@@ -15,7 +15,7 @@ class PartidaController
 
         include_once("helpers/Configuration.php");
         $this->configuration = new Configuration();
-        
+
     }
 
     public function nuevaPartida()
@@ -60,7 +60,7 @@ class PartidaController
 
         $arrDatosPartida = $this->partidaModel->obtenerPartida($idPartida);
 
-        
+
         if(!isset($arrDatosPartida['idPartida'])) {
             $this->redirigirHome();
             return;
@@ -75,7 +75,7 @@ class PartidaController
         if($arrDatosPartida['idUsuario'] != $_SESSION['id']) {
             $this->redirigirHome();
             return;
-        }        
+        }
 
 
         $this->renderer->render("partida");
@@ -111,7 +111,7 @@ class PartidaController
         if($arrDatosPartida['idUsuario'] != $_SESSION['id']) {
             $this->redirigirHome();
             return;
-        }        
+        }
 
         $arrDevolucion=[];
 
@@ -145,7 +145,7 @@ class PartidaController
 
             //Marco como terminada la partida si la respuesta es incorrecta
             if($bRespuestaCorrecta == false) {
-                $this->partidaModel->marcarComoTerminada($idPartida);
+                $this->partidaModel->marcarComoTerminada($idPartida,$idUsuario);
             }
 
             //Configuro datos para devolver al frontend
@@ -176,7 +176,7 @@ class PartidaController
                 $arrDevolucion['pregunta_nueva'] = $arrDatosPregunta;
             } catch (Exception $e) {
 
-            } 
+            }
         }
 
         $arrDevolucion['puntos']=$arrDatosPartida['puntosObtenidos'];
@@ -197,7 +197,16 @@ class PartidaController
             default:
                 header("location: /lobbyUsuario");
                 break;
-        }            
+        }
+    }
+
+    public function acumularpuntos(){
+        $requestData = json_decode(file_get_contents('php://input'), true);
+
+        $idUsuario = $_SESSION['id'];
+        $puntos = $requestData['puntos'];
+
+        $this->partidaModel->sumarPuntosTotales($idUsuario, $puntos);
     }
 
 }
