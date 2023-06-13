@@ -64,11 +64,11 @@ class configuration{
         return new LoginController($this->getRenderer());
     }
     public function getLobbyUsuarioController(){
-        return new LobbyUsuarioController($this->getRenderer());
+        return new LobbyUsuarioController($this->getRenderer(),new PerfilModel($this->getDataBase()));
     }
 
     public function getSesionController(){
-        return new SesionController(new SesionModel($this->getDataBase()),$this->getRenderer());
+        return new SesionController(new SesionModel($this->getDataBase()),$this->getRenderer(), new PerfilModel($this->getDataBase()));
     }
 
     public function getRegistroController(){

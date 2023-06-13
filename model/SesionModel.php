@@ -10,14 +10,13 @@ class SesionModel
         $this->database = $database;
     }
 
-
     public function validar($email, $clave)
     {
         $claveHasheada = md5($clave);
 
         $sql = "SELECT *  FROM usuario WHERE email='$email' AND contrasenia='$claveHasheada' AND estado='1'";
 
-
+        return $this->database->query($sql);
     }
 
     public function validarEmail($email)
