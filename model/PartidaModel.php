@@ -64,7 +64,7 @@ class PartidaModel{
     public function actualizarPuntaje($idPartida){
         $sql = 'UPDATE `partida` SET puntosObtenidos = puntosObtenidos + 1 WHERE idPartida='.$idPartida;
 
-        $this->database->execute($sql);
+        $this->database->execute($sql);        
 
     }
 

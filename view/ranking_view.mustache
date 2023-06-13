@@ -13,7 +13,6 @@
 {{> header_logueado}}
 <div class="container">
     <div class="lobby-container">
-        <h1 class="puntaje">Ranking</h1>
         <table id="ranking-tabla" class="responsive-table">
             <thead>
             <tr>
@@ -25,7 +24,7 @@
             </tbody>
             {{#usuarios}}
                 <tr>
-                <tr onclick="redireccionar('{{usuario}}')">
+                <tr onclick="redireccionar('{{idUsuario}}')">
                     <td>{{usuario}}</td>
                     <td>{{puntosTotales}}</td>
                 </tr>

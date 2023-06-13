@@ -3,13 +3,16 @@
 class SesionController{
 
     private $sesionModel;
+    private $perfilModel;
+
     private $renderer;
     public static $datosDelUsuario;
 
 
-    public function __construct($sesionModel,$renderer){
+    public function __construct($sesionModel,$renderer,$perfilModel){
         $this->sesionModel = $sesionModel;
         $this->renderer = $renderer;
+        $this->perfilModel=$perfilModel;
     }
 
     public function iniciarSesion(){
@@ -43,9 +46,7 @@ class SesionController{
                 $_SESSION['rol']=$resultado["0"]["idRol"];
                 $_SESSION['url_imagen']=$resultado["0"]["url_imagen"];
                 $_SESSION['id']=$resultado["0"]["idUsuario"];
-                $datos=$resultado["0"];
-
-                $_SESSION["usuario"] = array('datosUsur' => $datos);
+                $_SESSION['datosUsur'] = $resultado;
                 switch ( $_SESSION['rol']){
                     case "1":
                         header("location: /lobbyAdmin");

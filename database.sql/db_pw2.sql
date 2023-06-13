@@ -1,18 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 5.2.1
+-- version 5.2.0
 -- https://www.phpmyadmin.net/
 --
-<<<<<<< HEAD
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 05-06-2023 a las 02:51:55
+-- Tiempo de generación: 12-06-2023 a las 20:51:26
 -- Versión del servidor: 10.4.27-MariaDB
 -- Versión de PHP: 8.2.0
-=======
--- Host: 127.0.0.1
--- Generation Time: Jun 09, 2023 at 08:54 PM
--- Server version: 10.4.28-MariaDB
--- PHP Version: 8.2.4
->>>>>>> 8c7c1f7102920bbb683d797cc923d6914d3304cc
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -25,13 +18,13 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8mb4 */;
 
 --
--- Database: `db_pw2`
+-- Base de datos: `db_pw2`
 --
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `categoria`
+-- Estructura de tabla para la tabla `categoria`
 --
 
 CREATE TABLE `categoria` (
@@ -41,7 +34,7 @@ CREATE TABLE `categoria` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
--- Dumping data for table `categoria`
+-- Volcado de datos para la tabla `categoria`
 --
 
 INSERT INTO `categoria` (`categoria_id`, `nombre`, `color`) VALUES
@@ -54,7 +47,7 @@ INSERT INTO `categoria` (`categoria_id`, `nombre`, `color`) VALUES
 -- --------------------------------------------------------
 
 --
--- Table structure for table `partida`
+-- Estructura de tabla para la tabla `partida`
 --
 
 CREATE TABLE `partida` (
@@ -63,113 +56,127 @@ CREATE TABLE `partida` (
   `puntosObtenidos` int(11) NOT NULL,
   `fecha` date NOT NULL,
   `idPreguntaActual` int(11) DEFAULT NULL,
+  `numPartidaDelJugador` int(11) NOT NULL DEFAULT 0,
   `terminada` tinyint(1) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
--- Dumping data for table `partida`
+-- Volcado de datos para la tabla `partida`
 --
 
-INSERT INTO `partida` (`idPartida`, `idUsuario`, `puntosObtenidos`, `fecha`, `idPreguntaActual`, `terminada`) VALUES
-(1, 16, 0, '2023-06-04', 0, 0),
-(2, 16, 0, '2023-06-04', 0, 0),
-(3, 16, 0, '2023-06-04', 0, 0),
-(4, 16, 0, '2023-06-04', 0, 0),
-(5, 16, 0, '2023-06-04', 0, 0),
-(6, 16, 0, '2023-06-04', 0, 0),
-(7, 16, 0, '2023-06-04', 0, 0),
-(8, 16, 0, '2023-06-04', 0, 0),
-(9, 16, 0, '2023-06-04', 0, 0),
-(10, 16, 0, '2023-06-04', 0, 0),
-(11, 16, 0, '2023-06-04', 0, 0),
-(12, 16, 0, '2023-06-04', 0, 0),
-(13, 16, 0, '2023-06-04', 0, 0),
-(14, 16, 0, '2023-06-04', 0, 0),
-(15, 16, 0, '2023-06-04', 0, 0),
-(16, 16, 0, '2023-06-04', 0, 0),
-(17, 16, 0, '2023-06-04', 0, 0),
-(18, 16, 0, '2023-06-04', 0, 0),
-(19, 16, 0, '2023-06-04', 0, 0),
-(20, 16, 0, '2023-06-04', 0, 0),
-(21, 16, 0, '2023-06-04', 0, 0),
-(22, 16, 0, '2023-06-04', 0, 0),
-(23, 16, 0, '2023-06-04', 0, 0),
-(24, 16, 0, '2023-06-04', 0, 0),
-(25, 16, 0, '2023-06-04', 0, 0),
-(26, 16, 0, '2023-06-04', 0, 0),
-(27, 16, 0, '2023-06-04', 0, 0),
-(28, 16, 0, '2023-06-04', 0, 0),
-(29, 16, 0, '2023-06-04', 0, 0),
-(30, 16, 0, '2023-06-04', 0, 0),
-(31, 16, 0, '2023-06-04', 0, 0),
-(32, 16, 0, '2023-06-04', 0, 0),
-(33, 16, 0, '2023-06-04', 0, 0),
-(34, 16, 0, '2023-06-04', 0, 0),
-(35, 16, 0, '2023-06-04', 0, 0),
-(36, 16, 0, '2023-06-04', 0, 0),
-(37, 16, 0, '2023-06-04', 0, 0),
-(38, 16, 0, '2023-06-04', 0, 0),
-(39, 16, 0, '2023-06-04', 0, 0),
-(40, 16, 0, '2023-06-04', 0, 0),
-(41, 16, 0, '2023-06-04', 0, 0),
-(42, 16, 0, '2023-06-04', 0, 0),
-(43, 16, 0, '2023-06-04', 0, 0),
-(44, 16, 0, '2023-06-04', 0, 0),
-(45, 16, 0, '2023-06-04', 0, 0),
-(46, 16, 0, '2023-06-04', 0, 0),
-(47, 16, 0, '2023-06-04', 0, 0),
-(48, 16, 0, '2023-06-04', 0, 0),
-(49, 16, 0, '2023-06-04', 0, 0),
-(50, 16, 0, '2023-06-04', 0, 0),
-(51, 16, 0, '2023-06-04', 0, 0),
-(52, 16, 0, '2023-06-04', 0, 0),
-(53, 16, 0, '2023-06-04', 0, 0),
-(54, 16, 0, '2023-06-04', 0, 0),
-(55, 16, 0, '2023-06-04', 0, 0),
-(56, 16, 0, '2023-06-04', 0, 0),
-(57, 16, 0, '2023-06-04', 0, 0),
-(58, 16, 0, '2023-06-04', 13, 1),
-(59, 16, 0, '2023-06-05', 27, 1),
-(60, 16, 0, '2023-06-05', 16, 1),
-(61, 16, 0, '2023-06-05', 16, 0),
-(62, 16, 0, '2023-06-05', 22, 0),
-(63, 16, 0, '2023-06-05', 16, 1),
-(64, 16, 0, '2023-06-05', 39, 1),
-(65, 16, 0, '2023-06-05', 33, 1),
-(66, 16, 0, '2023-06-05', 41, 1),
-(67, 16, 0, '2023-06-05', 29, 1),
-(68, 16, 4, '2023-06-05', 39, 1),
-(69, 16, 1, '2023-06-05', 21, 1),
-(70, 16, 1, '2023-06-05', 22, 1),
-(71, 16, 2, '2023-06-05', 27, 1),
-(72, 16, 0, '2023-06-05', 17, 1),
-<<<<<<< HEAD
-(73, 16, 0, '2023-06-05', 23, 1);
-=======
-(73, 16, 0, '2023-06-05', 23, 1),
-(74, 17, 6, '2023-06-08', 15, 1),
-(75, 17, 3, '2023-06-09', 33, 1),
-(76, 17, 3, '2023-06-09', 19, 1),
-(77, 17, 2, '2023-06-09', 29, 1),
-(78, 17, 2, '2023-06-09', 16, 1),
-(79, 17, 0, '2023-06-09', 22, 1),
-(80, 17, 3, '2023-06-09', 18, 1),
-(81, 17, 2, '2023-06-09', 18, 1),
-(82, 17, 3, '2023-06-09', 16, 1),
-(83, 17, 2, '2023-06-09', 35, 1),
-(84, 17, 2, '2023-06-09', 18, 1),
-(85, 17, 2, '2023-06-09', 32, 1),
-(86, 17, 1, '2023-06-09', 37, 1),
-(87, 17, 2, '2023-06-09', 32, 1),
-(88, 17, 3, '2023-06-09', 14, 1),
-(89, 17, 2, '2023-06-09', 18, 1),
-(90, 17, 4, '2023-06-09', 37, 1);
->>>>>>> 8c7c1f7102920bbb683d797cc923d6914d3304cc
+INSERT INTO `partida` (`idPartida`, `idUsuario`, `puntosObtenidos`, `fecha`, `idPreguntaActual`, `numPartidaDelJugador`, `terminada`) VALUES
+(1, 16, 0, '2023-06-04', 0, 0, 0),
+(2, 16, 0, '2023-06-04', 0, 0, 0),
+(3, 16, 0, '2023-06-04', 0, 0, 0),
+(4, 16, 0, '2023-06-04', 0, 0, 0),
+(5, 16, 0, '2023-06-04', 0, 0, 0),
+(6, 16, 0, '2023-06-04', 0, 0, 0),
+(7, 16, 0, '2023-06-04', 0, 0, 0),
+(8, 16, 0, '2023-06-04', 0, 0, 0),
+(9, 16, 0, '2023-06-04', 0, 0, 0),
+(10, 16, 0, '2023-06-04', 0, 0, 0),
+(11, 16, 0, '2023-06-04', 0, 0, 0),
+(12, 16, 0, '2023-06-04', 0, 0, 0),
+(13, 16, 0, '2023-06-04', 0, 0, 0),
+(14, 16, 0, '2023-06-04', 0, 0, 0),
+(15, 16, 0, '2023-06-04', 0, 0, 0),
+(16, 16, 0, '2023-06-04', 0, 0, 0),
+(17, 16, 0, '2023-06-04', 0, 0, 0),
+(18, 16, 0, '2023-06-04', 0, 0, 0),
+(19, 16, 0, '2023-06-04', 0, 0, 0),
+(20, 16, 0, '2023-06-04', 0, 0, 0),
+(21, 16, 0, '2023-06-04', 0, 0, 0),
+(22, 16, 0, '2023-06-04', 0, 0, 0),
+(23, 16, 0, '2023-06-04', 0, 0, 0),
+(24, 16, 0, '2023-06-04', 0, 0, 0),
+(25, 16, 0, '2023-06-04', 0, 0, 0),
+(26, 16, 0, '2023-06-04', 0, 0, 0),
+(27, 16, 0, '2023-06-04', 0, 0, 0),
+(28, 16, 0, '2023-06-04', 0, 0, 0),
+(29, 16, 0, '2023-06-04', 0, 0, 0),
+(30, 16, 0, '2023-06-04', 0, 0, 0),
+(31, 16, 0, '2023-06-04', 0, 0, 0),
+(32, 16, 0, '2023-06-04', 0, 0, 0),
+(33, 16, 0, '2023-06-04', 0, 0, 0),
+(34, 16, 0, '2023-06-04', 0, 0, 0),
+(35, 16, 0, '2023-06-04', 0, 0, 0),
+(36, 16, 0, '2023-06-04', 0, 0, 0),
+(37, 16, 0, '2023-06-04', 0, 0, 0),
+(38, 16, 0, '2023-06-04', 0, 0, 0),
+(39, 16, 0, '2023-06-04', 0, 0, 0),
+(40, 16, 0, '2023-06-04', 0, 0, 0),
+(41, 16, 0, '2023-06-04', 0, 0, 0),
+(42, 16, 0, '2023-06-04', 0, 0, 0),
+(43, 16, 0, '2023-06-04', 0, 0, 0),
+(44, 16, 0, '2023-06-04', 0, 0, 0),
+(45, 16, 0, '2023-06-04', 0, 0, 0),
+(46, 16, 0, '2023-06-04', 0, 0, 0),
+(47, 16, 0, '2023-06-04', 0, 0, 0),
+(48, 16, 0, '2023-06-04', 0, 0, 0),
+(49, 16, 0, '2023-06-04', 0, 0, 0),
+(50, 16, 0, '2023-06-04', 0, 0, 0),
+(51, 16, 0, '2023-06-04', 0, 0, 0),
+(52, 16, 0, '2023-06-04', 0, 0, 0),
+(53, 16, 0, '2023-06-04', 0, 0, 0),
+(54, 16, 0, '2023-06-04', 0, 0, 0),
+(55, 16, 0, '2023-06-04', 0, 0, 0),
+(56, 16, 0, '2023-06-04', 0, 0, 0),
+(57, 16, 0, '2023-06-04', 0, 0, 0),
+(58, 16, 0, '2023-06-04', 13, 0, 1),
+(59, 16, 0, '2023-06-05', 27, 1, 1),
+(60, 16, 0, '2023-06-05', 16, 2, 1),
+(61, 16, 0, '2023-06-05', 16, 0, 0),
+(62, 16, 0, '2023-06-05', 22, 0, 0),
+(63, 16, 0, '2023-06-05', 16, 7, 1),
+(64, 16, 0, '2023-06-05', 39, 3, 1),
+(65, 16, 0, '2023-06-05', 33, 9, 1),
+(66, 16, 0, '2023-06-05', 41, 6, 1),
+(67, 16, 0, '2023-06-05', 29, 10, 1),
+(68, 16, 4, '2023-06-05', 39, 11, 1),
+(69, 16, 1, '2023-06-05', 21, 8, 1),
+(70, 16, 1, '2023-06-05', 22, 5, 1),
+(71, 16, 2, '2023-06-05', 27, 12, 1),
+(72, 16, 0, '2023-06-05', 17, 0, 1),
+(73, 16, 0, '2023-06-05', 23, 4, 1),
+(74, 17, 6, '2023-06-08', 15, 13, 1),
+(75, 17, 3, '2023-06-09', 33, 12, 1),
+(76, 17, 3, '2023-06-09', 19, 19, 1),
+(77, 17, 2, '2023-06-09', 29, 11, 1),
+(78, 17, 2, '2023-06-09', 16, 14, 1),
+(79, 17, 0, '2023-06-09', 22, 15, 1),
+(80, 17, 3, '2023-06-09', 18, 16, 1),
+(81, 17, 2, '2023-06-09', 18, 17, 1),
+(82, 17, 3, '2023-06-09', 16, 18, 1),
+(83, 17, 2, '2023-06-09', 35, 10, 1),
+(84, 17, 2, '2023-06-09', 18, 9, 1),
+(85, 17, 2, '2023-06-09', 32, 8, 1),
+(86, 17, 1, '2023-06-09', 37, 1, 1),
+(87, 17, 2, '2023-06-09', 32, 2, 1),
+(88, 17, 3, '2023-06-09', 14, 3, 1),
+(89, 17, 2, '2023-06-09', 18, 4, 1),
+(90, 17, 4, '2023-06-09', 37, 5, 1),
+(91, 18, 11, '2023-06-12', 13, 0, 0),
+(92, 18, 1, '2023-06-12', 29, 0, 0),
+(93, 17, 0, '2023-06-12', 35, 6, 1),
+(95, 17, 0, '2023-06-12', 40, 7, 1),
+(97, 18, 2, '2023-06-12', 31, 1, 1),
+(98, 18, 0, '2023-06-12', 15, 0, 0),
+(99, 18, 1, '2023-06-12', 33, 0, 0),
+(100, 18, 2, '2023-06-12', 18, 2, 1),
+(101, 18, 2, '2023-06-12', 22, 3, 1),
+(102, 18, 0, '2023-06-12', 22, 4, 1),
+(103, 18, 0, '2023-06-12', 36, 5, 1),
+(104, 18, 0, '2023-06-12', 24, 6, 1),
+(105, 18, 0, '2023-06-12', 34, 7, 1),
+(106, 18, 0, '2023-06-12', 23, 8, 1),
+(107, 18, 3, '2023-06-12', 38, 9, 1),
+(108, 17, 0, '2023-06-12', 19, 20, 1),
+(109, 17, 1, '2023-06-12', 30, 21, 1);
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `preguntas`
+-- Estructura de tabla para la tabla `preguntas`
 --
 
 CREATE TABLE `preguntas` (
@@ -187,7 +194,7 @@ CREATE TABLE `preguntas` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
--- Dumping data for table `preguntas`
+-- Volcado de datos para la tabla `preguntas`
 --
 
 INSERT INTO `preguntas` (`pregunta_id`, `enunciado`, `respuestaA`, `respuestaB`, `respuestaC`, `respuestaD`, `respuesta_correcta`, `categoria_id`, `veces_correcta`, `veces_respondida`, `dificultad`) VALUES
@@ -224,7 +231,7 @@ INSERT INTO `preguntas` (`pregunta_id`, `enunciado`, `respuestaA`, `respuestaB`,
 -- --------------------------------------------------------
 
 --
--- Table structure for table `pregunta_usuario`
+-- Estructura de tabla para la tabla `pregunta_usuario`
 --
 
 CREATE TABLE `pregunta_usuario` (
@@ -237,11 +244,7 @@ CREATE TABLE `pregunta_usuario` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
-<<<<<<< HEAD
 -- Volcado de datos para la tabla `pregunta_usuario`
-=======
--- Dumping data for table `pregunta_usuario`
->>>>>>> 8c7c1f7102920bbb683d797cc923d6914d3304cc
 --
 
 INSERT INTO `pregunta_usuario` (`id_pregunta_usuario`, `idPartida`, `idPregunta`, `idUsuario`, `respuesta`, `estadoRespuesta`) VALUES
@@ -269,9 +272,6 @@ INSERT INTO `pregunta_usuario` (`id_pregunta_usuario`, `idPartida`, `idPregunta`
 (22, 71, 30, 16, 'Oxígeno', 0),
 (23, 71, 27, 16, 'NaCl', 0),
 (24, 72, 17, 16, '', 0),
-<<<<<<< HEAD
-(25, 73, 23, 16, '', 0);
-=======
 (25, 73, 23, 16, '', 0),
 (26, 74, 34, 17, 'Miguel de Cervantes', 0),
 (27, 74, 35, 17, 'Rusia', 0),
@@ -331,13 +331,58 @@ INSERT INTO `pregunta_usuario` (`id_pregunta_usuario`, `idPartida`, `idPregunta`
 (81, 90, 30, 17, 'Oxígeno', 0),
 (82, 90, 27, 17, 'H2O', 0),
 (83, 90, 30, 17, 'Oxígeno', 0),
-(84, 90, 37, 17, 'Hernán Cortés', 0);
->>>>>>> 8c7c1f7102920bbb683d797cc923d6914d3304cc
+(84, 90, 37, 17, 'Hernán Cortés', 0),
+(85, 91, 41, 18, 'H2O', 0),
+(86, 91, 16, 18, 'Oxígeno', 0),
+(87, 91, 31, 18, 'Leonardo da Vinci', 0),
+(88, 91, 29, 18, 'Nilo', 0),
+(89, 91, 15, 18, 'Nilo', 0),
+(90, 91, 37, 18, 'Cristóbal Colón', 0),
+(91, 91, 40, 18, 'Júpiter', 0),
+(92, 91, 20, 18, 'Miguel de Cervantes', 0),
+(93, 91, 29, 18, 'Nilo', 0),
+(94, 91, 29, 18, 'Nilo', 0),
+(95, 91, 41, 18, 'H2O', 0),
+(96, 91, 13, 18, '', 0),
+(97, 92, 38, 18, 'Au', 0),
+(98, 92, 29, 18, 'Misisipi', 0),
+(99, 93, 35, 17, 'Estados Unidos', 0),
+(100, 94, 34, 17, 'Miguel de Cervantes', 0),
+(101, 94, 35, 17, 'Rusia', 0),
+(102, 94, 29, 17, 'Nilo', 0),
+(103, 94, 37, 17, 'Hernán Cortés', 0),
+(104, 95, 40, 17, 'Mercurio', 0),
+(105, 96, 33, 17, 'Yen', 0),
+(106, 96, 38, 17, NULL, 0),
+(107, 97, 30, 18, 'Oxígeno', 0),
+(108, 97, 31, 18, 'Vincent van Gogh', 0),
+(109, 97, 31, 18, 'Vincent van Gogh', 0),
+(110, 98, 15, 18, 'Amazonas', 0),
+(111, 99, 41, 18, 'H2O', 0),
+(112, 99, 33, 18, 'Euro', 0),
+(113, 100, 31, 18, 'Leonardo da Vinci', 0),
+(114, 100, 21, 18, 'Rusia', 0),
+(115, 100, 18, 18, 'Aconcagua', 0),
+(116, 101, 19, 18, 'Yen', 0),
+(117, 101, 13, 18, 'Nilo', 0),
+(118, 101, 22, 18, 'Océano Ártico', 0),
+(119, 102, 22, 18, 'Océano Ártico', 0),
+(120, 103, 36, 18, 'Océano Índico', 0),
+(121, 104, 24, 18, 'Pt', 0),
+(122, 105, 34, 18, 'Jorge Luis Borges', 0),
+(123, 106, 23, 18, 'Hernán Cortés', 0),
+(124, 107, 29, 18, 'Nilo', 0),
+(125, 107, 33, 18, 'Yen', 0),
+(126, 107, 15, 18, 'Nilo', 0),
+(127, 107, 38, 18, 'Hg', 0),
+(128, 108, 19, 17, 'Euro', 0),
+(129, 109, 13, 17, 'Nilo', 0),
+(130, 109, 30, 17, 'Hierro', 0);
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `rol`
+-- Estructura de tabla para la tabla `rol`
 --
 
 CREATE TABLE `rol` (
@@ -346,7 +391,7 @@ CREATE TABLE `rol` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
--- Dumping data for table `rol`
+-- Volcado de datos para la tabla `rol`
 --
 
 INSERT INTO `rol` (`idRol`, `nombre`) VALUES
@@ -357,7 +402,7 @@ INSERT INTO `rol` (`idRol`, `nombre`) VALUES
 -- --------------------------------------------------------
 
 --
--- Table structure for table `usuario`
+-- Estructura de tabla para la tabla `usuario`
 --
 
 CREATE TABLE `usuario` (
@@ -381,116 +426,90 @@ CREATE TABLE `usuario` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
--- Dumping data for table `usuario`
+-- Volcado de datos para la tabla `usuario`
 --
 
-<<<<<<< HEAD
-INSERT INTO `usuario` (`idUsuario`, `nombre`, `apellido`, `nacimiento`, `genero`, `pais`, `ciudad`, `email`, `contrasenia`, `hashRegistro`, `usuario`, `estado`, `qr`, `fecha_registro`, `idRol`, `url_imagen`) VALUES
-(1, 'pablo', 'Perez', '2000-10-10', 'X', 'Argentina', 'Buenos Aires', 'pabloP@gmail.com', '1234', '', 'admin', 1, '', '2023-05-23', 1, ''),
-(16, 'Ale', 'Paz', '1991-12-19', 'M', 'Argentina', 'Lomas del Mirador', 'alejandrodanielpaz92@gmail.com', '81dc9bdb52d04dc20036dbd8313ed055', 'a11b4b285bfc222f8f4635b80b9cd39a', 'Aleee', 1, '', '2023-05-31', 3, './uploads/Aleee.png');
-=======
 INSERT INTO `usuario` (`idUsuario`, `nombre`, `apellido`, `nacimiento`, `genero`, `pais`, `ciudad`, `email`, `contrasenia`, `hashRegistro`, `usuario`, `estado`, `qr`, `fecha_registro`, `idRol`, `url_imagen`, `puntosTotales`) VALUES
 (1, 'pablo', 'Perez', '2000-10-10', 'X', 'Argentina', 'Buenos Aires', 'pabloP@gmail.com', '1234', '', 'admin', 1, '', '2023-05-23', 1, '', 0),
 (16, 'Ale', 'Paz', '1991-12-19', 'M', 'Argentina', 'Lomas del Mirador', 'alejandrodanielpaz92@gmail.com', '81dc9bdb52d04dc20036dbd8313ed055', 'a11b4b285bfc222f8f4635b80b9cd39a', 'Aleee', 1, '', '2023-05-31', 3, './uploads/Aleee.png', 0),
-(17, 'Ivan', 'Dp', '1992-01-03', 'M', 'Argentina', 'Ramos Mejia', 'ivangdelpino4@gmail.com', '81dc9bdb52d04dc20036dbd8313ed055', '5f3ef04d6af3a8dc400b6fa4b6fade78', 'ivandp', 1, '', '2023-06-08', 3, './uploads/ivandp.png', 4);
->>>>>>> 8c7c1f7102920bbb683d797cc923d6914d3304cc
+(17, 'Ivan', 'Dp', '1992-01-03', 'M', 'Argentina', 'Ramos Mejia', 'ivangdelpino4@gmail.com', '81dc9bdb52d04dc20036dbd8313ed055', '5f3ef04d6af3a8dc400b6fa4b6fade78', 'ivandp', 1, '', '2023-06-08', 3, './uploads/ivandp.png', 5),
+(18, 'Luis Agustin', 'Vega Dobal', '2023-06-13', 'X', 'Argentina', 'Hurlingham', 'vegadobal@gmail.com', '81dc9bdb52d04dc20036dbd8313ed055', 'fc2d395d19537bac3690ce59a786314a', 'fello', 1, '', '2023-06-12', 3, './uploads/fello.jpeg', 9);
 
 --
--- Indexes for dumped tables
+-- Índices para tablas volcadas
 --
 
 --
--- Indexes for table `categoria`
+-- Indices de la tabla `categoria`
 --
 ALTER TABLE `categoria`
   ADD PRIMARY KEY (`categoria_id`);
 
 --
--- Indexes for table `partida`
+-- Indices de la tabla `partida`
 --
 ALTER TABLE `partida`
   ADD PRIMARY KEY (`idPartida`);
 
 --
--- Indexes for table `preguntas`
+-- Indices de la tabla `preguntas`
 --
 ALTER TABLE `preguntas`
   ADD PRIMARY KEY (`pregunta_id`);
 
 --
--- Indexes for table `pregunta_usuario`
+-- Indices de la tabla `pregunta_usuario`
 --
 ALTER TABLE `pregunta_usuario`
   ADD PRIMARY KEY (`id_pregunta_usuario`);
 
 --
--- Indexes for table `rol`
+-- Indices de la tabla `rol`
 --
 ALTER TABLE `rol`
   ADD PRIMARY KEY (`idRol`);
 
 --
--- Indexes for table `usuario`
+-- Indices de la tabla `usuario`
 --
 ALTER TABLE `usuario`
   ADD PRIMARY KEY (`idUsuario`),
   ADD KEY `idRol` (`idRol`);
 
 --
--- AUTO_INCREMENT for dumped tables
+-- AUTO_INCREMENT de las tablas volcadas
 --
 
 --
-<<<<<<< HEAD
 -- AUTO_INCREMENT de la tabla `partida`
 --
 ALTER TABLE `partida`
-  MODIFY `idPartida` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=74;
+  MODIFY `idPartida` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=110;
 
 --
 -- AUTO_INCREMENT de la tabla `pregunta_usuario`
 --
 ALTER TABLE `pregunta_usuario`
-  MODIFY `id_pregunta_usuario` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=26;
-=======
--- AUTO_INCREMENT for table `partida`
---
-ALTER TABLE `partida`
-  MODIFY `idPartida` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=91;
+  MODIFY `id_pregunta_usuario` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=131;
 
 --
--- AUTO_INCREMENT for table `pregunta_usuario`
---
-ALTER TABLE `pregunta_usuario`
-  MODIFY `id_pregunta_usuario` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=85;
->>>>>>> 8c7c1f7102920bbb683d797cc923d6914d3304cc
-
---
--- AUTO_INCREMENT for table `rol`
+-- AUTO_INCREMENT de la tabla `rol`
 --
 ALTER TABLE `rol`
   MODIFY `idRol` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
--- AUTO_INCREMENT for table `usuario`
+-- AUTO_INCREMENT de la tabla `usuario`
 --
 ALTER TABLE `usuario`
-<<<<<<< HEAD
-  MODIFY `idUsuario` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
-=======
-  MODIFY `idUsuario` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=18;
->>>>>>> 8c7c1f7102920bbb683d797cc923d6914d3304cc
+  MODIFY `idUsuario` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=19;
 
 --
--- Constraints for dumped tables
+-- Restricciones para tablas volcadas
 --
 
 --
-<<<<<<< HEAD
 -- Filtros para la tabla `usuario`
-=======
--- Constraints for table `usuario`
->>>>>>> 8c7c1f7102920bbb683d797cc923d6914d3304cc
 --
 ALTER TABLE `usuario`
   ADD CONSTRAINT `usuario_ibfk_1` FOREIGN KEY (`idRol`) REFERENCES `rol` (`idRol`);

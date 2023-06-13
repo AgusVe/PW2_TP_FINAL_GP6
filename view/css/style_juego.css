@@ -232,7 +232,6 @@ footer .report:hover {
     pointer-events: none;
     transform: translate(-50%, -50%) scale(0.9);
     z-index: 9999;
-
 }
 .result-box .icon{
     font-size: 100px;
@@ -242,6 +241,7 @@ footer .report:hover {
 .result-box .juego-terminado{
     font-size: 20px;
     font-weight: 500;
+
 }
 .result-box .puntajeFinal span{
     /*display: flex;*/

@@ -27,7 +27,7 @@ function next() {
             const boton_siguiente = quiz_box.querySelector(".siguiente-preg");
 
             arrDatosPregunta = devolucion.pregunta_nueva;
-
+            
             //Actualizo puntaje
             let elemPuntos=document.getElementById('elem_puntos');
             elemPuntos.innerHTML=devolucion.puntos;
@@ -39,7 +39,7 @@ function next() {
                     let cruzIcon = '<div class="icon tick"><i class="fas fa-check"></i></div>';
                     let equisIcon = '<div class="icon cross"><i class="fas fa-times"></i></div>';
                     const opciones_lista = document.querySelector(".opciones-lista");
-
+              
                     let todasOpciones = opciones_lista.children.length;
 
                     // SI LA RESPUESTA ES INCORRECTA MOSTRAR LA QUE ES CORRECTA
@@ -53,8 +53,8 @@ function next() {
                             opciones_lista.children[i].setAttribute("class", "opcion incorrecto");
                         }
 
-                    }
-
+                    }        
+                    
                     if(devolucion.pregunta_anterior.resultado == true) {
                         setTimeout(mostrarPregunta, 1500);
                     } else {
@@ -64,7 +64,7 @@ function next() {
                         }, 3000);
                     }
 
-
+                   
                 }
             }
 
@@ -121,12 +121,12 @@ function mostrarPregunta() {
 
     clearInterval(tiempo_contador);
     startTimer(tiempo_valor);
-
+    
     arrDatosPregunta.respuestas.forEach(function(element) {
         let opcion_tag =
-            '<div class="opcion">' +
-            element +
-            '<span></span></div>' ;
+        '<div class="opcion">' +
+        element +
+        '<span></span></div>' ;
         opciones_lista.innerHTML = opciones_lista.innerHTML + opcion_tag;
 
     });

@@ -14,8 +14,9 @@ class PerfilController {
 
     public function verPerfil(){
         if(isset($_GET['usuario'])) {
-            $usuario = $_GET['usuario'];
-            $datos['usuarios'] = $this->perfilModel->obtenerDatos($usuario);
+            $idUsuario = $_GET['usuario'];
+            $datos['usuarios'] = $this->perfilModel->obtenerDatos($idUsuario);
+            $datos['userPartidas'] = $this->perfilModel->obtenerDatosPartidas($idUsuario);
             $this->renderer->render("perfil", $datos);
         }else{
             header("location: /");
