@@ -5,10 +5,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Lobby</title>
     <link  rel="stylesheet"  href="http://localhost/view/css/style_juego.css">
-<!--FontAwesome-->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css" />
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://kit.fontawesome.com/7ce3ade19e.js" crossorigin="anonymous"></script>
     <link href="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
-
 </head>
 <body>
 <div class="quiz-box">
@@ -19,7 +18,7 @@
             <div class="tiempo-segundos">10</div>
         </div>
     </header>
-<section>
+<section class="tipo_pregunta">
 <div class="pregunta">
 <!--
     <span>¿Cuantas patas tiene el pato?</span>
@@ -60,21 +59,19 @@
 <!-- BOX RESULTADOS-->
 <div class="result-box">
     <div class="icon">
-        <i class="fas fa-crown"></i>
+        <i class="fa-solid fa-face-sad-tear"></i>
     </div>
-    <div class="juego-terminado">GAME OVER :(</div>
+    <div class="juego-terminado">GAME OVER</div>
     <div class="puntajeFinal">
-        <!-- Here I've inserted Score Result from JavaScript -->
-    <span>Tus puntaje final fue de:</span>
+        <p>Tu puntaje final fue de: <span id='puntos_final'>0</span></p>
     </div>
     <div class="botones">
-        <button class="restart">Jugar de nuevo</button>
-        <button class="quit">Volver al lobby</button>
+        <button class="siguiente-preg"><a id="nuevaPartida"href="/partida/nuevaPartida">Jugar de nuevo</a></button>
+        <button class="report"><a id="nuevaPartida"href="/lobbyUsuario/execute">Volver al lobby</a></button>
     </div>
 </div>
 
 <script src="http://localhost/view/js/script_juego_preguntas.js"></script>
-<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.3/dist/umd/popper.min.js"></script>
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"></script>
 

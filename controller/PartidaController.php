@@ -145,7 +145,7 @@ class PartidaController
 
             //Marco como terminada la partida si la respuesta es incorrecta
             if($bRespuestaCorrecta == false) {
-                $this->partidaModel->marcarComoTerminada($idPartida);
+                $this->partidaModel->marcarComoTerminada($idPartida,$idUsuario);
             }
 
             //Configuro datos para devolver al frontend
@@ -198,6 +198,15 @@ class PartidaController
                 header("location: /lobbyUsuario");
                 break;
         }            
+    }
+
+    public function acumularpuntos(){
+        $requestData = json_decode(file_get_contents('php://input'), true);
+
+        $idUsuario = $_SESSION['id'];
+        $puntos = $requestData['puntos'];
+
+        $this->partidaModel->sumarPuntosTotales($idUsuario, $puntos);
     }
 
 }

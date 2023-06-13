@@ -6,7 +6,6 @@ let arrDatosPregunta = null;
 
 next();
 
-
 function next() {
     let url_string = location.href;
     let url = new URL(url_string);
@@ -60,7 +59,8 @@ function next() {
                         setTimeout(mostrarPregunta, 1500);
                     } else {
                         setTimeout(function redirigir(){
-                            window.location.href="/login";
+                            mostrarGameOver(devolucion.puntos);
+                            //window.location.href="/login";
                         }, 3000);
                     }
 
@@ -77,11 +77,43 @@ function next() {
     xhr.send();
 }
 
+function mostrarGameOver(puntos) {
+    const resultBox = document.querySelector(".result-box");
+    const quiz_box = document.querySelector(".quiz-box");
+    let elemPuntos=document.getElementById('puntos_final');
 
+    elemPuntos.innerHTML=puntos;
+
+    quiz_box.style.display = "none";
+    resultBox.style.opacity = 1;
+    resultBox.style.display = "block";
+    resultBox.style.pointerEvents = 'auto';
+
+    const data = {
+        puntos: puntos
+    };
+
+    $.ajax({
+        url: '/partida/acumularpuntos',
+        type: 'POST',
+        contentType: 'application/json',
+        data: JSON.stringify(data),
+        success: function() {
+            console.log('Puntos enviados exitosamente');
+        },
+        error: function() {
+            console.error('Error al enviar los puntos');
+        }
+    });
+}
 
 function mostrarPregunta() {
     const pregunta = document.querySelector(".pregunta");
     const opciones_lista = document.querySelector(".opciones-lista");
+
+    const color_seccion = document.querySelector(".tipo_pregunta");
+    color_seccion.style.backgroundColor = arrDatosPregunta.color;
+
     let pregunta_tag = '<span>' + arrDatosPregunta.enunciado + '</span>';
     pregunta.innerHTML = pregunta_tag;
     opciones_lista.innerHTML = "";
