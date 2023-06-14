@@ -5,9 +5,22 @@
     </button>
     <div class="collapse navbar-collapse" id="navbarText">
         <ul class="navbar-nav mr-auto">
-            <li class="nav-item active">
+            <li class="nav-item">
                 <a class="nav-link" id="nuevaPartida"href="/lobbyUsuario/execute">Inicio <span class="sr-only">(current)</span></a>
             </li>
+            {{#editor}}
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" id="gestionarPreguntasDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        Gestionar preguntas
+                    </a>
+                    <div class="dropdown-menu" aria-labelledby="gestionarPreguntasDropdown">
+                        <a class="dropdown-item" href="/editor/agregarPregunta">Alta Pregunta</a>
+                        <a class="dropdown-item" href="#">Modificar Pregunta</a>
+                        <a class="dropdown-item" href="#">Eliminar Pregunta</a>
+                        <a class="dropdown-item" href="#">Preguntas Reportadas y Sugeridas</a>
+                    </div>
+                </li>
+            {{/editor}}
             <li class="nav-item">
                 <a class="nav-link" href="#">Acerca de</a>
             </li>

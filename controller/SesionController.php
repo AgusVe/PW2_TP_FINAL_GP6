@@ -47,18 +47,8 @@ class SesionController{
                 $_SESSION['url_imagen']=$resultado["0"]["url_imagen"];
                 $_SESSION['id']=$resultado["0"]["idUsuario"];
                 $_SESSION['datosUsur'] = $resultado;
-
-                switch ( $_SESSION['rol']){
-                    case "1":
-                        header("location: /lobbyAdmin");
-                        break;
-                    case "2":
-                        header("location: /lobbyEditor");
-                        break;
-                    default:
-                        header("location: /lobbyUsuario");
-                        break;
-                }
+                header("location: /lobbyUsuario");
+                exit();
             }else{
                 session_destroy();
                 //mostrar vista de error.
