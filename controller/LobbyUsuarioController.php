@@ -14,7 +14,7 @@ class LobbyUsuarioController{
 
     public function execute()
     {
-        $datos['datosUsur']=$_SESSION["datosUsur"];
+        $datos['datosUsur']=$this->perfilModel->obtenerDatos($_SESSION["id"]);
         $datosPartidas=$this->perfilModel->obtenerDatosPartidas($_SESSION['id']);
         $datos['userPartidas']=$datosPartidas;
 
@@ -24,6 +24,7 @@ class LobbyUsuarioController{
         }
         echo $this->renderer->render("lobbyUsuario",$datos);
     }
+
 
 
 

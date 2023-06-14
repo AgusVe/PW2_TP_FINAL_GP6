@@ -47,6 +47,7 @@ class SesionController{
                 $_SESSION['url_imagen']=$resultado["0"]["url_imagen"];
                 $_SESSION['id']=$resultado["0"]["idUsuario"];
                 $_SESSION['datosUsur'] = $resultado;
+
                 switch ( $_SESSION['rol']){
                     case "1":
                         header("location: /lobbyAdmin");
