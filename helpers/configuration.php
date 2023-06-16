@@ -15,6 +15,7 @@ include_once('controller/PartidaController.php');
 include_once('controller/RankingController.php');
 include_once('controller/PerfilController.php');
 include_once('controller/EditorController.php');
+include_once('controller/PreguntaController.php');
 
 
 include_once('model/SesionModel.php');
@@ -91,5 +92,9 @@ class configuration{
 
     public function getEditorController(){
         return new EditorController(new EditorModel($this->getDataBase()),$this->getRenderer());
+    }
+
+    public function getPreguntaController(){
+        return new PreguntaController(new PreguntaModel($this->getDataBase()),$this->getRenderer());
     }
 }

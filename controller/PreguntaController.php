@@ -22,4 +22,28 @@ class PreguntaController{
         //verificar si la respondio
     }
 
+    public function procesarFormulario(){
+        if (isset($_POST['add'])) {
+            $enunciado = $_POST['pregunta'];
+            $opcionA = $_POST['opcionA'];
+            $opcionB = $_POST['opcionB'];
+            $opcionC = $_POST['opcionC'];
+            $opcionD = $_POST['opcionD'];
+            $respuesta = $_POST['respuesta'];
+            $categoria = $_POST['categoria'];
+
+
+            $valores = "VALUES ('$enunciado', '$opcionA', '$opcionB', '$opcionC', '$opcionD', '$respuesta', '$categoria')";
+            $this->preguntaModel->agregarPreguntaEnBD($valores);
+
+            header('location: /pregunta/exito');
+            exit();
+
+        }
+    }
+
+    public function exito(){
+        $this->renderer->render("pregunta_exito");
+    }
+
 }

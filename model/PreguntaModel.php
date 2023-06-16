@@ -41,7 +41,9 @@ class PreguntaModel{
     }
 
 
-    public function verificarRespuesta(){
-
+    public function agregarPreguntaEnBD($valores){
+        $insert = 'INSERT INTO `preguntas`
+                   (enunciado, respuestaA, respuestaB, respuestaC, respuestaD, respuesta_correcta, categoria_id)' . $valores . ";";
+        $this->database->execute($insert);
     }
 }
