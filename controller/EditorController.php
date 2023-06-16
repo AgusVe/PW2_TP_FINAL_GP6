@@ -21,8 +21,7 @@ class EditorController{
     }
 
     public function modificarPregunta(){
-        $data["usuarios"] = $this->rankingModel->listar();
-        $this->renderer->render("ranking", $data);
+        $this->renderer->render("modificarPregunta");
     }
 
     public function verPregunta(){

@@ -46,4 +46,9 @@ class PreguntaModel{
                    (enunciado, respuestaA, respuestaB, respuestaC, respuestaD, respuesta_correcta, categoria_id)' . $valores . ";";
         $this->database->execute($insert);
     }
+
+    public function buscarPreguntasEnBD($buscado){
+        $sql ="SELECT * FROM preguntas WHERE pregunta_id LIKE '%$buscado%' OR enunciado LIKE '%$buscado%'";
+        return $this->database->query($sql);
+    }
 }

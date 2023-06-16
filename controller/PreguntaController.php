@@ -46,4 +46,12 @@ class PreguntaController{
         $this->renderer->render("pregunta_exito");
     }
 
+    public function verPregunta(){
+        if (isset($_GET['numeroPregunta'])) {
+            $buscado = $_GET['numeroPregunta'];
+            $preguntasEncontradas = $this->preguntaModel->buscarPreguntasEnBD($buscado);
+            echo json_encode($preguntasEncontradas);
+        }
+    }
+
 }
