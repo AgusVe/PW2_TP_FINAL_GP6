@@ -54,4 +54,12 @@ class PreguntaController{
         }
     }
 
+    public function modificarPregunta(){
+
+    }
+
+    public function eliminarPregunta(){
+
+    }
+
 }

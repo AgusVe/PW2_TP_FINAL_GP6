@@ -12,7 +12,6 @@ function buscarPreguntas() {
         success: function(jsonPreguntas) {
             var preguntasEncontradas = JSON.parse(jsonPreguntas);
 
-            // Obtener el elemento <ul> donde se mostrarán las preguntas encontradas
             var listaPreguntas = document.getElementById("listaPreguntas");
             listaPreguntas.innerHTML = ""; // Limpiar el contenido anterior
 
@@ -20,10 +19,8 @@ function buscarPreguntas() {
             for (var i = 0; i < preguntasEncontradas.length; i++) {
                 var pregunta = preguntasEncontradas[i];
 
-                // Crear un elemento <li> para la pregunta
                 var listItem = document.createElement("li");
 
-                // Crear un elemento <span> para mostrar el número y el texto de la pregunta
                 var numeroSpan = document.createElement("span");
                 numeroSpan.innerHTML = pregunta.pregunta_id + ". ";
                 listItem.appendChild(numeroSpan);
@@ -32,19 +29,41 @@ function buscarPreguntas() {
                 textoSpan.innerHTML = pregunta.enunciado;
                 listItem.appendChild(textoSpan);
 
-                // Crear un botón "Modificar pregunta"
+                var modificarDiv = document.createElement("div");
+                modificarDiv.classList.add("form-group");
+
+
                 var modificarBtn = document.createElement("button");
                 modificarBtn.innerHTML = "Modificar pregunta";
+                modificarBtn.classList.add("btn");
+                modificarBtn.classList.add("btn-primary");
 
-                // Agregar un manejador de eventos al botón para llamar a la función modificarPregunta()
                 modificarBtn.addEventListener(
                     "click",
-                    modificarPregunta.bind(null, pregunta.numero)
+                    modificarPregunta.bind(null, pregunta.pregunta_id)
                 );
 
-                listItem.appendChild(modificarBtn);
+                modificarDiv.appendChild(modificarBtn);
+                listItem.appendChild(modificarDiv);
 
-                // Agregar el elemento <li> a la lista
+                var eliminarDiv = document.createElement("div");
+                eliminarDiv.classList.add("form-group");
+
+                var eliminarBtn = document.createElement("button");
+                eliminarBtn.innerHTML = "Eliminar pregunta";
+                eliminarBtn.classList.add("btn");
+                eliminarBtn.classList.add("btn-primary");
+
+                eliminarDiv.appendChild(eliminarBtn);
+                listItem.appendChild(eliminarDiv);
+
+                eliminarBtn.addEventListener("click", function() {
+                    var confirmarEliminacion = confirm("¿Estás seguro de eliminar el registro?");
+                    if (confirmarEliminacion) {
+                        eliminarPregunta(pregunta.pregunta_id);
+                    }
+                });
+
                 listaPreguntas.appendChild(listItem);
             }
         },
@@ -54,8 +73,34 @@ function buscarPreguntas() {
     });
 }
 
-    // Función para modificar una pregunta específica
 function modificarPregunta(numeroPregunta) {
-    // Aquí puedes implementar la lógica para modificar la pregunta en tu sistema
-    console.log("Modificando pregunta número " + numeroPregunta);
+    $.ajax({
+        url: "/pregunta/modificarPregunta",
+        method: "POST",
+        data: { numeroPregunta: numeroPregunta },
+        success: function(response) {
+            // Manejar la respuesta del controlador después de modificar la pregunta
+            console.log("Pregunta modificada con éxito");
+        },
+        error: function(error) {
+            console.log("Error en la solicitud AJAX:", error);
+        }
+    });
 }
+
+
+function eliminarPregunta(numeroPregunta) {
+    $.ajax({
+        url: "/pregunta/eliminarPregunta",
+        method: "POST",
+        data: { numeroPregunta: numeroPregunta },
+        success: function(response) {
+            // Manejar la respuesta del controlador después de eliminar la pregunta
+            console.log("Pregunta eliminada con éxito");
+        },
+        error: function(error) {
+            console.log("Error en la solicitud AJAX:", error);
+        }
+    });
+}
+
