@@ -14,7 +14,6 @@ include_once('controller/LobbyUsuarioController.php');
 include_once('controller/PartidaController.php');
 include_once('controller/RankingController.php');
 include_once('controller/PerfilController.php');
-include_once('controller/EditorController.php');
 include_once('controller/PreguntaController.php');
 
 
@@ -24,7 +23,6 @@ include_once('model/PreguntaModel.php');
 include_once('model/PartidaModel.php');
 include_once('model/RankingModel.php');
 include_once('model/PerfilModel.php');
-include_once('model/EditorModel.php');
 
 class configuration{
 
@@ -88,10 +86,6 @@ class configuration{
 
     public function getPerfilController(){
         return new PerfilController(new PerfilModel($this->getDataBase()),$this->getRenderer());
-    }
-
-    public function getEditorController(){
-        return new EditorController(new EditorModel($this->getDataBase()),$this->getRenderer());
     }
 
     public function getPreguntaController(){

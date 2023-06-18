@@ -46,6 +46,10 @@ class PreguntaController{
         $this->renderer->render("pregunta_exito");
     }
 
+    public function sugerencia_exito(){
+        $this->renderer->render("sugerencia_exito");
+    }
+
     public function verPregunta(){
         if (isset($_GET['numeroPregunta'])) {
             $buscado = $_GET['numeroPregunta'];
@@ -90,5 +94,71 @@ class PreguntaController{
         }
     }
 
+    public function agregarSugerencia(){
+        if (isset($_POST['add'])) {
+            $usuario = $_POST['usuario'];
+            $enunciado = $_POST['pregunta'];
+            $opcionA = $_POST['opcionA'];
+            $opcionB = $_POST['opcionB'];
+            $opcionC = $_POST['opcionC'];
+            $opcionD = $_POST['opcionD'];
+            $respuesta = $_POST['respuesta'];
+            $categoria = $_POST['categoria'];
+
+
+            $valores = "VALUES ('$enunciado', '$opcionA', '$opcionB', '$opcionC', '$opcionD', '$respuesta', '$categoria','$usuario')";
+            $this->preguntaModel->agregarSugerenciaEnBD($valores);
+
+            header('location: /pregunta/exito');
+            exit();
+
+        }
+    }
+
+    public function listarSugeridas(){
+        $data["sugeridas"] = $this->preguntaModel->listarPreguntasSugeridasEnBD();
+        $this->renderer->render("sugerencia_lista",$data);
+    }
+
+    public function verPreguntaSugerida(){
+        if(isset($_GET['pregunta'])) {
+            $idSugerida = $_GET['pregunta'];
+            $datos['sugerida'] = $this->preguntaModel->obtenerPreguntaSugeridaEnBD($idSugerida);
+            $this->renderer->render("pregunta_sugerida", $datos);
+        }else{
+            header("location: /lobbyUsuario");
+            exit();
+        }
+    }
+
+    public function procesarSugerencia(){
+        if (isset($_POST['agregar'])) {
+            $id = $_POST['idSugerencia'];
+            $enunciado = $_POST['pregunta'];
+            $opcionA = $_POST['opcionA'];
+            $opcionB = $_POST['opcionB'];
+            $opcionC = $_POST['opcionC'];
+            $opcionD = $_POST['opcionD'];
+            $respuesta = $_POST['respuesta'];
+            $categoria = $_POST['categoria'];
+
+            $flag = "Aceptar";
+
+            $valores = "VALUES ('$enunciado', '$opcionA', '$opcionB', '$opcionC', '$opcionD', '$respuesta', '$categoria')";
+            $this->preguntaModel->agregarPreguntaEnBD($valores);
+            $this->preguntaModel->actualizarSugerencia($flag,$id);
+
+            header('location: /pregunta/exito');
+            exit();
+
+        }else if(isset($_POST['eliminar'])){
+            $id = $_POST['idSugerencia'];
+            $flag = "Eliminar";
+            $this->preguntaModel->actualizarSugerencia($flag,$id);
+
+            header('location: /pregunta/exito');
+            exit();
+        }
+    }
 
 }

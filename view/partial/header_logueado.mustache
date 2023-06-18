@@ -18,6 +18,7 @@
     <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
     <script src="http://localhost/view/js/busqueda.js"></script>
     <script src="http://localhost/view/js/ranking.js"></script>
+    <script src="http://localhost/view/js/sugeridas.js"></script>
 
 </head>
 <body>
@@ -31,15 +32,21 @@
             <li class="nav-item">
                 <a class="nav-link" id="nuevaPartida"href="/lobbyUsuario">Inicio <span class="sr-only">(current)</span></a>
             </li>
+            {{#usuarioComun}}
+                <li class="nav-item">
+                    <a class="nav-link" href="/lobbyUsuario/agregarSugerencia">Sugerir Pregunta</a>
+                </li>
+            {{/usuarioComun}}
             {{#editor}}
                 <li class="nav-item dropdown">
                     <a class="nav-link dropdown-toggle" id="gestionarPreguntasDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                         Gestionar preguntas
                     </a>
                     <div class="dropdown-menu" aria-labelledby="gestionarPreguntasDropdown">
-                        <a class="dropdown-item" href="/editor/agregarPregunta">Alta Pregunta</a>
-                        <a class="dropdown-item" href="/editor/modificarPregunta">Modificar & Eliminar Preguntas</a>
-                        <a class="dropdown-item" href="#">Preguntas Reportadas y Sugeridas</a>
+                        <a class="dropdown-item" href="/lobbyUsuario/agregarPregunta">Alta Pregunta</a>
+                        <a class="dropdown-item" href="/lobbyUsuario/modificarPregunta">Modificar & Eliminar Preguntas</a>
+                        <a class="dropdown-item" href="/lobbyUsuario/listarReportadas">Preguntas Reportadas</a>
+                        <a class="dropdown-item" href="/pregunta/listarSugeridas">Preguntas Sugeridas</a>
                     </div>
                 </li>
             {{/editor}}

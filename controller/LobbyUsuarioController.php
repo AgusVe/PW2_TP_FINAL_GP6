@@ -38,7 +38,19 @@ class LobbyUsuarioController{
         echo $this->renderer->render("lobbyUsuario",$datos);
     }
 
+    public function agregarPregunta(){
+        $datos['editor'] = 2;
+        $this->renderer->render("agregarPregunta", $datos);
+    }
 
+    public function modificarPregunta(){
+        $this->renderer->render("modificarPregunta");
+    }
+
+    public function agregarSugerencia(){
+        $datos['datosUsur']=$this->perfilModel->obtenerDatos($_SESSION["id"]);
+        $this->renderer->render("sugerirPregunta",$datos);
+    }
 
 
 }

@@ -1,0 +1,24 @@
+{{>header_logueado}}
+<div class="container">
+    <div class="lobby-container">
+        <h2>Preguntas Sugeridas</h2>
+        <table id="sugerencia-tabla" class="responsive-table">
+            <thead>
+            <tr>
+                <th>Enunciado</th>
+                <th>Creado Por</th>
+            </tr>
+            </thead>
+            <tbody>
+            </tbody>
+            {{#sugeridas}}
+                <tr>
+                <tr onclick="redireccionarSugerencia('{{id_sugerencia}}')">
+                    <td>{{enunciado_s}}</td>
+                    <td>{{creado_por}}</td>
+                </tr>
+            {{/sugeridas}}
+        </table>
+    </div>
+</div>
+{{> footer}}

@@ -72,4 +72,31 @@ class PreguntaModel{
         $this->database->execute($sql);
     }
 
+    public function agregarSugerenciaEnBD($valores){
+        $insert = 'INSERT INTO `pregunta_sugerida`
+                   (enunciado_s, respuestaA_s, respuestaB_s, respuestaC_s, respuestaD_s, respuesta_correcta_s, categoria_id_s, creado_por)' . $valores . ";";
+        $this->database->execute($insert);
+    }
+
+    public function listarPreguntasSugeridasEnBD(){
+        $sql ="SELECT * FROM pregunta_sugerida WHERE estado = 0";
+        return $this->database->query($sql);
+    }
+
+    public function obtenerPreguntaSugeridaEnBD($idSugerida){
+        $sql ="SELECT * FROM pregunta_sugerida WHERE id_sugerencia = $idSugerida";
+        return $this->database->query($sql);
+    }
+
+    public function actualizarSugerencia($flag,$id){
+        if($flag=="Aceptar"){
+            $sql = "UPDATE pregunta_sugerida SET estado = 1 WHERE id_sugerencia='$id'";
+
+        }else if($flag=="Eliminar"){
+            $sql = "DELETE FROM pregunta_sugerida WHERE id_sugerencia = $id";
+        }
+
+        $this->database->execute($sql);
+    }
+
 }

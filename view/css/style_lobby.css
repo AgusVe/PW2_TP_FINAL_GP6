@@ -92,3 +92,11 @@ text-align: inherit;
 .textoFooter{
     color: #ffffff;
 }
+
+#agregarSugerencia{
+    display: inline;
+}
+
+#eliminarSugerencia{
+    display: inline;
+}
