@@ -99,4 +99,29 @@ class PreguntaModel{
         $this->database->execute($sql);
     }
 
+    public function agregarReporteEnBD($valores){
+        $id = $valores['idPregunta'];
+        $motivo = $valores['motivo'];
+
+        $sql = "UPDATE preguntas SET motivo_reporte = '$motivo', reportada = 1 WHERE pregunta_id='$id'";
+
+        $this->database->execute($sql);
+    }
+
+    public function listarPreguntasReportadasEnBD(){
+        $sql ="SELECT * FROM preguntas WHERE reportada = 1";
+        return $this->database->query($sql);
+    }
+
+    public function actualizarReportada($flag,$id){
+        if($flag=="Desestimar"){
+            $sql = "UPDATE preguntas SET reportada = 0, motivo_reporte='' WHERE pregunta_id='$id'";
+
+        }else if($flag=="Eliminar"){
+            $sql = "DELETE FROM preguntas WHERE pregunta_id = $id";
+        }
+
+        $this->database->execute($sql);
+    }
+
 }

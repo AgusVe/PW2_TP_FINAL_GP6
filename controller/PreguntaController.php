@@ -161,4 +161,65 @@ class PreguntaController{
         }
     }
 
+    public function reportar(){
+        if (isset($_GET['idPregunta'])) {
+            $id = $_GET['idPregunta'];
+            $data["pregunta"] = $this->preguntaModel->obtenerPreguntaPorId($id);
+            $this->renderer->render("reportar_pregunta", $data);
+        }
+    }
+
+    public function agregarMotivoReporte(){
+        if (isset($_POST['report'])) {
+
+            $valores = array(
+                'idPregunta' => $_POST['idPregunta'],
+                'motivo' => $_POST['motivo']
+            );
+
+            $this->preguntaModel->agregarReporteEnBD($valores);
+
+            header('location: /pregunta/exito');
+            exit();
+
+        }
+    }
+
+    public function listarReportadas(){
+        $data["reportadas"] = $this->preguntaModel->listarPreguntasReportadasEnBD();
+        $this->renderer->render("reportadas_lista",$data);
+    }
+
+    public function verPreguntaReportada(){
+        if(isset($_GET['pregunta'])) {
+            $idReportada = $_GET['pregunta'];
+            $datos['reportadas'] = $this->preguntaModel->obtenerPreguntaPorId($idReportada);
+            $this->renderer->render("pregunta_reportada", $datos);
+        }else{
+            header("location: /lobbyUsuario");
+            exit();
+        }
+    }
+
+    public function procesarReporte(){
+        if (isset($_POST['eliminar'])) {
+            $id = $_POST['idReportada'];
+            $flag = "Eliminar";
+
+            $this->preguntaModel->actualizarReportada($flag,$id);
+
+            header('location: /pregunta/exito');
+            exit();
+
+        }else if(isset($_POST['desestimar'])){
+            $id = $_POST['idReportada'];
+            $flag = "Desestimar";
+
+            $this->preguntaModel->actualizarReportada($flag,$id);
+
+            header('location: /pregunta/exito');
+            exit();
+        }
+    }
+
 }

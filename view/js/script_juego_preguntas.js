@@ -4,7 +4,10 @@ let time;
 let strRespuestaUsuario = null;
 let arrDatosPregunta = null;
 
+
 next();
+
+
 
 function next() {
     let url_string = location.href;
@@ -214,3 +217,30 @@ function seleccionarOpcionIncorrecta() {
         */
     }
 }
+
+function reportarPregunta(idPregunta) {
+    const data = {
+        pregunta_id: idPregunta
+    };
+
+    $.ajax({
+        url: '/pregunta/reportar',
+        method: 'POST',
+        contentType: 'application/json',
+        data: JSON.stringify(data),
+        success: function() {
+            console.log('Redireccionando a formulario de reporte');
+        },
+        error: function() {
+            console.error('Error al reportar la pregunta');
+        }
+    });
+}
+
+
+document.getElementById("reportar-btn").addEventListener("click", function() {
+    window.location.href = 'http://localhost/pregunta/reportar?idPregunta=' + arrDatosPregunta.pregunta_id;
+});
+
+
+
