@@ -54,12 +54,41 @@ class PreguntaController{
         }
     }
 
-    public function modificarPregunta(){
-
-    }
 
     public function eliminarPregunta(){
-
+        if (isset($_POST['numeroPregunta'])) {
+            $valor = $_POST['numeroPregunta'];
+            $this->preguntaModel->eliminarPreguntaEnBD($valor);
+        }
     }
+
+    public function formularioPregunta(){
+        if (isset($_GET['idPregunta'])) {
+            $valor = $_GET['idPregunta'];
+            $datos['pregunta'] = $this->preguntaModel->buscarPreguntasEnBD($valor);
+            $this->renderer->render("pregunta", $datos);
+        }
+    }
+
+    public function modificarPregunta(){
+        if (isset($_POST['edit'])) {
+            $valores = array(
+                'idPregunta' => $_POST['idPregunta'],
+                'enunciado' => $_POST['pregunta'],
+                'opcionA' => $_POST['opcionA'],
+                'opcionB' => $_POST['opcionB'],
+                'opcionC' => $_POST['opcionC'],
+                'opcionD' => $_POST['opcionD'],
+                'respuesta' => $_POST['respuesta']
+            );
+
+            $this->preguntaModel->modificarPreguntaEnBD($valores);
+
+            header('location: /pregunta/exito');
+            exit();
+
+        }
+    }
+
 
 }

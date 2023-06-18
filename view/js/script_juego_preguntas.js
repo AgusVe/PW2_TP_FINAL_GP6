@@ -24,7 +24,7 @@ function next() {
             var devolucion = JSON.parse(xhr.responseText);
 
             const quiz_box = document.querySelector(".quiz-box");
-            const boton_siguiente = quiz_box.querySelector(".siguiente-preg");
+
 
             arrDatosPregunta = devolucion.pregunta_nueva;
             
@@ -67,11 +67,6 @@ function next() {
                    
                 }
             }
-
-            /* SI SE CLICKEA EN SIGUIENTE */
-            boton_siguiente.onclick = () => {
-                next();
-            };
         }
     };
     xhr.send();

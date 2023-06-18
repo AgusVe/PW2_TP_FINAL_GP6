@@ -21,13 +21,13 @@ class LobbyUsuarioController{
 
         switch ($_SESSION['rol']){
             case "1":
-                header("location: /lobbyAdmin");
+                $datos['admin'] = 1;
                 break;
             case "2":
                 $datos['editor'] = 2;
                 break;
             default:
-                header("location: /lobbyUsuario");
+                $datos['usuarioComun'] = 3;
                 break;
         }
 

@@ -51,4 +51,25 @@ class PreguntaModel{
         $sql ="SELECT * FROM preguntas WHERE pregunta_id LIKE '%$buscado%' OR enunciado LIKE '%$buscado%'";
         return $this->database->query($sql);
     }
+
+    public function eliminarPreguntaEnBD($valor){
+        $delete ="DELETE FROM preguntas WHERE pregunta_id = $valor";
+        $this->database->execute($delete);
+    }
+
+    public function modificarPreguntaEnBD($valores){
+        $id = $valores['idPregunta'];
+        $enunciado = $valores['enunciado'];
+        $opcionA = $valores['opcionA'];
+        $opcionB = $valores['opcionB'];
+        $opcionC = $valores['opcionC'];
+        $opcionD = $valores['opcionD'];
+        $respuesta = $valores['respuesta'];
+
+
+        $sql = "UPDATE preguntas SET enunciado = '$enunciado', respuestaA = '$opcionA', respuestaB = '$opcionB', respuestaC = '$opcionC', respuestaD = '$opcionD', respuesta_correcta = '$respuesta' WHERE pregunta_id='$id'";
+
+        $this->database->execute($sql);
+    }
+
 }

@@ -74,18 +74,7 @@ function buscarPreguntas() {
 }
 
 function modificarPregunta(numeroPregunta) {
-    $.ajax({
-        url: "/pregunta/modificarPregunta",
-        method: "POST",
-        data: { numeroPregunta: numeroPregunta },
-        success: function(response) {
-            // Manejar la respuesta del controlador después de modificar la pregunta
-            console.log("Pregunta modificada con éxito");
-        },
-        error: function(error) {
-            console.log("Error en la solicitud AJAX:", error);
-        }
-    });
+    window.location.href = 'http://localhost/pregunta/formularioPregunta?idPregunta=' + numeroPregunta;
 }
 
 
@@ -94,8 +83,7 @@ function eliminarPregunta(numeroPregunta) {
         url: "/pregunta/eliminarPregunta",
         method: "POST",
         data: { numeroPregunta: numeroPregunta },
-        success: function(response) {
-            // Manejar la respuesta del controlador después de eliminar la pregunta
+        success: function() {
             console.log("Pregunta eliminada con éxito");
         },
         error: function(error) {
