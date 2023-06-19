@@ -69,6 +69,7 @@ class PreguntaController{
     public function formularioPregunta(){
         if (isset($_GET['idPregunta'])) {
             $valor = $_GET['idPregunta'];
+            $datos['editor'] = 2;
             $datos['pregunta'] = $this->preguntaModel->buscarPreguntasEnBD($valor);
             $this->renderer->render("pregunta", $datos);
         }
@@ -116,6 +117,7 @@ class PreguntaController{
     }
 
     public function listarSugeridas(){
+        $data['editor'] = 2;
         $data["sugeridas"] = $this->preguntaModel->listarPreguntasSugeridasEnBD();
         $this->renderer->render("sugerencia_lista",$data);
     }
@@ -123,6 +125,7 @@ class PreguntaController{
     public function verPreguntaSugerida(){
         if(isset($_GET['pregunta'])) {
             $idSugerida = $_GET['pregunta'];
+            $datos['editor'] = 2;
             $datos['sugerida'] = $this->preguntaModel->obtenerPreguntaSugeridaEnBD($idSugerida);
             $this->renderer->render("pregunta_sugerida", $datos);
         }else{
@@ -164,6 +167,7 @@ class PreguntaController{
     public function reportar(){
         if (isset($_GET['idPregunta'])) {
             $id = $_GET['idPregunta'];
+            $data['usuarioComun'] = 2;
             $data["pregunta"] = $this->preguntaModel->obtenerPreguntaPorId($id);
             $this->renderer->render("reportar_pregunta", $data);
         }
@@ -186,6 +190,7 @@ class PreguntaController{
     }
 
     public function listarReportadas(){
+        $data['editor'] = 2;
         $data["reportadas"] = $this->preguntaModel->listarPreguntasReportadasEnBD();
         $this->renderer->render("reportadas_lista",$data);
     }
@@ -193,6 +198,7 @@ class PreguntaController{
     public function verPreguntaReportada(){
         if(isset($_GET['pregunta'])) {
             $idReportada = $_GET['pregunta'];
+            $datos['editor'] = 2;
             $datos['reportadas'] = $this->preguntaModel->obtenerPreguntaPorId($idReportada);
             $this->renderer->render("pregunta_reportada", $datos);
         }else{

@@ -44,10 +44,12 @@ class LobbyUsuarioController{
     }
 
     public function modificarPregunta(){
-        $this->renderer->render("modificarPregunta");
+        $datos['editor'] = 2;
+        $this->renderer->render("modificarPregunta",$datos);
     }
 
     public function agregarSugerencia(){
+        $datos['usuarioComun'] = 3;
         $datos['datosUsur']=$this->perfilModel->obtenerDatos($_SESSION["id"]);
         $this->renderer->render("sugerirPregunta",$datos);
     }
