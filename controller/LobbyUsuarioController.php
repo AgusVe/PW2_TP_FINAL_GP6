@@ -14,14 +14,16 @@ class LobbyUsuarioController{
 
     public function execute()
     {
+        if(!isset($_SESSION['email'])){
+            header("location: /");
+            exit();
+        }
         $datos['datosUsur']=$this->perfilModel->obtenerDatos($_SESSION["id"]);
-
-        $datosPartidas=$this->perfilModel->obtenerDatosPartidas($_SESSION['id']);
-        $datos['userPartidas']=$datosPartidas;
-
+        $datos['userPartidas']=$this->perfilModel->obtenerDatosPartidas($_SESSION['id']);
         switch ($_SESSION['rol']){
             case "1":
                 $datos['admin'] = 1;
+                echo $this->renderer->render("lobbyUsuario",$datos);
                 break;
             case "2":
                 $datos['editor'] = 2;
@@ -31,28 +33,43 @@ class LobbyUsuarioController{
                 break;
         }
 
+        echo $this->renderer->render("lobbyUsuario",$datos);
+    }
+
+    public function agregarSugerencia(){
         if(!isset($_SESSION['email'])){
             header("location: /");
             exit();
         }
-        echo $this->renderer->render("lobbyUsuario",$datos);
+        if($_SESSION['rol']=3) {
+            $datos['editor'] = 3;
+            $datos['datosUsur']=$this->perfilModel->obtenerDatos($_SESSION["id"]);
+            $this->renderer->render("sugerirPregunta",$datos);
+        }
     }
-
     public function agregarPregunta(){
-        $datos['editor'] = 2;
-        $this->renderer->render("agregarPregunta", $datos);
-    }
+        if(!isset($_SESSION['email'])){
+            header("location: /");
+            exit();
+        }
+     if($_SESSION['rol']=2) {
+         $datos['editor'] = 2;
+
+         $this->renderer->render("agregarPregunta",$datos);
+     }
+     }
 
     public function modificarPregunta(){
-        $datos['editor'] = 2;
-        $this->renderer->render("modificarPregunta",$datos);
+        if(!isset($_SESSION['email'])){
+            header("location: /");
+            exit();
+        }
+        if($_SESSION['rol']=2) {
+            $datos['editor'] = 2;
+            $this->renderer->render("modificarPregunta",$datos);
+        }
     }
 
-    public function agregarSugerencia(){
-        $datos['usuarioComun'] = 3;
-        $datos['datosUsur']=$this->perfilModel->obtenerDatos($_SESSION["id"]);
-        $this->renderer->render("sugerirPregunta",$datos);
-    }
 
 
 }

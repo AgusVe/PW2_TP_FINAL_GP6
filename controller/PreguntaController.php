@@ -43,10 +43,18 @@ class PreguntaController{
     }
 
     public function exito(){
+        if(!isset($_SESSION['email'])){
+            header("location: /");
+            exit();
+        }
         $this->renderer->render("pregunta_exito");
     }
 
     public function sugerencia_exito(){
+        if(!isset($_SESSION['email'])){
+            header("location: /");
+            exit();
+        }
         $this->renderer->render("sugerencia_exito");
     }
 
@@ -67,6 +75,10 @@ class PreguntaController{
     }
 
     public function formularioPregunta(){
+        if(!isset($_SESSION['email'])){
+            header("location: /");
+            exit();
+        }
         if (isset($_GET['idPregunta'])) {
             $valor = $_GET['idPregunta'];
             $datos['editor'] = 2;
@@ -76,6 +88,7 @@ class PreguntaController{
     }
 
     public function modificarPregunta(){
+
         if (isset($_POST['edit'])) {
             $valores = array(
                 'idPregunta' => $_POST['idPregunta'],
@@ -96,6 +109,7 @@ class PreguntaController{
     }
 
     public function agregarSugerencia(){
+
         if (isset($_POST['add'])) {
             $usuario = $_POST['usuario'];
             $enunciado = $_POST['pregunta'];
@@ -110,19 +124,27 @@ class PreguntaController{
             $valores = "VALUES ('$enunciado', '$opcionA', '$opcionB', '$opcionC', '$opcionD', '$respuesta', '$categoria','$usuario')";
             $this->preguntaModel->agregarSugerenciaEnBD($valores);
 
-            header('location: /pregunta/exito');
+            header('location: /pregunta/sugerencia_exito');
             exit();
 
         }
     }
 
     public function listarSugeridas(){
+        if(!isset($_SESSION['email'])){
+            header("location: /");
+            exit();
+        }
         $data['editor'] = 2;
         $data["sugeridas"] = $this->preguntaModel->listarPreguntasSugeridasEnBD();
         $this->renderer->render("sugerencia_lista",$data);
     }
 
     public function verPreguntaSugerida(){
+        if(!isset($_SESSION['email'])){
+            header("location: /");
+            exit();
+        }
         if(isset($_GET['pregunta'])) {
             $idSugerida = $_GET['pregunta'];
             $datos['editor'] = 2;
@@ -135,6 +157,7 @@ class PreguntaController{
     }
 
     public function procesarSugerencia(){
+
         if (isset($_POST['agregar'])) {
             $id = $_POST['idSugerencia'];
             $enunciado = $_POST['pregunta'];
@@ -165,6 +188,10 @@ class PreguntaController{
     }
 
     public function reportar(){
+        if(!isset($_SESSION['email'])){
+            header("location: /");
+            exit();
+        }
         if (isset($_GET['idPregunta'])) {
             $id = $_GET['idPregunta'];
             $data['usuarioComun'] = 2;
@@ -174,6 +201,10 @@ class PreguntaController{
     }
 
     public function agregarMotivoReporte(){
+        if(!isset($_SESSION['email'])){
+            header("location: /");
+            exit();
+        }
         if (isset($_POST['report'])) {
 
             $valores = array(
@@ -196,6 +227,7 @@ class PreguntaController{
     }
 
     public function verPreguntaReportada(){
+
         if(isset($_GET['pregunta'])) {
             $idReportada = $_GET['pregunta'];
             $datos['editor'] = 2;
@@ -208,6 +240,7 @@ class PreguntaController{
     }
 
     public function procesarReporte(){
+
         if (isset($_POST['eliminar'])) {
             $id = $_POST['idReportada'];
             $flag = "Eliminar";

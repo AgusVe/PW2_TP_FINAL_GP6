@@ -17,6 +17,7 @@ include_once('controller/PerfilController.php');
 include_once('controller/PreguntaController.php');
 
 
+
 include_once('model/SesionModel.php');
 include_once('model/RegistroModel.php');
 include_once('model/PreguntaModel.php');
@@ -91,4 +92,6 @@ class configuration{
     public function getPreguntaController(){
         return new PreguntaController(new PreguntaModel($this->getDataBase()),$this->getRenderer());
     }
+
+
 }
