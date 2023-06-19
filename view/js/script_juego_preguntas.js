@@ -32,6 +32,11 @@ function next() {
             let elemPuntos=document.getElementById('elem_puntos');
             elemPuntos.innerHTML=devolucion.puntos;
 
+            if(devolucion.terminada==1){
+                mostrarGameOver(devolucion.puntos);
+            }
+
+
             if(devolucion.pregunta_anterior == null) {
                 mostrarPregunta();
             } else {
