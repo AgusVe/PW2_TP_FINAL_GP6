@@ -13,7 +13,8 @@ class PerfilModel{
         return $this->database->query($sql);
     }
     public function obtenerDatosPartidas($idUsuario){
-        $sql = "SELECT P.* FROM partida P JOIN usuario U ON P.idUsuario=U.idUsuario WHERE U.idUsuario='$idUsuario' AND P.terminada = 1 ORDER BY  P.numPartidaDelJugador DESC";
+        $sql = "SELECT P.* FROM partida P JOIN usuario U ON P.idUsuario=U.idUsuario 
+           WHERE U.idUsuario='$idUsuario' AND P.terminada = 1 ORDER BY  P.numPartidaDelJugador DESC";
         return $this->database->query($sql);
     }
 }

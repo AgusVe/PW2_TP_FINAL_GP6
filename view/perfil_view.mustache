@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="es">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -7,9 +7,30 @@
     <link rel="stylesheet" href="http://localhost/view/css/style.css">
     <link rel="stylesheet" href="http://localhost/view/css/style_lobby.css">
     <title>Lobby</title>
+    <script src = "http://maps.googleapis.com/maps/api/js?key=AIzaSyAiq3xISXSZYgkd9GDAOdajy4NK2d3L7dY"></script>
+    <script>
+        function loadMap(lat, lng) {
+
+            let mapOptions = {
+                //center:new google.maps.LatLng(-34.6686986,-58.5614947),
+                center:new google.maps.LatLng(lat, lng),
+                zoom:12,
+                mapTypeId:google.maps.MapTypeId.ROADMAP
+            };
+
+            let map = new google.maps.Map(document.getElementById("mapa"),mapOptions);
+
+            let marker = new google.maps.Marker({
+                position: new google.maps.LatLng(lat,lng),
+                map: map
+            });
+        }
+
+    </script>
 </head>
-<body>
-{{> header_logueado}}
+{{#usuarios}}
+<body onload="loadMap({{latitud}},{{longitud}})" >
+{{/usuarios}}
 <div class="container">
     <div class="lobby-container">
         {{#usuarios}}
@@ -17,10 +38,11 @@
             <div>
                 <h1 class="puntaje">Puntaje Total: {{puntosTotales}}</h1>
             </div>
-            <div class="btn-container">
-                <div id="mapa"></div>
-                <img src='/uploads/qrcode_{{usuario}}.png' alt="Código QR">
+            <div class="btn-container row">
+                <div class="col-8" id="mapa" style="width:250px; height:200px;"></div>
+                <img class="col-4" src='/uploads/qrcode_{{usuario}}.png' alt="Código QR">
             </div>
+
         {{/usuarios}}
         <h2>Partidas Jugadas</h2>
         <table class="table table-hover">
