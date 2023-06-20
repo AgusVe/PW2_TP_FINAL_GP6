@@ -4,75 +4,71 @@ let time;
 let strRespuestaUsuario = null;
 let arrDatosPregunta = null;
 
-
 next();
-
-
 
 function next() {
     let url_string = location.href;
     let url = new URL(url_string);
     let idPartida = url.searchParams.get("id");
     // Realizar una petición AJAX para obtener los datos de preguntas JSON
-    var xhr = new XMLHttpRequest();
-
     let strURL = '/partida/next?id='+idPartida;
     if(arrDatosPregunta != null) {
         strURL = strURL + "&id_pregunta="+arrDatosPregunta['pregunta_id']+"&respuesta="+strRespuestaUsuario;
     }
 
-    xhr.open('GET', strURL, true);
-    xhr.onload = function () {
-        if (xhr.status >= 200 && xhr.status < 400) {
-            var devolucion = JSON.parse(xhr.responseText);
+    $.ajax({
+        url: strURL,
+        method: 'GET',
+        dataType: 'json',
+        success: function(response) {
 
             const quiz_box = document.querySelector(".quiz-box");
 
+            arrDatosPregunta = response.pregunta_nueva;
 
-            arrDatosPregunta = devolucion.pregunta_nueva;
-            
             //Actualizo puntaje
             let elemPuntos=document.getElementById('elem_puntos');
-            elemPuntos.innerHTML=devolucion.puntos;
+            elemPuntos.innerHTML=response.puntos;
 
-            if(devolucion.pregunta_anterior == null) {
+            if(response.pregunta_anterior == null) {
                 mostrarPregunta();
             } else {
-                if(devolucion.pregunta_anterior.respuesta_correcta) {
+                if(response.pregunta_anterior.respuesta_correcta) {
                     let cruzIcon = '<div class="icon tick"><i class="fas fa-check"></i></div>';
                     let equisIcon = '<div class="icon cross"><i class="fas fa-times"></i></div>';
                     const opciones_lista = document.querySelector(".opciones-lista");
-              
+
                     let todasOpciones = opciones_lista.children.length;
 
                     // SI LA RESPUESTA ES INCORRECTA MOSTRAR LA QUE ES CORRECTA
                     for (let i = 0; i < todasOpciones; i++) {
-                        if (opciones_lista.children[i].textContent == devolucion.pregunta_anterior.respuesta_correcta) {
+                        if (opciones_lista.children[i].textContent == response.pregunta_anterior.respuesta_correcta) {
                             opciones_lista.children[i].setAttribute("class", "opcion correcto");
-//                            respuesta.classList.add("correcto");
-//                            respuesta.insertAdjacentHTML("beforeend", cruzIcon);
                         }
-                        if (opciones_lista.children[i].textContent == strRespuestaUsuario && devolucion.pregunta_anterior.resultado != true) {
+                        if (opciones_lista.children[i].textContent == strRespuestaUsuario && response.pregunta_anterior.resultado != true) {
                             opciones_lista.children[i].setAttribute("class", "opcion incorrecto");
                         }
 
-                    }        
-                    
-                    if(devolucion.pregunta_anterior.resultado == true) {
+                    }
+
+                    if(response.pregunta_anterior.resultado == true) {
                         setTimeout(mostrarPregunta, 1500);
                     } else {
                         setTimeout(function redirigir(){
-                            mostrarGameOver(devolucion.puntos);
+                            mostrarGameOver(response.puntos);
                             //window.location.href="/login";
                         }, 3000);
                     }
 
-                   
+
                 }
             }
+        },
+        error: function() {
+            // Manejar el error de la petición AJAX
+            console.log('Error al obtener los datos de la base de datos.');
         }
-    };
-    xhr.send();
+    });
 }
 
 function mostrarGameOver(puntos) {
@@ -119,7 +115,7 @@ function mostrarPregunta() {
 
     clearInterval(tiempo_contador);
     startTimer(tiempo_valor);
-    
+
     arrDatosPregunta.respuestas.forEach(function(element) {
         let opcion_tag =
         '<div class="opcion">' +
@@ -143,37 +139,6 @@ function mostrarPregunta() {
 function opcionSeleccionada(respuesta) {
     strRespuestaUsuario = respuesta.textContent;
     next();
-    /*
-    const opciones_lista = document.querySelector(".opciones-lista");
-
-    clearInterval(tiempo_contador);
-    let cruzIcon = '<div class="icon tick"><i class="fas fa-check"></i></div>';
-    let equisIcon = '<div class="icon cross"><i class="fas fa-times"></i></div>';
-
-    let userRespuesta = respuesta.textContent;
-    //let respuestaCorrecta = preguntas[index_conteo].respuesta_correcta;
-    let respuestaCorrecta = "";
-    let todasOpciones = opciones_lista.children.length;
-    if (userRespuesta == respuestaCorrecta) {
-        respuesta.classList.add("correcto");
-        respuesta.insertAdjacentHTML("beforeend", cruzIcon);
-    } else {
-        respuesta.classList.add("incorrecto");
-        respuesta.insertAdjacentHTML("beforeend", equisIcon);
-
-        // SI LA RESPUESTA ES INCORRECTA MOSTRAR LA QUE ES CORRECTA
-        for (let i = 0; i < todasOpciones; i++) {
-            if (opciones_lista.children[i].textContent == respuestaCorrecta) {
-                opciones_lista.children[i].setAttribute("class", "opcion correcto");
-            }
-        }
-    }
-
-    // UNA VEZ QUE ELIJE LA OPCION DESABILITA LAS DEMAS
-    for (let i = 0; i < todasOpciones; i++) {
-        opciones_lista.children[i].classList.add("desabilitar");
-    }
-    */
 }
 
 /* CONTADOR DE TIEMPO */
@@ -193,9 +158,6 @@ function timer() {
         timeCount.textContent = "0";
 
         next();
-
-        // SELECCIONA LA OPCION INCCORRECTA SI SE TERMINA EL TIEMPO
-        //seleccionarOpcionIncorrecta();
 
     }
 }

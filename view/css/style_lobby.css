@@ -100,3 +100,8 @@ text-align: inherit;
 #eliminarSugerencia{
     display: inline;
 }
+
+#qr{
+    width: 50%;
+    height: auto;
+}
