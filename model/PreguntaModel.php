@@ -32,14 +32,12 @@ class PreguntaModel{
 
     public function obtenerPreguntaPorId($strIdPregunta){
         //TODO mejorar como se selecciona aleatoriamente
-        try {
+
             $sql = "SELECT P.* FROM preguntas P
             WHERE P.pregunta_id = $strIdPregunta";
             return $this->database->getOne($sql);
-        } catch (Exception $e) {
-        } 
-    }
 
+    }
 
     public function verificarRespuesta(){
 

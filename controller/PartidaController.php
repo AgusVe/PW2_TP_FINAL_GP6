@@ -13,8 +13,8 @@ class PartidaController
         $this->preguntaModel = $preguntaModel;
         $this->renderer = $renderer;
 
-        include_once("helpers/Configuration.php");
-        $this->configuration = new Configuration();
+        /*include_once("helpers/Configuration.php");
+        $this->configuration = new Configuration();*/
         
     }
 
@@ -25,12 +25,12 @@ class PartidaController
             exit();
         }
 
-        if($this->configuration->getConfigParameter('permitir_multiples_partidas') != 1){
+        /*if($this->configuration->getConfigParameter('permitir_multiples_partidas') != 1){
             if(isset($_SESSION['id_partida']) && $_SESSION['id_partida'] > 0) {
                 header('location: ./jugar?id='.$_SESSION['id_partida']);
                 return;
             }
-        }
+        }*/
 
         $idUsuario = $_SESSION['id'];
         $fecha = date("Y/m/d");
@@ -147,6 +147,7 @@ class PartidaController
             if($bRespuestaCorrecta == false) {
                 $this->partidaModel->marcarComoTerminada($idPartida,$idUsuario);
             }
+
 
             //Configuro datos para devolver al frontend
             $arrDevolucion['pregunta_anterior'] = $arrDatosPreguntaRespondida;
