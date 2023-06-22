@@ -1,0 +1,62 @@
+{{> header_logueado}}
+<div class="container">
+    <div class="lobby-container">
+        <h1>Confirmacion de sugerencias</h1>
+        {{#sugerida}}
+            <form action="/pregunta/procesarSugerencia" method="post">
+                <input type="hidden" name="idSugerencia" value="{{id_sugerencia}}">
+                <div class="form-group">
+                    <label for="pregunta">Pregunta:</label>
+                    <input type="text" id="pregunta" name="pregunta" class="form-control" value="{{enunciado_s}}" required>
+                </div>
+
+                <input type="hidden" name="categoria" value="{{categoria_id_s}}">
+                <!--
+                <div class="form-group">
+                    <label for="temas">Categoria:</label>
+                    <select class="form-select" name="categoria" id="categoria">
+                        <option value="1">Historia</option>
+                        <option value="2">Entretenimiento</option>
+                        <option value="3">Arte</option>
+                        <option value="4">Ciencia</option>
+                        <option value="5">Geografia</option>
+                    </select>
+                </div>
+                -->
+
+                <div class="form-group">
+                    <label for="opcionA">Opción A:</label>
+                    <input type="text" id="opcionA" name="opcionA" class="form-control" value="{{respuestaA_s}}" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="opcionB">Opción B:</label>
+                    <input type="text" id="opcionB" name="opcionB" class="form-control" value="{{respuestaB_s}}" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="opcionC">Opción C:</label>
+                    <input type="text" id="opcionC" name="opcionC" class="form-control" value="{{respuestaC_s}}" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="opcionD">Opción D:</label>
+                    <input type="text" id="opcionD" name="opcionD" class="form-control" value="{{respuestaD_s}}" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="respuesta">Respuesta Correcta:</label>
+                    <input type="text" id="respuesta" name="respuesta" class="form-control" value="{{respuesta_correcta_s}}" required>
+                </div>
+
+                <div class="form-group" id="agregarSugerencia">
+                    <button type="submit" class="btn btn-primary" name="agregar">Agregar</button>
+                </div>
+                <div class="form-group" id="eliminarSugerencia">
+                    <button type="submit" class="btn btn-primary" name="eliminar">Eliminar</button>
+                </div>
+            </form>
+        {{/sugerida}}
+    </div>
+</div>
+{{> footer}}

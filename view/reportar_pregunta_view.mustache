@@ -1,0 +1,23 @@
+{{> header_logueado}}
+<div class="container">
+    <div class="lobby-container">
+        <h1>Reportar</h1>
+        {{#pregunta}}
+            <form action="/pregunta/agregarMotivoReporte" method="post">
+                <input type="hidden" name="idPregunta" value="{{pregunta_id}}">
+                <div class="form-group">
+                    <label for="pregunta">Pregunta:</label>
+                    <input type="text" id="pregunta" name="pregunta" class="form-control" value="{{enunciado}}" readonly>
+                </div>
+
+                <div class="form-group">
+                    <label for="motivo">Motivo del reporte:</label>
+                    <textarea id="motivo" name="motivo" rows="4" cols="50"></textarea>
+                </div>
+
+                <button type="submit" class="btn btn-primary" name="report">Reportar</button>
+            </form>
+        {{/pregunta}}
+    </div>
+</div>
+{{> footer}}

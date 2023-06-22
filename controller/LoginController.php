@@ -14,9 +14,6 @@ class LoginController{
                 case "1":
                     header("location: /lobbyAdmin");
                     break;
-                case "2":
-                    header("location: /lobbyEditor");
-                    break;
                 default:
                     header("location: /lobbyUsuario");
                     break;

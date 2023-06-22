@@ -1,0 +1,24 @@
+{{>header_logueado}}
+<div class="container">
+    <div class="lobby-container">
+        <h2>Preguntas Reportadas</h2>
+        <table id="sugerencia-tabla" class="responsive-table">
+            <thead>
+            <tr>
+                <th>Id de Pregunta</th>
+                <th>Enunciado</th>
+            </tr>
+            </thead>
+            <tbody>
+            </tbody>
+            {{#reportadas}}
+                <tr>
+                <tr onclick="redireccionarReportada('{{pregunta_id}}')">
+                    <td>{{pregunta_id}}</td>
+                    <td>{{enunciado}}</td>
+                </tr>
+            {{/reportadas}}
+        </table>
+    </div>
+</div>
+{{> footer}}
