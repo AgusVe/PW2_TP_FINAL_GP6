@@ -15,6 +15,7 @@ include_once('controller/PartidaController.php');
 include_once('controller/RankingController.php');
 include_once('controller/PerfilController.php');
 include_once('controller/LobbyAdminController.php');
+include_once('controller/PreguntaController.php');
 
 
 
@@ -91,6 +92,11 @@ class configuration{
     }
 
     public function getLobbyAdminController(){
-        return new LobbyAdminController($this->getRenderer(),new LobbyAdminModel($this->getDataBase()));
+        return new LobbyAdminController($this->getRenderer(),new LobbyAdminModel($this->getDataBase()),new PerfilModel($this->getDataBase()));
     }
+    public function getPreguntaController(){
+        return new PreguntaController(new PreguntaModel($this->getDataBase()),$this->getRenderer());
+    }
+
+
 }

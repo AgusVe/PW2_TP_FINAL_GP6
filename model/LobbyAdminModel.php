@@ -9,92 +9,84 @@ class LobbyAdminModel
         $this->database = $database;
     }
 
-    public function cantidadDeJugadoresTotales()
+    public function cantidadDeJugadoresTotales($fecha)
     {
-        $sql = "SELECT count(*)  FROM usuario";
-        return $this->database->getOne($sql);
+        $sql = "SELECT MONTHNAME(fecha_registro) AS mes, count(*) AS cantidad  FROM usuario WHERE fecha_registro <='$fecha' AND idRol=3 GROUP BY MONTH(fecha_registro)";
+
+        return $this->database->query($sql);
 
 
     }
 
-    public function cantidadDePartidasJugadas()
+    public function cantidadDePartidasJugadas($fecha)
     {
-        $sql = "SELECT count(*)  FROM partida WHERE terminada=1";
-        return $this->database->getOne($sql);
+        $sql = "SELECT MONTHNAME(fecha) AS mes, count(*) AS cantidad  FROM partida WHERE terminada=1 AND fecha <='$fecha' GROUP BY MONTH(fecha)";
+        return $this->database->query($sql);
 
     }
 
-    public function cantidadDePreguntasEnJuego()
+    public function cantidadDePreguntasEnJuego($fecha)
     {
 
-        $sql = "SELECT count(*)  FROM preguntas";
-        return $this->database->getOne($sql);
+        $sql = "SELECT MONTHNAME(fecha) AS mes, count(*) AS cantidad  FROM preguntas WHERE fecha <='$fecha' GROUP BY MONTH(fecha)";
+        return $this->database->query($sql);
     }
 
-    public function cantidadDePreguntasDadasDeAlta()
+    public function cantidadDePreguntasDadasDeAlta($fecha)
     {
+        $sql="SELECT MONTHNAME(fecha) AS mes, count(*) AS cantidad FROM preguntas WHERE preguntaSugerida=1 AND fecha <='$fecha' GROUP BY MONTH(fecha)";
 
-
-    }
-
-    public function cantidadDeUsuariosNuevos()
-    {
-        $fechaActual = date("Y/m/d");
-        $fechaDeUnMesAtras = date("Y-m-d", strtotime($fechaActual . "- 1 month"));
-
-        $sql = "SELECT count(*) FROM usuario WHERE fecha_registro BETWEEN '.$fechaDeUnMesAtras.' AND '.$fechaActual.'";
-
-        return $this->database->getOne($sql);
-
+        return $this->database->query($sql);
 
     }
 
-    public function porcentajeDePreguntasRespondidasCorrectamentePorElUsuario()
+    public function cantidadDeUsuariosNuevos($fecha)
     {
+
+        $sql = "SELECT WEEK(fecha_registro) AS semana,count(*) AS cantidad FROM usuario WHERE MONTH(fecha_registro) = MONTH('$fecha') GROUP BY semana ORDER BY semana;";
+        return $this->database->query($sql);
 
     }
 
-    public function cantidadDeUsuariosPorPais($idPais)
+    /*ESTA MAL*/
+    public function porcentajeDePreguntasRespondidasCorrectamentePorElUsuario($idUsuario)
     {
+        $sql = "SELECT puntosTotales FROM usuario WHERE idUsuario ='$idUsuario'";
+        $cantidadDePuntosTotales= $this->database->getOne($sql);
 
-        $sql = "SELECT count(*) FROM usuario WHERE pais='.$idPais.'";
-        return $this->database->getOne($sql);
+        $sql = "SELECT count(*) FROM usuario U FROM partida P ON P.idUsuario= P.idUsuario WHERE terminada =1";
+        $cantidaDePartidasJugadas= $this->database->getOne($sql);
 
+        return ($cantidadDePuntosTotales/$cantidaDePartidasJugadas)*100;
 
-    }
-
-    public function cantidadDeUsuariosPorSexo($sexo)
-    {
-
-        $sql = "SELECT count(*) FROM usuario WHERE genero='.$sexo.'";
-        return $this->database->getOne($sql);
 
 
     }
 
-    public function cantidadDeUsuariosPorGrupoDeEdad($grupoDeEdad)
+    public function cantidadDeUsuariosPorPais($fecha)
     {
-        $fechaActual = date("Y/m/d");
-        switch ($grupoDeEdad) {
-            case "menor":
-                $sql = "SELECT count(*) FROM usuario WHERE TIMESTAMPDIFF(YEAR,nacimiento,'.$fechaActual.' ) < 18";
-                return $this->database->getOne($sql);
-                break;
 
-            case "medio":
-                $sql = "SELECT count(*) FROM usuario WHERE TIMESTAMPDIFF(YEAR,nacimiento,'.$fechaActual.' ) BETWEEN 18 AND 60";
-                return $this->database->getOne($sql);
-                break;
+        $sql = "SELECT pais, count(*) AS cantidad FROM usuario WHERE fecha_registro <='$fecha' AND idRol=3 GROUP BY pais";
+        return $this->database->query($sql);
 
 
-            case "jubilado":
-                $sql = "SELECT count(*) FROM usuario WHERE TIMESTAMPDIFF(YEAR,nacimiento,'.$fechaActual.' ) > 60";
-                return $this->database->getOne($sql);
-                break;
+    }
+
+    /*REVISAR*/
+    public function cantidadDeUsuariosPorSexo($fecha)
+    {
+
+        $sql = "SELECT genero,count(*) AS cantidad FROM usuario WHERE fecha_registro <='$fecha' AND idRol=3 GROUP BY genero";
+        return $this->database->query($sql);
+
+
+    }
+
+    public function cantidadDeUsuariosPorGrupoDeEdad($fecha)
+    {
+        $sql = "SELECT grupoEdad,count(*) AS cantidad FROM usuario WHERE fecha_registro <='$fecha' AND idRol=3 GROUP BY grupoEdad";
+                return $this->database->query($sql);
 
         }
-
-    }
-
 
 }

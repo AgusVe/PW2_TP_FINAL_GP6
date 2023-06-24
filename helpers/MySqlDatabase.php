@@ -31,6 +31,7 @@ class MySqlDatabase {
 
     public function execute($insert){
         mysqli_query($this->connection, $insert);
+
     }
 
     public function getLastInsertId() {

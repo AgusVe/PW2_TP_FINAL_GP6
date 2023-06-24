@@ -48,7 +48,6 @@ class RegistroController
             }
 
 
-
             /*LE APLICO HASH A LA CONTRASEÑA*/
             $contraseniaHasheada = md5($contrasenia);
 

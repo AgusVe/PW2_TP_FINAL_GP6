@@ -15,7 +15,7 @@ class PartidaController
 
         include_once("helpers/Configuration.php");
         $this->configuration = new Configuration();
-        
+
     }
 
     public function nuevaPartida()
@@ -60,7 +60,8 @@ class PartidaController
 
         $arrDatosPartida = $this->partidaModel->obtenerPartida($idPartida);
 
-        
+
+
         if(!isset($arrDatosPartida['idPartida'])) {
             $this->redirigirHome();
             return;
@@ -75,8 +76,7 @@ class PartidaController
         if($arrDatosPartida['idUsuario'] != $_SESSION['id']) {
             $this->redirigirHome();
             return;
-        }        
-
+        }
 
         $this->renderer->render("partida");
     }
@@ -97,7 +97,7 @@ class PartidaController
 
         $arrDatosPartida = $this->partidaModel->obtenerPartida($idPartida);
 
-    /*    if(!isset($arrDatosPartida['idPartida'])) {
+       if(!isset($arrDatosPartida['idPartida'])) {
             $this->redirigirHome();
             return;
         }
@@ -111,7 +111,8 @@ class PartidaController
         if($arrDatosPartida['idUsuario'] != $_SESSION['id']) {
             $this->redirigirHome();
             return;
-        }  */
+
+        }
 
         $arrDevolucion=[];
 
@@ -176,7 +177,7 @@ class PartidaController
                 $arrDevolucion['pregunta_nueva'] = $arrDatosPregunta;
             } catch (Exception $e) {
 
-            } 
+            }
         }
 
         $arrDevolucion['puntos']=$arrDatosPartida['puntosObtenidos'];
@@ -187,17 +188,8 @@ class PartidaController
     }
 
     private function redirigirHome() {
-        switch ( $_SESSION['rol']){
-            case "1":
-                header("location: /lobbyAdmin");
-                break;
-            case "2":
-                header("location: /lobbyEditor");
-                break;
-            default:
-                header("location: /lobbyUsuario");
-                break;
-        }            
+        header("location: /lobbyUsuario");
+        exit();
     }
 
     public function acumularpuntos(){
