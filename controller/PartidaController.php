@@ -68,7 +68,7 @@ class PartidaController
         }
 
         if($arrDatosPartida['terminada'] == 1) {
-            $this->redirigirHome();
+            $this->redirigir();
             return;
         }
 
