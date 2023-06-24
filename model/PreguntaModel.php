@@ -7,37 +7,106 @@ class PreguntaModel{
         $this->database = $database;
     }
 
-    public function obtenerPreguntas(){
+    public function obtenerPregunta($idUsuarioActual){
+        $ratio = $this->obtenerNivelUsuario($idUsuarioActual);
 
-        $idPregunta = rand(13,41);
-        $sql = "SELECT P.*, C.color  FROM preguntas P
-        JOIN categoria C ON P.categoria_id = C.categoria_id
-        WHERE P.pregunta_id = $idPregunta";
-        return $this->database->query($sql);
+        //Usuario con pocas respuesta correctas - Preguntas faciles
+        if($ratio < 30){
+            $sql = "SELECT p.pregunta_id, p.enunciado, p.categoria_id, p.respuestaA, p.respuestaB, p.respuestaC, p.respuestaD, p.respuesta_correcta, c.color
+                    FROM preguntas p
+                    JOIN categoria c ON p.categoria_id = c.categoria_id
+                    WHERE ((p.veces_correcta * 100) / p.veces_respondida) >=70
+                            AND NOT EXISTS (
+                            SELECT 1
+                            FROM pregunta_usuario pu
+                            WHERE pu.idUsuario = $idUsuarioActual
+                            AND pu.idPregunta = p.pregunta_id
+                            )
+                    ORDER BY RAND()
+                    LIMIT 1";
+        //Usuario Medio - Preguntas medias o preguntas nuevas
+        }else if($ratio >=30 && $ratio <= 70){
+            $sql = "SELECT p.pregunta_id, p.enunciado, p.categoria_id, p.respuestaA, p.respuestaB, p.respuestaC, p.respuestaD, p.respuesta_correcta, c.color
+                    FROM preguntas p
+                    JOIN categoria c ON p.categoria_id = c.categoria_id
+                    WHERE ((p.veces_correcta * 100) / p.veces_respondida) >=30 AND ((p.veces_correcta * 100) / p.veces_respondida) <=70
+                            AND NOT EXISTS (
+                            SELECT 1
+                            FROM pregunta_usuario pu
+                            WHERE pu.idUsuario = $idUsuarioActual
+                            AND pu.idPregunta = p.pregunta_id
+                            )
+                    OR p.veces_correcta = 0 
+                    OR p.veces_respondida = 0
+                    ORDER BY RAND()
+                    LIMIT 1";
+        //Usuario con muchas respuestas correctas - Preguntas dificiles
+        }else{
+            $sql = "SELECT p.pregunta_id, p.enunciado, p.categoria_id, p.respuestaA, p.respuestaB, p.respuestaC, p.respuestaD, p.respuesta_correcta, c.color
+                    FROM preguntas p
+                    JOIN categoria c ON p.categoria_id = c.categoria_id
+                    WHERE ((p.veces_correcta * 100) / p.veces_respondida) <30
+                            AND NOT EXISTS (
+                            SELECT 1
+                            FROM pregunta_usuario pu
+                            WHERE pu.idUsuario = $idUsuarioActual
+                            AND pu.idPregunta = p.pregunta_id
+                            )
+                    ORDER BY RAND()
+                    LIMIT 1";
+        }
 
+        return $this->database->getOne($sql);
+    }
+
+    public function obtenerNivelUsuario($idUsuarioActual){
+        $sql1 = "SELECT COUNT(*) AS totalPreguntas FROM pregunta_usuario WHERE idUsuario = $idUsuarioActual";
+        $resultado1 = $this->database->execute($sql1);
+
+        $total = 0;
+        $totalCorrecta = 0;
+
+        if ($resultado1 === true) {
+            $row = $resultado1->fetch_assoc();
+            $total = $row['totalPreguntas'];
+        }
+
+        $sql2 = "SELECT COUNT(*) AS totalCorrectas FROM pregunta_usuario WHERE estadoRespuesta = 1  AND idUsuario = $idUsuarioActual";
+        $resultado2 = $this->database->execute($sql2);
+
+        if ($resultado2 === true) {
+            $row = $resultado2->fetch_assoc();
+            $totalCorrecta = $row['totalCorrectas'];
+        }
+
+        if($total === 0 || $totalCorrecta === 0){
+            $ratio = 50;
+        }else{
+            $ratio = ($totalCorrecta * 100) / $total;
+        }
+
+        /*Mayor respuestas correctas, mayor ratio*/
+
+        return $ratio;
 
     }
 
-    public function obtenerPregunta(){
-        //TODO mejorar como se selecciona aleatoriamente
-        try {
-            $idPregunta = rand(13,41);
-            $sql = "SELECT P.*, C.color  FROM preguntas P
-            JOIN categoria C ON P.categoria_id = C.categoria_id
-            WHERE P.pregunta_id = $idPregunta";
-            return $this->database->getOne($sql);
-        } catch (Exception $e) {
-        } 
-    }
 
     public function obtenerPreguntaPorId($strIdPregunta){
-        //TODO mejorar como se selecciona aleatoriamente
-        try {
-            $sql = "SELECT P.* FROM preguntas P
-            WHERE P.pregunta_id = $strIdPregunta";
-            return $this->database->getOne($sql);
-        } catch (Exception $e) {
-        } 
+        $sql = "SELECT P.* FROM preguntas P
+        WHERE P.pregunta_id = $strIdPregunta";
+        return $this->database->getOne($sql);
+    }
+
+
+    public function aumentarRespondidaBien($idPregunta){
+        $sql = "UPDATE preguntas SET veces_correcta = veces_correcta + 1 WHERE pregunta_id='$idPregunta'";
+        $this->database->execute($sql);
+    }
+
+    public function aumentarCantidadDeVeces($idPregunta){
+        $sql = "UPDATE preguntas SET veces_respondida = veces_respondida + 1 WHERE pregunta_id='$idPregunta'";
+        $this->database->execute($sql);
     }
 
 
