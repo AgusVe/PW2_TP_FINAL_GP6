@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 5.2.1
+-- version 5.2.0
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 19-06-2023 a las 20:24:55
--- Versión del servidor: 8.0.26
--- Versión de PHP: 8.1.4
+-- Tiempo de generación: 24-06-2023 a las 03:06:10
+-- Versión del servidor: 10.4.27-MariaDB
+-- Versión de PHP: 8.2.0
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -28,9 +28,9 @@ SET time_zone = "+00:00";
 --
 
 CREATE TABLE `categoria` (
-  `categoria_id` int NOT NULL,
-  `nombre` varchar(50) COLLATE utf8mb4_general_ci DEFAULT NULL,
-  `color` varchar(20) COLLATE utf8mb4_general_ci DEFAULT NULL
+  `categoria_id` int(11) NOT NULL,
+  `nombre` varchar(50) DEFAULT NULL,
+  `color` varchar(20) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
@@ -51,13 +51,13 @@ INSERT INTO `categoria` (`categoria_id`, `nombre`, `color`) VALUES
 --
 
 CREATE TABLE `partida` (
-  `idPartida` int NOT NULL,
-  `idUsuario` int NOT NULL,
-  `puntosObtenidos` int NOT NULL,
+  `idPartida` int(11) NOT NULL,
+  `idUsuario` int(11) NOT NULL,
+  `puntosObtenidos` int(11) NOT NULL,
   `fecha` date NOT NULL,
-  `idPreguntaActual` int DEFAULT NULL,
-  `numPartidaDelJugador` int NOT NULL DEFAULT '0',
-  `terminada` tinyint(1) NOT NULL DEFAULT '0'
+  `idPreguntaActual` int(11) DEFAULT NULL,
+  `numPartidaDelJugador` int(11) NOT NULL DEFAULT 0,
+  `terminada` tinyint(1) NOT NULL DEFAULT 0
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
@@ -220,7 +220,9 @@ INSERT INTO `partida` (`idPartida`, `idUsuario`, `puntosObtenidos`, `fecha`, `id
 (155, 17, 0, '2023-06-19', NULL, 0, 0),
 (156, 17, 0, '2023-06-19', NULL, 0, 0),
 (157, 17, 0, '2023-06-19', NULL, 0, 0),
-(158, 17, 0, '2023-06-19', 20, 44, 1);
+(158, 17, 0, '2023-06-19', 20, 44, 1),
+(159, 18, 0, '2023-06-19', 28, 10, 1),
+(160, 18, 0, '2023-06-20', 30, 0, 0);
 
 -- --------------------------------------------------------
 
@@ -229,55 +231,44 @@ INSERT INTO `partida` (`idPartida`, `idUsuario`, `puntosObtenidos`, `fecha`, `id
 --
 
 CREATE TABLE `preguntas` (
-  `pregunta_id` int NOT NULL,
-  `enunciado` varchar(260) COLLATE utf8mb4_general_ci DEFAULT NULL,
-  `respuestaA` varchar(100) COLLATE utf8mb4_general_ci DEFAULT NULL,
-  `respuestaB` varchar(100) COLLATE utf8mb4_general_ci DEFAULT NULL,
-  `respuestaC` varchar(100) COLLATE utf8mb4_general_ci DEFAULT NULL,
-  `respuestaD` varchar(100) COLLATE utf8mb4_general_ci DEFAULT NULL,
-  `respuesta_correcta` varchar(100) COLLATE utf8mb4_general_ci DEFAULT NULL,
-  `categoria_id` int DEFAULT NULL,
-  `veces_correcta` int DEFAULT '0',
-  `veces_respondida` int DEFAULT '0',
-  `dificultad` varchar(10) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL DEFAULT '0',
-  `reportada` tinyint(1) NOT NULL DEFAULT '0',
-  `motivo_reporte` varchar(500) COLLATE utf8mb4_general_ci DEFAULT NULL
+  `pregunta_id` int(11) NOT NULL,
+  `enunciado` varchar(260) DEFAULT NULL,
+  `respuestaA` varchar(100) DEFAULT NULL,
+  `respuestaB` varchar(100) DEFAULT NULL,
+  `respuestaC` varchar(100) DEFAULT NULL,
+  `respuestaD` varchar(100) DEFAULT NULL,
+  `respuesta_correcta` varchar(100) DEFAULT NULL,
+  `categoria_id` int(11) DEFAULT NULL,
+  `veces_correcta` int(11) DEFAULT 0,
+  `veces_respondida` int(11) DEFAULT 0,
+  `dificultad` varchar(10) NOT NULL DEFAULT '0',
+  `reportada` tinyint(1) NOT NULL DEFAULT 0,
+  `motivo_reporte` varchar(500) DEFAULT NULL,
+  `preguntaSugerida` tinyint(1) NOT NULL DEFAULT 0,
+  `fecha` date NOT NULL DEFAULT current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Volcado de datos para la tabla `preguntas`
 --
 
-INSERT INTO `preguntas` (`pregunta_id`, `enunciado`, `respuestaA`, `respuestaB`, `respuestaC`, `respuestaD`, `respuesta_correcta`, `categoria_id`, `veces_correcta`, `veces_respondida`, `dificultad`, `reportada`, `motivo_reporte`) VALUES
-(13, '¿Cuál es el río más largo del mundo?', 'Amazonas', 'Nilo', 'Mississippi', 'Yangtsé', 'Nilo', 5, 0, 0, '', 0, NULL),
-(14, '¿Cuál es el capital de Francia?', 'Madrid', 'Londres', 'París', 'Roma', 'París', 5, 0, 0, 'Facil', 0, ''),
-(15, '¿Cuál es el río más largo del mundo?', 'Amazonas', 'Nilo', 'Yangtsé', 'Misisipi', 'Nilo', 5, 0, 0, 'Dificil', 0, NULL),
-(16, '¿Cuál es el elemento más abundante en la Tierra?', 'Oxígeno', 'Silicio', 'Hierro', 'Carbono', 'Oxígeno', 4, 0, 0, 'Dificil', 0, NULL),
-(17, '¿Quién pintó la Mona Lisa?', 'Pablo Picasso', 'Leonardo da Vinci', 'Vincent van Gogh', 'Salvador Dalí', 'Leonardo da Vinci', 3, 0, 0, 'Medio', 0, NULL),
-(18, '¿Cuál es la montaña más alta del mundo?', 'K2', 'Monte Everest', 'Aconcagua', 'Mont Blanc', 'Monte Everest', 5, 0, 0, 'Medio', 0, NULL),
-(19, '¿Cuál es la moneda oficial de Japón?', 'Dólar', 'Euro', 'Yen', 'Libra esterlina', 'Yen', 5, 0, 0, 'Facil', 0, NULL),
-(20, '¿Quién escribió \"Don Quijote de la Mancha\"?', 'Miguel de Cervantes', 'Gabriel García Márquez', 'Jorge Luis Borges', 'William Shakespeare', 'Miguel de Cervantes', 3, 0, 0, '', 0, NULL),
-(21, '¿Cuál es el país más grande del mundo en términos de superficie?', 'Estados Unidos', 'Rusia', 'China', 'Canadá', 'Rusia', 5, 0, 0, '', 0, ''),
-(22, '¿Cuál es el océano más grande del mundo?', 'Océano Pacífico', 'Océano Atlántico', 'Océano Índico', 'Océano Ártico', 'Océano Pacífico', 5, 0, 0, '', 0, NULL),
-(23, '¿Quién descubrió América?', 'Cristóbal Colón', 'Fernando de Magallanes', 'Vasco da Gama', 'Hernán Cortés', 'Cristóbal Colón', 1, 0, 0, '', 0, NULL),
-(24, '¿Cuál es el símbolo químico del oro?', 'Ag', 'Au', 'Pt', 'Hg', 'Au', 4, 0, 0, '', 0, NULL),
-(25, '¿Cuál es el escritor de la obra \"Romeo y Julieta\"?', 'William Shakespeare', 'Charles Dickens', 'Jane Austen', 'Fyodor Dostoyevsky', 'William Shakespeare', 3, 0, 0, '', 0, NULL),
-(26, '¿Cuál es el planeta más grande del sistema solar?', 'Mercurio', 'Venus', 'Júpiter', 'Saturno', 'Júpiter', 5, 0, 0, '', 0, NULL),
-(27, '¿Cuál es la fórmula química del agua?', 'H2O', 'CO2', 'NaCl', 'CH4', 'H2O', 4, 0, 0, '', 0, ''),
-(28, '¿Cuál es el capital de Francia?', 'Madrid', 'Londres', 'París', 'Roma', 'París', 5, 0, 0, '', 0, NULL),
-(29, '¿Cuál es el río más largo del mundo?', 'Amazonas', 'Nilo', 'Yangtsé', 'Misisipi', 'Nilo', 5, 0, 0, '', 0, NULL),
-(30, '¿Cuál es el elemento más abundante en la Tierra?', 'Oxígeno', 'Silicio', 'Hierro', 'Carbono', 'Oxígeno', 4, 0, 0, '', 0, NULL),
-(31, '¿Quién pintó la Mona Lisa?', 'Pablo Picasso', 'Leonardo da Vinci', 'Vincent van Gogh', 'Salvador Dalí', 'Leonardo da Vinci', 3, 0, 0, '', 0, NULL),
-(32, '¿Cuál es la montaña más alta del mundo?', 'K2', 'Monte Everest', 'Aconcagua', 'Mont Blanc', 'Monte Everest', 5, 0, 0, '', 0, NULL),
-(33, '¿Cuál es la moneda oficial de Japón?', 'Dólar', 'Euro', 'Yen', 'Libra esterlina', 'Yen', 5, 0, 0, '', 0, NULL),
-(34, '¿Quién escribió \"Don Quijote de la Mancha\"?', 'Miguel de Cervantes', 'Gabriel García Márquez', 'Jorge Luis Borges', 'William Shakespeare', 'Miguel de Cervantes', 3, 0, 0, '', 0, NULL),
-(35, '¿Cuál es el país más grande del mundo en términos de superficie?', 'Estados Unidos', 'Rusia', 'China', 'Canadá', 'Rusia', 5, 0, 0, '', 0, NULL),
-(36, '¿Cuál es el océano más grande del mundo?', 'Océano Pacífico', 'Océano Atlántico', 'Océano Índico', 'Océano Ártico', 'Océano Pacífico', 5, 0, 0, '', 0, NULL),
-(37, '¿Quién descubrió América?', 'Cristóbal Colón', 'Fernando de Magallanes', 'Vasco da Gama', 'Hernán Cortés', 'Cristóbal Colón', 5, 0, 0, '', 0, NULL),
-(38, '¿Cuál es el símbolo químico del Oro?', 'Ag', 'Au', 'Pt', 'Hg', 'Au', 5, 0, 0, '', 0, NULL),
-(40, '¿Cuál es el planeta más grande del sistema solar?', 'Mercurio', 'Venus', 'Júpiter', 'Saturno', 'Júpiter', 5, 0, 0, '', 0, NULL),
-(41, '¿Cuál es la fórmula química del agua?', 'H2O', 'CO2', 'NaCl', 'CH4', 'H2O', 5, 0, 0, '', 0, NULL),
-(49, '¿Quien es el campeon de F1?', 'Verstappen', 'Hamilton', 'Perez', 'Leclerc', 'Verstappen', 2, 0, 0, '0', 0, NULL);
+INSERT INTO `preguntas` (`pregunta_id`, `enunciado`, `respuestaA`, `respuestaB`, `respuestaC`, `respuestaD`, `respuesta_correcta`, `categoria_id`, `veces_correcta`, `veces_respondida`, `dificultad`, `reportada`, `motivo_reporte`, `preguntaSugerida`, `fecha`) VALUES
+(13, '¿Cuál es el río más largo del mundo?', 'Amazonas', 'Nilo', 'Mississippi', 'Yangtsé', 'Nilo', 5, 0, 0, '', 0, NULL, 0, '2023-06-23'),
+(14, '¿Cuál es el capital de Francia?', 'Madrid', 'Londres', 'París', 'Roma', 'París', 5, 0, 0, 'Facil', 0, '', 0, '2023-06-23'),
+(16, '¿Cuál es el elemento más abundante en la Tierra?', 'Oxígeno', 'Silicio', 'Hierro', 'Carbono', 'Oxígeno', 4, 0, 0, 'Dificil', 0, NULL, 0, '2023-06-23'),
+(17, '¿Quién pintó la Mona Lisa?', 'Pablo Picasso', 'Leonardo da Vinci', 'Vincent van Gogh', 'Salvador Dalí', 'Leonardo da Vinci', 3, 0, 0, 'Medio', 0, NULL, 0, '2023-06-23'),
+(18, '¿Cuál es la montaña más alta del mundo?', 'K2', 'Monte Everest', 'Aconcagua', 'Mont Blanc', 'Monte Everest', 5, 0, 0, 'Medio', 0, NULL, 0, '2023-06-23'),
+(19, '¿Cuál es la moneda oficial de Japón?', 'Dólar', 'Euro', 'Yen', 'Libra esterlina', 'Yen', 5, 0, 0, 'Facil', 0, NULL, 0, '2023-06-23'),
+(20, '¿Quién escribió \"Don Quijote de la Mancha\"?', 'Miguel de Cervantes', 'Gabriel García Márquez', 'Jorge Luis Borges', 'William Shakespeare', 'Miguel de Cervantes', 3, 0, 0, '', 0, NULL, 0, '2023-06-23'),
+(21, '¿Cuál es el país más grande del mundo en términos de superficie?', 'Estados Unidos', 'Rusia', 'China', 'Canadá', 'Rusia', 5, 0, 0, '', 0, '', 0, '2023-06-23'),
+(22, '¿Cuál es el océano más grande del mundo?', 'Océano Pacífico', 'Océano Atlántico', 'Océano Índico', 'Océano Ártico', 'Océano Pacífico', 5, 0, 0, '', 0, NULL, 0, '2023-06-23'),
+(23, '¿Quién descubrió América?', 'Cristóbal Colón', 'Fernando de Magallanes', 'Vasco da Gama', 'Hernán Cortés', 'Cristóbal Colón', 1, 0, 0, '', 0, NULL, 0, '2023-06-23'),
+(25, '¿Cuál es el escritor de la obra \"Romeo y Julieta\"?', 'William Shakespeare', 'Charles Dickens', 'Jane Austen', 'Fyodor Dostoyevsky', 'William Shakespeare', 3, 0, 0, '', 0, NULL, 0, '2023-06-23'),
+(26, '¿Cuál es el planeta más grande del sistema solar?', 'Mercurio', 'Venus', 'Júpiter', 'Saturno', 'Júpiter', 5, 0, 0, '', 0, NULL, 0, '2023-06-23'),
+(27, '¿Cuál es la fórmula química del agua?', 'H2O', 'CO2', 'NaCl', 'CH4', 'H2O', 4, 0, 0, '', 0, '', 0, '2023-06-23'),
+(31, '¿Quién pintó la Mona Lisa?', 'Pablo Picasso', 'Leonardo da Vinci', 'Vincent van Gogh', 'Salvador Dalí', 'Leonardo da Vinci', 3, 0, 0, '', 0, NULL, 0, '2023-06-23'),
+(38, '¿Cuál es el símbolo químico del Oro?', 'Ag', 'Au', 'Pt', 'Hg', 'Au', 5, 0, 0, '', 0, NULL, 0, '2023-06-23'),
+(49, '¿Quien es el campeon de F1?', 'Verstappen', 'Hamilton', 'Perez', 'Leclerc', 'Verstappen', 2, 0, 0, '0', 0, NULL, 1, '2023-06-23');
 
 -- --------------------------------------------------------
 
@@ -286,16 +277,16 @@ INSERT INTO `preguntas` (`pregunta_id`, `enunciado`, `respuestaA`, `respuestaB`,
 --
 
 CREATE TABLE `pregunta_sugerida` (
-  `id_sugerencia` int NOT NULL,
-  `enunciado_s` varchar(260) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci DEFAULT NULL,
-  `respuestaA_s` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci DEFAULT NULL,
-  `respuestaB_s` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci DEFAULT NULL,
-  `respuestaC_s` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci DEFAULT NULL,
-  `respuestaD_s` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci DEFAULT NULL,
-  `respuesta_correcta_s` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
-  `categoria_id_s` int DEFAULT NULL,
-  `creado_por` varchar(25) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
-  `estado` tinyint(1) NOT NULL DEFAULT '0'
+  `id_sugerencia` int(11) NOT NULL,
+  `enunciado_s` varchar(260) DEFAULT NULL,
+  `respuestaA_s` varchar(100) DEFAULT NULL,
+  `respuestaB_s` varchar(100) DEFAULT NULL,
+  `respuestaC_s` varchar(100) DEFAULT NULL,
+  `respuestaD_s` varchar(100) DEFAULT NULL,
+  `respuesta_correcta_s` varchar(100) NOT NULL,
+  `categoria_id_s` int(11) DEFAULT NULL,
+  `creado_por` varchar(25) NOT NULL,
+  `estado` tinyint(1) NOT NULL DEFAULT 0
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
@@ -303,7 +294,11 @@ CREATE TABLE `pregunta_sugerida` (
 --
 
 INSERT INTO `pregunta_sugerida` (`id_sugerencia`, `enunciado_s`, `respuestaA_s`, `respuestaB_s`, `respuestaC_s`, `respuestaD_s`, `respuesta_correcta_s`, `categoria_id_s`, `creado_por`, `estado`) VALUES
-(1, '¿Quien es el campeon de F1?', 'Verstappen', 'Hamilton', 'Perez', 'Leclerc', 'Verstappen', 2, 'ivandp', 1);
+(1, '¿Quien es el campeon de F1?', 'Verstappen', 'Hamilton', 'Perez', 'Leclerc', 'Verstappen', 2, 'ivandp', 1),
+(4, 'dasdsdadsd', 'dsads', 'dasda', 'dasd', 'dasd', 'dasda', 1, 'fello', 1),
+(5, 'hkhkkhkhkhk', 'dasdada', 'dasddadsda', 'dasdad', 'das', 'das', 1, 'fello', 0),
+(6, 'sdadsdw', 'dasdads', 'sdasdas', 'sss', 'aaaa', 'aaaa', 1, 'fello', 0),
+(7, 'Quien el leo messio', 'un jugador', 'estrella noporn', 'basquetboll', 'beisbool', 'un jugador', 2, 'fello', 0);
 
 -- --------------------------------------------------------
 
@@ -312,11 +307,11 @@ INSERT INTO `pregunta_sugerida` (`id_sugerencia`, `enunciado_s`, `respuestaA_s`,
 --
 
 CREATE TABLE `pregunta_usuario` (
-  `id_pregunta_usuario` int NOT NULL,
-  `idPartida` int NOT NULL,
-  `idPregunta` int NOT NULL,
-  `idUsuario` int NOT NULL,
-  `respuesta` varchar(100) COLLATE utf8mb4_general_ci DEFAULT NULL,
+  `id_pregunta_usuario` int(11) NOT NULL,
+  `idPartida` int(11) NOT NULL,
+  `idPregunta` int(11) NOT NULL,
+  `idUsuario` int(11) NOT NULL,
+  `respuesta` varchar(100) DEFAULT NULL,
   `estadoRespuesta` tinyint(1) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
@@ -504,7 +499,9 @@ INSERT INTO `pregunta_usuario` (`id_pregunta_usuario`, `idPartida`, `idPregunta`
 (177, 147, 28, 17, NULL, 0),
 (178, 148, 21, 21, NULL, 0),
 (179, 149, 14, 21, NULL, 0),
-(180, 150, 33, 17, 'Libra esterlina', 0);
+(180, 150, 33, 17, 'Libra esterlina', 0),
+(181, 159, 28, 18, NULL, 0),
+(182, 160, 30, 18, NULL, 0);
 
 -- --------------------------------------------------------
 
@@ -513,8 +510,8 @@ INSERT INTO `pregunta_usuario` (`id_pregunta_usuario`, `idPartida`, `idPregunta`
 --
 
 CREATE TABLE `rol` (
-  `idRol` int NOT NULL,
-  `nombre` varchar(25) COLLATE utf8mb4_general_ci NOT NULL
+  `idRol` int(11) NOT NULL,
+  `nombre` varchar(25) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
@@ -533,35 +530,37 @@ INSERT INTO `rol` (`idRol`, `nombre`) VALUES
 --
 
 CREATE TABLE `usuario` (
-  `idUsuario` int NOT NULL,
-  `nombre` varchar(50) COLLATE utf8mb4_general_ci NOT NULL,
-  `apellido` varchar(50) COLLATE utf8mb4_general_ci NOT NULL,
+  `idUsuario` int(11) NOT NULL,
+  `nombre` varchar(50) NOT NULL,
+  `apellido` varchar(50) NOT NULL,
   `nacimiento` date NOT NULL,
-  `genero` varchar(2) COLLATE utf8mb4_general_ci NOT NULL,
-  `pais` varchar(120) COLLATE utf8mb4_general_ci NOT NULL,
-  `ciudad` varchar(120) COLLATE utf8mb4_general_ci NOT NULL,
-  `email` varchar(50) COLLATE utf8mb4_general_ci NOT NULL,
-  `contrasenia` varchar(250) COLLATE utf8mb4_general_ci NOT NULL,
-  `hashRegistro` varchar(100) COLLATE utf8mb4_general_ci NOT NULL,
-  `usuario` varchar(25) COLLATE utf8mb4_general_ci NOT NULL,
+  `grupoEdad` varchar(20) NOT NULL,
+  `genero` varchar(2) NOT NULL,
+  `pais` varchar(120) NOT NULL,
+  `ciudad` varchar(120) NOT NULL,
+  `email` varchar(50) NOT NULL,
+  `contrasenia` varchar(250) NOT NULL,
+  `hashRegistro` varchar(100) NOT NULL,
+  `usuario` varchar(25) NOT NULL,
   `estado` tinyint(1) NOT NULL,
-  `qr` varchar(140) COLLATE utf8mb4_general_ci NOT NULL,
+  `qr` varchar(140) NOT NULL,
   `fecha_registro` date NOT NULL,
-  `idRol` int NOT NULL,
-  `url_imagen` varchar(250) COLLATE utf8mb4_general_ci NOT NULL,
-  `puntosTotales` int NOT NULL DEFAULT '0'
+  `idRol` int(11) NOT NULL,
+  `url_imagen` varchar(250) NOT NULL,
+  `puntosTotales` int(11) NOT NULL DEFAULT 0
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Volcado de datos para la tabla `usuario`
 --
 
-INSERT INTO `usuario` (`idUsuario`, `nombre`, `apellido`, `nacimiento`, `genero`, `pais`, `ciudad`, `email`, `contrasenia`, `hashRegistro`, `usuario`, `estado`, `qr`, `fecha_registro`, `idRol`, `url_imagen`, `puntosTotales`) VALUES
-(1, 'pablo', 'Perez', '2000-10-10', 'X', 'Argentina', 'Buenos Aires', 'pabloP@gmail.com', '1234', '', 'admin', 1, '', '2023-05-23', 1, '', 0),
-(16, 'Ale', 'Paz', '1991-12-19', 'M', 'Argentina', 'Lomas del Mirador', 'alejandrodanielpaz92@gmail.com', '81dc9bdb52d04dc20036dbd8313ed055', 'a11b4b285bfc222f8f4635b80b9cd39a', 'Aleee', 1, '', '2023-05-31', 3, './uploads/Aleee.png', 0),
-(17, 'Ivan', 'Dp', '1992-01-03', 'M', 'Argentina', 'Ramos Mejia', 'ivangdelpino4@gmail.com', '81dc9bdb52d04dc20036dbd8313ed055', '5f3ef04d6af3a8dc400b6fa4b6fade78', 'ivandp', 1, '', '2023-06-08', 2, './uploads/ivandp.png', 25),
-(18, 'Luis Agustin', 'Vega Dobal', '2023-06-13', 'X', 'Argentina', 'Hurlingham', 'vegadobal@gmail.com', '81dc9bdb52d04dc20036dbd8313ed055', 'fc2d395d19537bac3690ce59a786314a', 'fello', 1, '', '2023-06-12', 3, './uploads/fello.jpeg', 9),
-(21, 'Leo', 'Messi', '1992-01-03', 'M', 'Argentina', 'Lomas del Mirador', 'ivandp6880@gmail.com', '81dc9bdb52d04dc20036dbd8313ed055', 'fcd2324cb4e9be6e33aabfeb9be8c424', 'lmessi', 1, '', '2023-06-13', 3, './uploads/lmessi.jpg', 1);
+INSERT INTO `usuario` (`idUsuario`, `nombre`, `apellido`, `nacimiento`, `grupoEdad`, `genero`, `pais`, `ciudad`, `email`, `contrasenia`, `hashRegistro`, `usuario`, `estado`, `qr`, `fecha_registro`, `idRol`, `url_imagen`, `puntosTotales`) VALUES
+(1, 'pablo', 'Perez', '2000-10-10', 'medio', 'X', 'Argentina', 'Buenos Aires', 'pabloP@gmail.com', '1234', '', 'admin', 1, '', '2023-05-23', 1, '', 0),
+(16, 'Ale', 'Paz', '1991-12-19', 'medio', 'M', 'Argentina', 'Lomas del Mirador', 'alejandrodanielpaz92@gmail.com', '81dc9bdb52d04dc20036dbd8313ed055', 'a11b4b285bfc222f8f4635b80b9cd39a', 'Aleee', 1, '', '2023-05-31', 3, './uploads/Aleee.png', 0),
+(17, 'Ivan', 'Dp', '1992-01-03', 'medio', 'M', 'Argentina', 'Ramos Mejia', 'ivangdelpino4@gmail.com', '81dc9bdb52d04dc20036dbd8313ed055', '5f3ef04d6af3a8dc400b6fa4b6fade78', 'ivandp', 1, '', '2023-06-08', 2, './uploads/ivandp.png', 25),
+(18, 'Luis Agustin', 'Vega Dobal', '2023-06-13', 'menor', 'X', 'Argentina', 'Hurlingham', 'vegadobal@gmail.com', '81dc9bdb52d04dc20036dbd8313ed055', 'fc2d395d19537bac3690ce59a786314a', 'fello', 1, '', '2023-06-12', 3, './uploads/fello.jpeg', 9),
+(21, 'Leo', 'Messi', '1992-01-03', 'medio', 'M', 'Argentina', 'Lomas del Mirador', 'ivandp6880@gmail.com', '81dc9bdb52d04dc20036dbd8313ed055', 'fcd2324cb4e9be6e33aabfeb9be8c424', 'lmessi', 1, '', '2023-06-13', 3, './uploads/lmessi.jpg', 1),
+(22, 'El admin', 'apellido Admin', '1983-02-10', 'medio', 'X', 'Brasil', 'Fortaleza ', 'admin@gmail.com', '81dc9bdb52d04dc20036dbd8313ed055', '8222e1552ec49ba4afaeb7e7c32da819', 'EL admin', 1, '', '2023-06-23', 1, './uploads/EL admin.jpg', 0);
 
 --
 -- Índices para tablas volcadas
@@ -618,37 +617,37 @@ ALTER TABLE `usuario`
 -- AUTO_INCREMENT de la tabla `partida`
 --
 ALTER TABLE `partida`
-  MODIFY `idPartida` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=159;
+  MODIFY `idPartida` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=161;
 
 --
 -- AUTO_INCREMENT de la tabla `preguntas`
 --
 ALTER TABLE `preguntas`
-  MODIFY `pregunta_id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=50;
+  MODIFY `pregunta_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=51;
 
 --
 -- AUTO_INCREMENT de la tabla `pregunta_sugerida`
 --
 ALTER TABLE `pregunta_sugerida`
-  MODIFY `id_sugerencia` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id_sugerencia` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 
 --
 -- AUTO_INCREMENT de la tabla `pregunta_usuario`
 --
 ALTER TABLE `pregunta_usuario`
-  MODIFY `id_pregunta_usuario` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=181;
+  MODIFY `id_pregunta_usuario` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=183;
 
 --
 -- AUTO_INCREMENT de la tabla `rol`
 --
 ALTER TABLE `rol`
-  MODIFY `idRol` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `idRol` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT de la tabla `usuario`
 --
 ALTER TABLE `usuario`
-  MODIFY `idUsuario` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=22;
+  MODIFY `idUsuario` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=23;
 
 --
 -- Restricciones para tablas volcadas

@@ -31,9 +31,11 @@ class PreguntaController{
             $opcionD = $_POST['opcionD'];
             $respuesta = $_POST['respuesta'];
             $categoria = $_POST['categoria'];
+            $preguntaSugerida=1;
 
 
-            $valores = "VALUES ('$enunciado', '$opcionA', '$opcionB', '$opcionC', '$opcionD', '$respuesta', '$categoria')";
+
+            $valores = "VALUES ('$enunciado', '$opcionA', '$opcionB', '$opcionC', '$opcionD', '$respuesta', '$categoria','$preguntaSugerida')";
             $this->preguntaModel->agregarPreguntaEnBD($valores);
 
             header('location: /pregunta/exito');
