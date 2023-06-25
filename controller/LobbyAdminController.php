@@ -8,6 +8,7 @@ class LobbyAdminController
     private $perfilModel;
 
 
+
     public function __construct($renderer, $lobbyAdminModel, $perfilModel)
     {
         $this->renderer = $renderer;
@@ -23,6 +24,7 @@ class LobbyAdminController
             exit();
         }
 
+
         $datos['datosUsur'] = $this->perfilModel->obtenerDatos($_SESSION["id"]);
 
         echo $this->renderer->render("lobbyAdmin", $datos);
@@ -30,8 +32,8 @@ class LobbyAdminController
 
     public function datosParaGraficos()
     {
-        if (isset($_POST['fecha'])) {
-            $fecha = $_POST['fecha'];
+        if (isset($_POST['filtroFecha'])){
+            $fecha = $_POST['filtroFecha'];
         } else {
             $fecha = date("Y/m/d");
         }
@@ -86,10 +88,7 @@ class LobbyAdminController
             $datos['porcentajeDePreguntasRespondidasCorrectamentePorElUsuario'][$row['nombre']] = $row['porcentaje'];
         }
 
-        header('Content-Type: application/json');
         echo json_encode($datos);
-        exit();
-
 
     }
 

@@ -19,7 +19,12 @@
         {{/datosUsur}}
 
         <div class="container">
-
+            <div class="form-group">
+                <input type="date" class="form-control" id="filtroFecha">
+            </div>
+            <div class="form-group">
+                <button onclick="mostrarGraficosConFiltros()" class="btn btn-primary btn-block" name="enviarFiltro">Filtrar</button>
+            </div>
             <div class="row row-cols-2 row-cols-lg-5 g-2 g-lg-3">
                 <div class="col">
                     <div class="card" style="width: 18rem;">

@@ -51,7 +51,7 @@ class LobbyAdminModel
     /*ESTA MAL*/
     public function porcentajeDePreguntasRespondidasCorrectamentePorElUsuario($fecha)
     {
-        $sql1="SELECT SUM(P.puntosObtenidos) AS suma FROM partida P JOIN usuario U ON U.idUsuario=P.idUsuario WHERE fecha <='$fecha'";
+        $sql1="SELECT SUM(P.puntosObtenidos) AS suma FROM partida P JOIN usuario U ON U.idUsuario=P.idUsuario WHERE P.fecha <='$fecha'";
         $respuestaSql=$this->database->getOne($sql1);
 
         $respuestaFinal=$respuestaSql['suma'];
