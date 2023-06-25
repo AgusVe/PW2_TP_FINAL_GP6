@@ -1,36 +1,33 @@
 var xhr = new XMLHttpRequest();
-xhr.open('GET', '/index.php?module=lobbyAdmin&action=datosParaGraficos', true); // Especifica la ruta al archivo PHP que realizará la consulta y devolverá los datos en formato JSON
+xhr.open('GET', '/index.php?module=lobbyAdmin&action=datosParaGraficos', true);
 xhr.onload = function () {
     if (xhr.status === 200) {
         var data = JSON.parse(xhr.responseText);
-        // Aquí puedes procesar los datos y configurar el gráfico utilizando Chart.js
-        var labels1 = Object.keys(data.cantidadDeJugadoresTotales); // EJE x
-        var values1 = Object.values(data.cantidadDeJugadoresTotales); // EJE Y
 
-// CONFIGURACION PARA GRAFICOS
+        var labels1 = Object.keys(data.cantidadDeJugadoresTotales);
+        var values1 = Object.values(data.cantidadDeJugadoresTotales);
+
         var ctx = document.getElementById('jugadoresTotal');
         new Chart(ctx, {
-            type: 'bar', // Tipo de gráfico de barras
+            type: 'bar',
             data: {
                 labels: labels1,
                 datasets: [{
                     label: 'Jugadores Totales',
                     data: values1,
-                    backgroundColor: 'rgba(75, 192, 192, 0.2)', // Color de fondo de las barras
-                    borderColor: 'rgba(75, 192, 192, 1)', // Color del borde de las barras
-                    borderWidth: 1 // Ancho del borde de las barras
+                    backgroundColor: 'rgba(75, 192, 192, 0.2)',
+                    borderColor: 'rgba(75, 192, 192, 1)',
+                    borderWidth: 1
                 }]
             },
             options: {
-                // Opciones adicionales de configuración, como títulos, leyendas, escalas, etc.
+                // Opciones adicionales de configuración
             }
         });
 
-        // Aquí puedes procesar los datos y configurar el gráfico utilizando Chart.js
-        var labels2 = Object.keys(data.cantidadDePartidasJugadas); // EJE x
-        var values2 = Object.values(data.cantidadDePartidasJugadas); // EJE Y
+        var labels2 = Object.keys(data.cantidadDePartidasJugadas);
+        var values2 = Object.values(data.cantidadDePartidasJugadas);
 
-// CONFIGURACION PARA GRAFICOS
         var lineChartCtx = document.getElementById('partidasJugadas');
         new Chart(lineChartCtx, {
             type: 'line',
@@ -39,21 +36,32 @@ xhr.onload = function () {
                 datasets: [{
                     label: 'Partidas Jugadas',
                     data: values2,
-                    backgroundColor: 'rgba(75, 192, 192, 0.2)',
-                    borderColor: 'rgba(75, 192, 192, 1)',
+                    backgroundColor: 'rgba(54, 162, 235, 0.2)',
+                    borderColor: 'rgba(54, 162, 235, 1)',
                     borderWidth: 1
                 }]
             },
             options: {
-                // Opciones adicionales de configuración para el gráfico de líneas
+                scales: {
+                    x: {
+                        title: {
+                            display: true,
+                            text: 'Mes'
+                        }
+                    },
+                    y: {
+                        title: {
+                            display: true,
+                            text: 'Cantidad'
+                        }
+                    }
+                }
             }
         });
 
-        // Aquí puedes procesar los datos y configurar el gráfico utilizando Chart.js
-        var labels3 = Object.keys(data.cantidadDePreguntasEnJuego); // EJE x
-        var values3 = Object.values(data.cantidadDePreguntasEnJuego); // EJE Y
+        var labels3 = Object.keys(data.cantidadDePreguntasEnJuego);
+        var values3 = Object.values(data.cantidadDePreguntasEnJuego);
 
-// CONFIGURACION PARA GRAFICOS
         var pieChartCtx = document.getElementById('preguntasEnJuego');
         new Chart(pieChartCtx, {
             type: 'pie',
@@ -62,8 +70,8 @@ xhr.onload = function () {
                 datasets: [{
                     label: 'Preguntas en el Juego',
                     data: values3,
-                    backgroundColor: ['rgba(75, 192, 192, 0.2)', 'rgba(54, 162, 235, 0.2)', 'rgba(255, 206, 86, 0.2)'],
-                    borderColor: ['rgba(75, 192, 192, 1)', 'rgba(54, 162, 235, 1)', 'rgba(255, 206, 86, 1)'],
+                    backgroundColor: ['rgba(255, 99, 132, 0.2)', 'rgba(54, 162, 235, 0.2)', 'rgba(255, 206, 86, 0.2)'],
+                    borderColor: ['rgba(255, 99, 132, 1)', 'rgba(54, 162, 235, 1)', 'rgba(255, 206, 86, 1)'],
                     borderWidth: 1
                 }]
             },
@@ -71,34 +79,31 @@ xhr.onload = function () {
                 // Opciones adicionales de configuración para el gráfico de pastel
             }
         });
-        // Aquí puedes procesar los datos y configurar el gráfico utilizando Chart.js
-        var labels4 = Object.keys(data.cantidadDePreguntasDadasDeAlta); // EJE x
-        var values4 = Object.values(data.cantidadDePreguntasDadasDeAlta); // EJE Y
 
-// CONFIGURACION PARA GRAFICOS
+        var labels4 = Object.keys(data.cantidadDePreguntasDadasDeAlta);
+        var values4 = Object.values(data.cantidadDePreguntasDadasDeAlta);
+
         var ctx2 = document.getElementById('preguntasDadasDeAlta');
         new Chart(ctx2, {
-            type: 'bar', // Tipo de gráfico de barras
+            type: 'bar',
             data: {
                 labels: labels4,
                 datasets: [{
                     label: 'Preguntas dadas de Alta',
                     data: values4,
-                    backgroundColor: 'rgba(75, 192, 192, 0.2)', // Color de fondo de las barras
-                    borderColor: 'rgba(75, 192, 192, 1)', // Color del borde de las barras
-                    borderWidth: 1 // Ancho del borde de las barras
+                    backgroundColor: 'rgba(255, 99, 132, 0.2)',
+                    borderColor: 'rgba(255, 99, 132, 1)',
+                    borderWidth: 1
                 }]
             },
             options: {
-                // Opciones adicionales de configuración, como títulos, leyendas, escalas, etc.
+                // Opciones adicionales de configuración
             }
         });
 
-        // Aquí puedes procesar los datos y configurar el gráfico utilizando Chart.js
-        var labels5 = Object.keys(data.cantidadDeUsuariosNuevos); // EJE x
-        var values5 = Object.values(data.cantidadDeUsuariosNuevos); // EJE Y
+        var labels5 = Object.keys(data.cantidadDeUsuariosNuevos);
+        var values5 = Object.values(data.cantidadDeUsuariosNuevos);
 
-// CONFIGURACION PARA GRAFICOS
         var lineChartCtx2 = document.getElementById('usuariosNuevos');
         new Chart(lineChartCtx2, {
             type: 'line',
@@ -107,31 +112,42 @@ xhr.onload = function () {
                 datasets: [{
                     label: 'Usuarios Nuevos',
                     data: values5,
-                    backgroundColor: 'rgba(75, 192, 192, 0.2)',
-                    borderColor: 'rgba(75, 192, 192, 1)',
+                    backgroundColor: 'rgba(255, 99, 132, 0.2)',
+                    borderColor: 'rgba(255, 99, 132, 1)',
                     borderWidth: 1
                 }]
             },
             options: {
-                // Opciones adicionales de configuración para el gráfico de líneas
+                scales: {
+                    x: {
+                        title: {
+                            display: true,
+                            text: 'Semana'
+                        }
+                    },
+                    y: {
+                        title: {
+                            display: true,
+                            text: 'Cantidad'
+                        }
+                    }
+                }
             }
         });
 
-        // Aquí puedes procesar los datos y configurar el gráfico utilizando Chart.js
-        var labels6 = Object.keys(data.cantidadDeUsuariosPorPais); // EJE x
-        var values6 = Object.values(data.cantidadDeUsuariosPorPais); // EJE Y
+        var labels6 = Object.keys(data.cantidadDeUsuariosPorPais);
+        var values6 = Object.values(data.cantidadDeUsuariosPorPais);
 
-// CONFIGURACION PARA GRAFICOS
         var pieChartCtx2 = document.getElementById('usuariosPorPais');
         new Chart(pieChartCtx2, {
             type: 'pie',
             data: {
                 labels: labels6,
                 datasets: [{
-                    label: 'Usuarios por Pais',
+                    label: 'Usuarios por País',
                     data: values6,
-                    backgroundColor: ['rgba(75, 192, 192, 0.2)', 'rgba(54, 162, 235, 0.2)', 'rgba(255, 206, 86, 0.2)'],
-                    borderColor: ['rgba(75, 192, 192, 1)', 'rgba(54, 162, 235, 1)', 'rgba(255, 206, 86, 1)'],
+                    backgroundColor: ['rgba(255, 99, 132, 0.2)', 'rgba(54, 162, 235, 0.2)', 'rgba(255, 206, 86, 0.2)'],
+                    borderColor: ['rgba(255, 99, 132, 1)', 'rgba(54, 162, 235, 1)', 'rgba(255, 206, 86, 1)'],
                     borderWidth: 1
                 }]
             },
@@ -140,21 +156,19 @@ xhr.onload = function () {
             }
         });
 
-        // Aquí puedes procesar los datos y configurar el gráfico utilizando Chart.js
-        var labels7 = Object.keys(data.cantidadDeUsuariosPorSexo); // EJE x
-        var values7 = Object.values(data.cantidadDeUsuariosPorSexo); // EJE Y
+        var labels7 = Object.keys(data.cantidadDeUsuariosPorSexo);
+        var values7 = Object.values(data.cantidadDeUsuariosPorSexo);
 
-// CONFIGURACION PARA GRAFICOS
         var pieChartCtx3 = document.getElementById('usuarioPorGenero');
         new Chart(pieChartCtx3, {
             type: 'pie',
             data: {
                 labels: labels7,
                 datasets: [{
-                    label: 'Usuarios por Genero',
+                    label: 'Usuarios por Género',
                     data: values7,
-                    backgroundColor: ['rgba(75, 192, 192, 0.2)', 'rgba(54, 162, 235, 0.2)', 'rgba(255, 206, 86, 0.2)'],
-                    borderColor: ['rgba(75, 192, 192, 1)', 'rgba(54, 162, 235, 1)', 'rgba(255, 206, 86, 1)'],
+                    backgroundColor: ['rgba(255, 99, 132, 0.2)', 'rgba(54, 162, 235, 0.2)', 'rgba(255, 206, 86, 0.2)'],
+                    borderColor: ['rgba(255, 99, 132, 1)', 'rgba(54, 162, 235, 1)', 'rgba(255, 206, 86, 1)'],
                     borderWidth: 1
                 }]
             },
@@ -162,11 +176,10 @@ xhr.onload = function () {
                 // Opciones adicionales de configuración para el gráfico de pastel
             }
         });
-        // Aquí puedes procesar los datos y configurar el gráfico utilizando Chart.js
-        var labels8 = Object.keys(data.cantidadDeUsuariosPorGrupoDeEdad); // EJE x
-        var values8 = Object.values(data.cantidadDeUsuariosPorGrupoDeEdad); // EJE Y
 
-// CONFIGURACION PARA GRAFICOS
+        var labels8 = Object.keys(data.cantidadDeUsuariosPorGrupoDeEdad);
+        var values8 = Object.values(data.cantidadDeUsuariosPorGrupoDeEdad);
+
         var pieChartCtx4 = document.getElementById('usuariosPorGrupo');
         new Chart(pieChartCtx4, {
             type: 'pie',
@@ -175,8 +188,28 @@ xhr.onload = function () {
                 datasets: [{
                     label: 'Usuarios por Grupo',
                     data: values8,
-                    backgroundColor: ['rgba(75, 192, 192, 0.2)', 'rgba(54, 162, 235, 0.2)', 'rgba(255, 206, 86, 0.2)'],
-                    borderColor: ['rgba(75, 192, 192, 1)', 'rgba(54, 162, 235, 1)', 'rgba(255, 206, 86, 1)'],
+                    backgroundColor: ['rgba(255, 99, 132, 0.2)', 'rgba(54, 162, 235, 0.2)', 'rgba(255, 206, 86, 0.2)'],
+                    borderColor: ['rgba(255, 99, 132, 1)', 'rgba(54, 162, 235, 1)', 'rgba(255, 206, 86, 1)'],
+                    borderWidth: 1
+                }]
+            },
+            options: {
+                // Opciones adicionales de configuración para el gráfico de pastel
+            }
+        });
+        var labels5 = Object.keys(data.porcentajeDePreguntasRespondidasCorrectamentePorElUsuario);
+        var values5 = Object.values(data.porcentajeDePreguntasRespondidasCorrectamentePorElUsuario);
+
+        var pieChartCtx5 = document.getElementById('porcentajeCorrectasUsur');
+        new Chart(pieChartCtx5, {
+            type: 'pie',
+            data: {
+                labels: labels5,
+                datasets: [{
+                    label: 'Porcentajes de preguntas correctas',
+                    data: values5,
+                    backgroundColor: ['rgba(255, 99, 132, 0.2)', 'rgba(54, 162, 235, 0.2)', 'rgba(255, 206, 86, 0.2)'],
+                    borderColor: ['rgba(255, 99, 132, 1)', 'rgba(54, 162, 235, 1)', 'rgba(255, 206, 86, 1)'],
                     borderWidth: 1
                 }]
             },
@@ -188,4 +221,3 @@ xhr.onload = function () {
     }
 };
 xhr.send();
-

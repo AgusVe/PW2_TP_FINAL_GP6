@@ -43,23 +43,21 @@ class LobbyAdminModel
     public function cantidadDeUsuariosNuevos($fecha)
     {
 
-        $sql = "SELECT WEEK(fecha_registro) AS semana,count(*) AS cantidad FROM usuario WHERE MONTH(fecha_registro) = MONTH('$fecha') GROUP BY semana ORDER BY semana;";
+        $sql = "SELECT WEEK(fecha_registro,3) AS semana,count(*) AS cantidad FROM usuario WHERE MONTH(fecha_registro) = MONTH('$fecha') GROUP BY semana ORDER BY semana;";
         return $this->database->query($sql);
 
     }
 
     /*ESTA MAL*/
-    public function porcentajeDePreguntasRespondidasCorrectamentePorElUsuario($idUsuario)
+    public function porcentajeDePreguntasRespondidasCorrectamentePorElUsuario($fecha)
     {
-        $sql = "SELECT puntosTotales FROM usuario WHERE idUsuario ='$idUsuario'";
-        $cantidadDePuntosTotales= $this->database->getOne($sql);
+        $sql1="SELECT SUM(P.puntosObtenidos) AS suma FROM partida P JOIN usuario U ON U.idUsuario=P.idUsuario WHERE fecha <='$fecha'";
+        $respuestaSql=$this->database->getOne($sql1);
 
-        $sql = "SELECT count(*) FROM usuario U FROM partida P ON P.idUsuario= P.idUsuario WHERE terminada =1";
-        $cantidaDePartidasJugadas= $this->database->getOne($sql);
+        $respuestaFinal=$respuestaSql['suma'];
 
-        return ($cantidadDePuntosTotales/$cantidaDePartidasJugadas)*100;
-
-
+        $sql2 = "SELECT U.usuario AS nombre, ('$respuestaFinal'/count(*))*100 AS porcentaje FROM usuario U JOIN pregunta_usuario P ON U.idUsuario= P.idUsuario WHERE P.respuesta IS NOT NULL AND U.idRol=3 GROUP BY U.nombre";
+        return $this->database->query($sql2);
 
     }
 

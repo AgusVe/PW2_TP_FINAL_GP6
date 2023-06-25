@@ -17,7 +17,7 @@ class LoginController{
                 default:
                     header("location: /lobbyUsuario");
                     break;
-            }            
+            }
         }
         echo $this->renderer->render("login");
     }
