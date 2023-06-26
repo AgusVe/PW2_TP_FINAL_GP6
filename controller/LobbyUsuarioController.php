@@ -14,13 +14,6 @@ class LobbyUsuarioController{
 
     public function execute()
     {
-<<<<<<< HEAD
-        $datos['datosUsur']=$this->perfilModel->obtenerDatos($_SESSION["id"]);
-        $datosPartidas=$this->perfilModel->obtenerDatosPartidas($_SESSION['id']);
-        $datos['userPartidas']=$datosPartidas;
-
-=======
->>>>>>> produccion
         if(!isset($_SESSION['email'])){
             header("location: /");
             exit();
