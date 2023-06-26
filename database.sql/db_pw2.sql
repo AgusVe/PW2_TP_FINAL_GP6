@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 26-06-2023 a las 01:54:36
+-- Tiempo de generación: 26-06-2023 a las 04:05:53
 -- Versión del servidor: 10.4.27-MariaDB
 -- Versión de PHP: 8.2.0
 
@@ -217,6 +217,8 @@ CREATE TABLE `usuario` (
   `genero` varchar(2) NOT NULL,
   `pais` varchar(120) NOT NULL,
   `ciudad` varchar(120) NOT NULL,
+  `latitud` varchar(260) NOT NULL,
+  `longitud` varchar(260) NOT NULL,
   `email` varchar(50) NOT NULL,
   `contrasenia` varchar(250) NOT NULL,
   `hashRegistro` varchar(100) NOT NULL,
@@ -233,13 +235,14 @@ CREATE TABLE `usuario` (
 -- Volcado de datos para la tabla `usuario`
 --
 
-INSERT INTO `usuario` (`idUsuario`, `nombre`, `apellido`, `nacimiento`, `grupoEdad`, `genero`, `pais`, `ciudad`, `email`, `contrasenia`, `hashRegistro`, `usuario`, `estado`, `qr`, `fecha_registro`, `idRol`, `url_imagen`, `puntosTotales`) VALUES
-(16, 'Ale', 'Paz', '1991-12-19', 'medio', 'M', 'Argentina', 'Lomas del Mirador', 'alejandrodanielpaz92@gmail.com', '81dc9bdb52d04dc20036dbd8313ed055', 'a11b4b285bfc222f8f4635b80b9cd39a', 'Aleee', 1, '', '2023-05-31', 3, './uploads/Aleee.png', 0),
-(18, 'Luis Agustin', 'Vega Dobal', '2023-06-13', 'menor', 'X', 'Argentina', 'Hurlingham', 'vegadobal@gmail.com', '81dc9bdb52d04dc20036dbd8313ed055', 'fc2d395d19537bac3690ce59a786314a', 'fello', 1, '', '2023-06-12', 3, './uploads/fello.jpeg', 6),
-(21, 'Leo', 'Messi', '1992-01-03', 'medio', 'M', 'Argentina', 'Lomas del Mirador', 'ivandp6880@gmail.com', '81dc9bdb52d04dc20036dbd8313ed055', 'fcd2324cb4e9be6e33aabfeb9be8c424', 'lmessi', 1, '', '2023-06-13', 3, './uploads/lmessi.jpg', 0),
-(22, 'Ivan', 'Del Pino', '1992-01-03', 'medio', 'M', 'Argentina', 'Ramos Mejia', 'ivangdelpino4@gmail.com', '81dc9bdb52d04dc20036dbd8313ed055', '9c011f5f48c9a41931c39c2d416714ee', 'ivan6880', 1, '', '2023-06-20', 2, './uploads/ivan6880.jpg', 0),
-(23, 'El admin', 'apellido Admin', '1983-02-10', 'medio', 'X', 'Brasil', 'Fortaleza ', 'admin@gmail.com', '81dc9bdb52d04dc20036dbd8313ed055', '8222e1552ec49ba4afaeb7e7c32da819', 'EL admin', 1, '', '2023-06-23', 1, './uploads/EL admin.jpg', 0),
-(26, 'Pepe', 'Gomez', '1943-07-16', 'jubilado', 'M', 'Uruguay', 'Maldonado', 'pepe@gmail.com', '81dc9bdb52d04dc20036dbd8313ed055', 'c731d289b29fa3df7b15c89932593575', 'Pepe mujica', 0, '', '2023-06-25', 3, './uploads/Pepe mujica.jpeg', 0);
+INSERT INTO `usuario` (`idUsuario`, `nombre`, `apellido`, `nacimiento`, `grupoEdad`, `genero`, `pais`, `ciudad`, `latitud`, `longitud`, `email`, `contrasenia`, `hashRegistro`, `usuario`, `estado`, `qr`, `fecha_registro`, `idRol`, `url_imagen`, `puntosTotales`) VALUES
+(16, 'Ale', 'Paz', '1991-12-19', 'medio', 'M', 'Argentina', 'Lomas del Mirador', '-34.6656778', '-58.552274', 'alejandrodanielpaz92@gmail.com', '81dc9bdb52d04dc20036dbd8313ed055', 'a11b4b285bfc222f8f4635b80b9cd39a', 'Aleee', 1, '', '2023-05-31', 3, './uploads/Aleee.png', 0),
+(18, 'Luis Agustin', 'Vega Dobal', '2023-06-13', 'menor', 'X', 'Argentina', 'Hurlingham', '', '', 'vegadobal@gmail.com', '81dc9bdb52d04dc20036dbd8313ed055', 'fc2d395d19537bac3690ce59a786314a', 'fello', 1, '', '2023-06-12', 3, './uploads/fello.jpeg', 6),
+(21, 'Leo', 'Messi', '1992-01-03', 'medio', 'M', 'Argentina', 'Lomas del Mirador', '-34.6656778', '-58.552274', 'ivandp6880@gmail.com', '81dc9bdb52d04dc20036dbd8313ed055', 'fcd2324cb4e9be6e33aabfeb9be8c424', 'lmessi', 1, '', '2023-06-13', 3, './uploads/lmessi.jpg', 0),
+(22, 'Ivan', 'Del Pino', '1992-01-03', 'medio', 'M', 'Argentina', 'Ramos Mejia', '-34.6390979', '-58.5679998', 'ivangdelpino4@gmail.com', '81dc9bdb52d04dc20036dbd8313ed055', '9c011f5f48c9a41931c39c2d416714ee', 'ivan6880', 1, '', '2023-06-20', 2, './uploads/ivan6880.jpg', 0),
+(23, 'El admin', 'apellido Admin', '1983-02-10', 'medio', 'X', 'Brasil', 'Fortaleza ', '', '', 'admin@gmail.com', '81dc9bdb52d04dc20036dbd8313ed055', '8222e1552ec49ba4afaeb7e7c32da819', 'EL admin', 1, '', '2023-06-23', 1, './uploads/EL admin.jpg', 0),
+(26, 'Pepe', 'Gomez', '1943-07-16', 'jubilado', 'M', 'Uruguay', 'Maldonado', '', '', 'pepe@gmail.com', '81dc9bdb52d04dc20036dbd8313ed055', 'c731d289b29fa3df7b15c89932593575', 'Pepe mujica', 0, '', '2023-06-25', 3, './uploads/Pepe mujica.jpeg', 0),
+(27, 'Luis Eduardo', 'Vega', '1988-09-10', 'medio', 'X', 'Argentina', 'Hurlingam', '', '', 'lalotech_@hotmail.com', '81dc9bdb52d04dc20036dbd8313ed055', '1d4ee60afcb451c3b926ac5bb8c19283', 'prueba', 0, '', '2023-06-26', 3, './uploads/prueba.jpeg', 0);
 
 --
 -- Índices para tablas volcadas
@@ -326,7 +329,7 @@ ALTER TABLE `rol`
 -- AUTO_INCREMENT de la tabla `usuario`
 --
 ALTER TABLE `usuario`
-  MODIFY `idUsuario` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=27;
+  MODIFY `idUsuario` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=28;
 
 --
 -- Restricciones para tablas volcadas
