@@ -1,15 +1,8 @@
-<!DOCTYPE html>
-<html lang="es">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css">
-    <link rel="stylesheet" href="http://localhost/view/css/style.css">
-    <link rel="stylesheet" href="http://localhost/view/css/style_lobby.css">
-    <title>Lobby</title>
-</head>
-<body>
 {{> header_logueado}}
+
+{{#usuarios}}
+<body onload="loadMap({{latitud}},{{longitud}})" >
+{{/usuarios}}
 <div class="container">
     <div class="lobby-container">
         {{#usuarios}}
@@ -17,9 +10,9 @@
             <div>
                 <h1 class="puntaje">Puntaje Total: {{puntosTotales}}</h1>
             </div>
-            <div class="btn-container">
-                <div id="mapa"></div>
-                <img src='/uploads/qrcode_{{usuario}}.png' alt="Código QR">
+            <div class="btn-container row">
+                <div class="col-8" id="mapa" style="width:250px; height:200px;"></div>
+                <img class="col-4" src='/uploads/qrcode_{{usuario}}.png' alt="Código QR">
             </div>
         {{/usuarios}}
         <h2>Partidas Jugadas</h2>

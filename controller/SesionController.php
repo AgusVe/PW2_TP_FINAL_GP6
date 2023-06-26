@@ -66,6 +66,7 @@ class SesionController
                 }
             } else {
                 header("location: /registro");
+
             }
         }
     }

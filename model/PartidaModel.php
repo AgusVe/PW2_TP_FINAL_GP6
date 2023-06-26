@@ -36,6 +36,13 @@ class PartidaModel{
 
     }
 
+    public function updateEstadoRespuesta($idPartida, $idPregunta, $idUsuario, $strRespuesta) {
+
+        $sql = 'UPDATE `pregunta_usuario` SET estadoRespuesta = 1 WHERE idPartida='.$idPartida.' AND idPregunta='.$idPregunta.' AND idUsuario='.$idUsuario.'';
+        $this->database->execute($sql);
+
+    }
+
 
     public function obtenerPartida($idPartida){
 

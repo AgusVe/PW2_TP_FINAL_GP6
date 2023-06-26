@@ -69,7 +69,7 @@ class PartidaController
         }
 
         if($arrDatosPartida['terminada'] == 1) {
-            $this->redirigirHome();
+            $this->redirigir();
             return;
         }
 
@@ -98,7 +98,7 @@ class PartidaController
 
         $arrDatosPartida = $this->partidaModel->obtenerPartida($idPartida);
 
-        if(!isset($arrDatosPartida['idPartida'])) {
+       if(!isset($arrDatosPartida['idPartida'])) {
             $this->redirigirHome();
             return;
         }
@@ -112,6 +112,7 @@ class PartidaController
         if($arrDatosPartida['idUsuario'] != $_SESSION['id']) {
             $this->redirigirHome();
             return;
+
         }
 
         $arrDevolucion=[];
@@ -137,7 +138,11 @@ class PartidaController
                     //Respuesta es correcta
                     $bRespuestaCorrecta = true;
                     $this->partidaModel->actualizarPuntaje($idPartida);
+                    /*Aumentar cantidad de veces respondida bien*/
+                    $this->preguntaModel->aumentarRespondidaBien($arrDatosPreguntaRespondida['pregunta_id']);
                     $arrDatosPartida['puntosObtenidos']+=1;
+                    //Indico Respuesta correcta en el historial de Pregunta_Usuario
+                    $this->partidaModel->updateEstadoRespuesta($idPartida, $arrDatosPreguntaRespondida['pregunta_id'], $idUsuario, $strRespuesta );
                 }
 
                 //Almaceno respuesta
@@ -149,6 +154,8 @@ class PartidaController
                 $this->partidaModel->marcarComoTerminada($idPartida,$idUsuario);
             }
 
+            /*Aumentar cantidad de veces respondida*/
+            $this->preguntaModel->aumentarCantidadDeVeces($arrDatosPreguntaRespondida['pregunta_id']);
 
             //Configuro datos para devolver al frontend
             $arrDevolucion['pregunta_anterior'] = $arrDatosPreguntaRespondida;
@@ -157,7 +164,8 @@ class PartidaController
 
         //Otorgo nueva pregunta
         if($arrDevolucion['pregunta_anterior'] == null || ($arrDevolucion['pregunta_anterior'] != null && $arrDevolucion['pregunta_anterior'] ['resultado'] == true) ) {
-            $arrDatosPregunta = $this->preguntaModel->obtenerPregunta();
+
+            $arrDatosPregunta = $this->preguntaModel->obtenerPregunta($idUsuario);
             $this->partidaModel->actualizarPreguntaPartida($idPartida, $arrDatosPregunta['pregunta_id'], $idUsuario);
             $arrDatosPregunta['respuestas'] = [];
 

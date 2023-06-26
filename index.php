@@ -8,5 +8,4 @@ $router = $configuration->getRouter();
 $module = $_GET['module'] ?? 'login';
 $action = $_GET['action'] ?? 'execute';
 
-
 $router->executeActionFromModule($action, $module);
