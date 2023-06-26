@@ -15,11 +15,6 @@ class PreguntaController{
 
         $pregunta = $this->preguntaModel->buscarPregunta();
 
-        //Consultar el nivel del usuario y devolverlo $nivel
-
-        //Ir a buscar una pregunta a la base de datos que matchee con la logica de nivel
-
-        //verificar si la respondio
     }
 
     public function procesarFormulario(){
