@@ -27,10 +27,11 @@ class PreguntaController{
             $respuesta = $_POST['respuesta'];
             $categoria = $_POST['categoria'];
             $preguntaSugerida=1;
+            $fecha = date("Y/m/d");
 
 
 
-            $valores = "VALUES ('$enunciado', '$opcionA', '$opcionB', '$opcionC', '$opcionD', '$respuesta', '$categoria','$preguntaSugerida')";
+            $valores = "VALUES ('$enunciado', '$opcionA', '$opcionB', '$opcionC', '$opcionD', '$respuesta', '$categoria','$preguntaSugerida','$fecha')";
             $this->preguntaModel->agregarPreguntaEnBD($valores);
 
             header('location: /pregunta/exito');
@@ -164,11 +165,13 @@ class PreguntaController{
             $respuesta = $_POST['respuesta'];
             $categoria = $_POST['categoria'];
             $preguntaSugerida=1;
+            $fecha = date("Y/m/d");
+
 
 
             $flag = "Aceptar";
 
-            $valores = "VALUES ('$enunciado', '$opcionA', '$opcionB', '$opcionC', '$opcionD', '$respuesta', '$categoria','$preguntaSugerida')";
+            $valores = "VALUES ('$enunciado', '$opcionA', '$opcionB', '$opcionC', '$opcionD', '$respuesta', '$categoria','$preguntaSugerida','$fecha')";
             $this->preguntaModel->agregarPreguntaEnBD($valores);
             $this->preguntaModel->actualizarSugerencia($flag,$id);
 
