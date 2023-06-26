@@ -17,15 +17,17 @@
         {{#datosUsur}}
             <h1 class="nombreUsuario">{{usuario}}</h1>
         {{/datosUsur}}
-
         <div class="container">
-            <div class="form-group">
-                <input type="date" class="form-control" id="filtroFecha">
+            <div class="form-filtro">
+                <div class="form-group">
+                    <input type="date" class="form-control" id="filtroFecha">
+                </div>
+                <div class="form-group">
+                    <button onclick="mostrarGraficos()" class="btn btn-primary boton-filtro" name="enviarFiltro">Filtrar</button>
+                </div>
+
             </div>
-            <div class="form-group">
-                <button onclick="mostrarGraficosConFiltros()" class="btn btn-primary btn-block" name="enviarFiltro">Filtrar</button>
-            </div>
-            <div class="row row-cols-2 row-cols-lg-5 g-2 g-lg-3">
+            <div class="row row-cols-auto g-2 g-lg-3">
                 <div class="col">
                     <div class="card" style="width: 18rem;">
                         <div class="card-body">
@@ -97,7 +99,8 @@
                 <div class="col">
                     <div class="card" style="width: 18rem;">
                         <div class="card-body">
-                            <h5 class="card-title text-center fw-semibold">PORCENTAJES DE PREGUNTAS CORRECTA POR USUARIOS</h5>
+                            <h5 class="card-title text-center fw-semibold">PORCENTAJES DE PREGUNTAS CORRECTA POR
+                                USUARIOS</h5>
                             <canvas id="porcentajeCorrectasUsur"></canvas>
                         </div>
                     </div>

@@ -32,7 +32,7 @@ class LobbyAdminController
 
     public function datosParaGraficos()
     {
-        if (isset($_POST['filtroFecha'])){
+        if ($_POST['filtroFecha'] != ''){
             $fecha = $_POST['filtroFecha'];
         } else {
             $fecha = date("Y/m/d");
