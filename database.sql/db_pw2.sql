@@ -3,6 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
+
 -- Tiempo de generación: 20-06-2023 a las 21:46:25
 -- Versión del servidor: 8.0.26
 -- Versión de PHP: 8.1.4
@@ -151,7 +152,6 @@ CREATE TABLE `pregunta_usuario` (
   `estadoRespuesta` tinyint(1) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
--- --------------------------------------------------------
 
 --
 -- Estructura de tabla para la tabla `rol`
@@ -264,13 +264,11 @@ ALTER TABLE `usuario`
 --
 ALTER TABLE `partida`
   MODIFY `idPartida` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=182;
-
 --
 -- AUTO_INCREMENT de la tabla `preguntas`
 --
 ALTER TABLE `preguntas`
   MODIFY `pregunta_id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=80;
-
 --
 -- AUTO_INCREMENT de la tabla `pregunta_sugerida`
 --
@@ -294,7 +292,6 @@ ALTER TABLE `rol`
 --
 ALTER TABLE `usuario`
   MODIFY `idUsuario` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=23;
-
 --
 -- Restricciones para tablas volcadas
 --
