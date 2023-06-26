@@ -4,6 +4,7 @@
 use PHPMailer\PHPMailer\PHPMailer;
 use PHPMailer\PHPMailer\Exception;
 
+
 require './third-party/phpmailer/Exception.php';
 require './third-party/phpmailer/PHPMailer.php';
 require './third-party/phpmailer/SMTP.php';
@@ -42,6 +43,30 @@ class RegistroController
             $estado = 0;
             $fechaRegistro = date("Y/m/d");
             $idRol = 3;
+
+            /*CALCULCAR GRUPO DE EDAD*/
+            $fechaRegistroParaUsarLaFuncionDiffMasAdelante = DateTime::createFromFormat('Y/m/d', $fechaRegistro);
+
+            $fechaNacEnFormatoDate = dateTime::createFromFormat('Y-m-d', $fechaNac); // Convierte el string a un objeto DateTime
+
+
+            $intervalo = $fechaNacEnFormatoDate->diff($fechaRegistroParaUsarLaFuncionDiffMasAdelante); // Calcula la diferencia entre las fechas y obtiene un objeto DateInterval que tiene diferencia de fechas
+
+            $edad = $intervalo->y; // Obtiene la diferencia en años
+            $grupoEdad='';
+            switch (true){
+                case $edad < 18:
+                   $grupoEdad='menor';
+                    break;
+
+                case $edad> 18 && $edad < 60:
+                    $grupoEdad='medio';
+                    break;
+                case $edad > 60:
+                    $grupoEdad='jubilado';
+                    break;
+
+            }
 
             if ($contrasenia != $contraseniaRepe) {
                 $errors['contraseña'] = 'La contraseñas deben ser iguales';
@@ -102,7 +127,7 @@ class RegistroController
 
             $hash_de_registro = hash("md5", time());
 
-            $valores = "VALUES ('$nombre', '$apellido', '$fechaNac', '$genero', '$pais', '$ciudad', '$email', '$contraseniaHasheada','$hash_de_registro', '$usuario', '$estado', '$fechaRegistro', '$idRol', '$target_file')";
+            $valores = "VALUES ('$nombre', '$apellido', '$fechaNac','$grupoEdad', '$genero', '$pais', '$ciudad', '$email', '$contraseniaHasheada','$hash_de_registro', '$usuario', '$estado', '$fechaRegistro', '$idRol', '$target_file')";
             $this->registroModel->altaUsuario($valores);
             $this->generarQr($usuario);
 

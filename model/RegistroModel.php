@@ -10,9 +10,15 @@ class RegistroModel{
 
     public function altaUsuario($valores){
         $insert = 'INSERT INTO `usuario`
-                   (nombre, apellido, nacimiento, genero, pais, ciudad, email, contrasenia, hashRegistro, usuario, estado, fecha_Registro, idRol, url_imagen)' . $valores . ";";
+                   (nombre, apellido, nacimiento,grupoEdad, genero, pais, ciudad, email, contrasenia, hashRegistro, usuario, estado, fecha_Registro, idRol, url_imagen)' . $valores . ";";
         $this->database->execute($insert);
     }
+    public function calcularGrupoEdad($email){
+        $fecha=date("Y/m/d");
+        $sql = "SELECT TIMESTAMPDIFF(YEAR,nacimiento,'$fecha' ) FROM usuario WHERE email='$email'";
+        return $this->database->getOne($sql);
+
+}
 
     public function verificarSiExisteUsuario($usuario){
         $sql = "SELECT *  FROM usuario WHERE usuario='".$usuario."'";

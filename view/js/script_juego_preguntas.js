@@ -118,9 +118,9 @@ function mostrarPregunta() {
 
     arrDatosPregunta.respuestas.forEach(function(element) {
         let opcion_tag =
-        '<div class="opcion">' +
-        element +
-        '<span></span></div>' ;
+            '<div class="opcion">' +
+            element +
+            '<span></span></div>' ;
         opciones_lista.innerHTML = opciones_lista.innerHTML + opcion_tag;
 
     });
@@ -203,6 +203,3 @@ function reportarPregunta(idPregunta) {
 document.getElementById("reportar-btn").addEventListener("click", function() {
     window.location.href = 'http://localhost/pregunta/reportar?idPregunta=' + arrDatosPregunta.pregunta_id;
 });
-
-
-

@@ -68,7 +68,7 @@ class PartidaController
         }
 
         if($arrDatosPartida['terminada'] == 1) {
-            $this->redirigirHome();
+            $this->redirigir();
             return;
         }
 
@@ -97,7 +97,7 @@ class PartidaController
 
         $arrDatosPartida = $this->partidaModel->obtenerPartida($idPartida);
 
-        if(!isset($arrDatosPartida['idPartida'])) {
+       if(!isset($arrDatosPartida['idPartida'])) {
             $this->redirigirHome();
             return;
         }
@@ -111,6 +111,7 @@ class PartidaController
         if($arrDatosPartida['idUsuario'] != $_SESSION['id']) {
             $this->redirigirHome();
             return;
+
         }
 
         $arrDevolucion=[];
