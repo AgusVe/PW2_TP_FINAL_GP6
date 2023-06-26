@@ -20,6 +20,26 @@
     <script src="http://localhost/view/js/ranking.js"></script>
     <script src="http://localhost/view/js/sugeridas.js"></script>
     <script src="http://localhost/view/js/reportadas.js"></script>
+    <script src = "http://maps.googleapis.com/maps/api/js?key=AIzaSyAiq3xISXSZYgkd9GDAOdajy4NK2d3L7dY"></script>
+    <script>
+        function loadMap(lat, lng) {
+
+            let mapOptions = {
+                //center:new google.maps.LatLng(-34.6686986,-58.5614947),
+                center:new google.maps.LatLng(lat, lng),
+                zoom:12,
+                mapTypeId:google.maps.MapTypeId.ROADMAP
+            };
+
+            let map = new google.maps.Map(document.getElementById("mapa"),mapOptions);
+
+            let marker = new google.maps.Marker({
+                position: new google.maps.LatLng(lat,lng),
+                map: map
+            });
+        }
+
+    </script>
 
 </head>
 <body>

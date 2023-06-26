@@ -4,6 +4,7 @@ function mostrarGraficosConFiltros() {
 
     var filtroFecha = document.getElementById("filtroFecha").value;
 
+
     // Realizar una solicitud AJAX al controlador
     $.ajax({
         url: "/lobbyAdmin/datosParaGraficos",
@@ -274,7 +275,6 @@ function mostrarGraficosConFiltros() {
 
 function mostrarGraficos() {
     // Realizar una solicitud AJAX al controlador
-
     $.ajax({
         url: "/lobbyAdmin/datosParaGraficos",
         method: "GET",
