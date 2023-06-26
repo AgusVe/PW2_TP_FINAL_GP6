@@ -221,3 +221,45 @@ xhr.onload = function () {
     }
 };
 xhr.send();
+document.getElementById('descargarPDF').addEventListener('click', function() {
+    capturarHTML();
+});
+function capturarHTML(){
+        var chartCanvas = document.getElementById('jugadoresTotal');
+        var chartHtml = chartCanvas.outerHTML;
+
+        var xhr = new XMLHttpRequest();
+        xhr.open('POST', '/index.php?module=lobbyAdmin&action=generarPDF', true);
+        xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
+        xhr.onreadystatechange = function() {
+            if (xhr.readyState === 4 && xhr.status === 200) {
+                var blob = new Blob([xhr.response], { type: 'application/pdf' });
+
+                // Crea una URL del archivo PDF
+                var url = window.URL.createObjectURL(blob);
+
+                // Abre una nueva ventana del navegador y carga el archivo PDF
+                var newWindow = window.open(url, '_blank');
+
+                // Libera los recursos del objeto URL
+                window.URL.revokeObjectURL(url);
+
+                /*var blob = new Blob([xhr.response], { type: 'application/pdf' });
+
+                // Crea un enlace temporal y simula un clic para descargar el archivo
+                var link = document.createElement('a');
+                link.href = window.URL.createObjectURL(blob);
+                link.download = 'grafico.pdf';
+                link.style.display = 'none';
+                document.body.appendChild(link);
+                link.click();
+                document.body.removeChild(link);
+
+                // Libera los recursos del objeto URL
+                window.URL.revokeObjectURL(link.href);*/
+            }
+        };
+        xhr.send('chartHtml=' + encodeURIComponent(chartHtml));
+        // Envía el contenido HTML del gráfico al servidor
+        // Utiliza AJAX o redirecciona la página a una ruta PHP con el contenido HTML del gráfico como parámetro
+}

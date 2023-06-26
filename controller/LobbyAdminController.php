@@ -1,5 +1,8 @@
 <?php
 
+require_once './third-party/dompdf/autoload.inc.php';
+use Dompdf\Dompdf;
+
 class LobbyAdminController
 {
     private $renderer;
@@ -91,6 +94,26 @@ class LobbyAdminController
         exit();
 
 
+    }
+
+
+    function generarPDF(){
+        $chartHtml = $_POST['chartHtml'];
+
+        //Se crea una instancia de Dompdf
+        $dompdf = new Dompdf();
+        $dompdf->setPaper('A4', 'landscape');
+        // Genera el contenido HTML completo para el PDF
+        $html = '<html><body><h1>Grafico en PDF</h1></body></html>';
+
+        // Carga el contenido HTML en dompdf
+        $dompdf->loadHtml(utf8_decode($html));
+
+        // Renderiza el PDF
+        $dompdf->render();
+
+        // Genera la respuesta del PDF para descargarlo
+        $dompdf->stream('grafico.pdf',['Attachment' => 0]);
     }
 
 
