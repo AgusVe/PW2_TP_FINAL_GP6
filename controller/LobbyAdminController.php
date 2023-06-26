@@ -26,6 +26,7 @@ class LobbyAdminController
 
 
         $datos['datosUsur'] = $this->perfilModel->obtenerDatos($_SESSION["id"]);
+        $datos['admin'] = 1;
 
         echo $this->renderer->render("lobbyAdmin", $datos);
     }

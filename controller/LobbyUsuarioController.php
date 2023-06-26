@@ -23,7 +23,6 @@ class LobbyUsuarioController{
         switch ($_SESSION['rol']){
             case "1":
                 $datos['admin'] = 1;
-                echo $this->renderer->render("lobbyUsuario",$datos);
                 break;
             case "2":
                 $datos['editor'] = 2;
