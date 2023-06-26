@@ -224,15 +224,6 @@ function mostrarGraficos() {
                     // Opciones adicionales de configuración para el gráfico de pastel
                 }
             });
-
-            $(document).ready(function() {
-                $('.masonry-container').masonry({
-                    itemSelector: '.col',
-                    columnWidth: '.col',
-                    percentPosition: true
-                });
-            });
-
         },
         error: function (error) {
             console.log("Error en la solicitud AJAX:", error);
