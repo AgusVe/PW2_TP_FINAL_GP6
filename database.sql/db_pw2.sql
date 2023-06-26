@@ -236,13 +236,12 @@ CREATE TABLE `usuario` (
 --
 
 INSERT INTO `usuario` (`idUsuario`, `nombre`, `apellido`, `nacimiento`, `grupoEdad`, `genero`, `pais`, `ciudad`, `latitud`, `longitud`, `email`, `contrasenia`, `hashRegistro`, `usuario`, `estado`, `qr`, `fecha_registro`, `idRol`, `url_imagen`, `puntosTotales`) VALUES
-(16, 'Ale', 'Paz', '1991-12-19', 'medio', 'M', 'Argentina', 'Lomas del Mirador', '-34.6656778', '-58.552274', 'alejandrodanielpaz92@gmail.com', '81dc9bdb52d04dc20036dbd8313ed055', 'a11b4b285bfc222f8f4635b80b9cd39a', 'Aleee', 1, '', '2023-05-31', 3, './uploads/Aleee.png', 0),
-(18, 'Luis Agustin', 'Vega Dobal', '2023-06-13', 'menor', 'X', 'Argentina', 'Hurlingham', '', '', 'vegadobal@gmail.com', '81dc9bdb52d04dc20036dbd8313ed055', 'fc2d395d19537bac3690ce59a786314a', 'fello', 1, '', '2023-06-12', 3, './uploads/fello.jpeg', 6),
-(21, 'Leo', 'Messi', '1992-01-03', 'medio', 'M', 'Argentina', 'Lomas del Mirador', '-34.6656778', '-58.552274', 'ivandp6880@gmail.com', '81dc9bdb52d04dc20036dbd8313ed055', 'fcd2324cb4e9be6e33aabfeb9be8c424', 'lmessi', 1, '', '2023-06-13', 3, './uploads/lmessi.jpg', 0),
-(22, 'Ivan', 'Del Pino', '1992-01-03', 'medio', 'M', 'Argentina', 'Ramos Mejia', '-34.6390979', '-58.5679998', 'ivangdelpino4@gmail.com', '81dc9bdb52d04dc20036dbd8313ed055', '9c011f5f48c9a41931c39c2d416714ee', 'ivan6880', 1, '', '2023-06-20', 2, './uploads/ivan6880.jpg', 0),
-(23, 'El admin', 'apellido Admin', '1983-02-10', 'medio', 'X', 'Brasil', 'Fortaleza ', '', '', 'admin@gmail.com', '81dc9bdb52d04dc20036dbd8313ed055', '8222e1552ec49ba4afaeb7e7c32da819', 'EL admin', 1, '', '2023-06-23', 1, './uploads/EL admin.jpg', 0),
-(26, 'Pepe', 'Gomez', '1943-07-16', 'jubilado', 'M', 'Uruguay', 'Maldonado', '', '', 'pepe@gmail.com', '81dc9bdb52d04dc20036dbd8313ed055', 'c731d289b29fa3df7b15c89932593575', 'Pepe mujica', 0, '', '2023-06-25', 3, './uploads/Pepe mujica.jpeg', 0),
-(27, 'Luis Eduardo', 'Vega', '1988-09-10', 'medio', 'X', 'Argentina', 'Hurlingam', '', '', 'lalotech_@hotmail.com', '81dc9bdb52d04dc20036dbd8313ed055', '1d4ee60afcb451c3b926ac5bb8c19283', 'prueba', 0, '', '2023-06-26', 3, './uploads/prueba.jpeg', 0);
+(21, 'Leo', 'Messi', '1992-01-03', 'mayor', 'M', 'Argentina', 'Lomas del Mirador', '-34.6656778', '-58.552274', 'ivandp6880@gmail.com', '81dc9bdb52d04dc20036dbd8313ed055', 'fcd2324cb4e9be6e33aabfeb9be8c424', 'lmessi', 1, '', '2023-06-13', 3, './uploads/lmessi.jpg', 5),
+(22, 'Ivan', 'Del Pino', '1992-01-03', 'menor', 'M', 'Argentina', 'Ramos Mejia', '-34.6390979', '-58.5679998', 'ivangdelpino4@gmail.com', '81dc9bdb52d04dc20036dbd8313ed055', '9c011f5f48c9a41931c39c2d416714ee', 'ivan6880', 1, '', '2023-06-20', 2, './uploads/ivan6880.jpg', 0),
+(23, 'El admin', 'apellido Admin', '1983-02-10', 'mayor', 'X', 'Brasil', 'Fortaleza ', '-3.7325021226167485', '-38.52579858170485', 'admin@gmail.com', '81dc9bdb52d04dc20036dbd8313ed055', '8222e1552ec49ba4afaeb7e7c32da819', 'EL admin', 1, '', '2023-06-23', 1, './uploads/EL admin.jpg', 0),
+(28, 'Ale', 'Paz', '1992-09-05', 'menor', 'M', 'Argentina', 'San Justo', '-34.6876029887841', '-58.56415346470932', 'alepaz@gmail.com', '81dc9bdb52d04dc20036dbd8313ed055', '7e0a842089712fe856ca1d0aa557b5db', 'ale_paz', 1, '', '2023-06-26', 3, './uploads/ale_paz.png', 0),
+(29, 'Jacqui', 'Uran', '1997-10-04', 'medio', 'F', 'Uruguay', 'Maldonado', '-34.90278744370515', '-54.95039500343634', 'jacquiuran@gmail.com', '81dc9bdb52d04dc20036dbd8313ed055', 'd5f0084f5144858516d20297642d3389', 'jacqui_uran', 1, '', '2023-06-26', 3, './uploads/jacqui_uran.png', 0),
+(30, 'Fabio', 'Torres', '1978-03-15', 'mayor', 'M', 'Brasil', 'Rio de Janeiro', '-22.946287902972752', '-43.20901815826178', 'fabiotorres@gmail.com', '81dc9bdb52d04dc20036dbd8313ed055', 'f2afc4821fc940db35a7437a5cec9e41', 'fabiotorres', 1, '', '2023-06-26', 3, './uploads/fabiotorres.jpg', 0);
 
 --
 -- Índices para tablas volcadas
