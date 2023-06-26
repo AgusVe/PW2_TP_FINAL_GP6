@@ -11,6 +11,43 @@ function mostrarGraficos() {
         success: function (jsonDataConsultas) {
             var data = JSON.parse(jsonDataConsultas);
 
+            var chartJugadoresTotal = Chart.getChart('jugadoresTotal');
+            if (chartJugadoresTotal) {
+                chartJugadoresTotal.destroy();
+            }
+            var chartPartidasJugadas = Chart.getChart('partidasJugadas');
+            if (chartPartidasJugadas) {
+                chartPartidasJugadas.destroy();
+            }
+            var chartPreguntasEnJuego = Chart.getChart('preguntasEnJuego');
+            if (chartPreguntasEnJuego) {
+                chartPreguntasEnJuego.destroy();
+            }
+            var chartPreguntasDadasDeAlta = Chart.getChart('preguntasDadasDeAlta');
+            if (chartPreguntasDadasDeAlta) {
+                chartPreguntasDadasDeAlta.destroy();
+            }
+            var chartUsuariosNuevos = Chart.getChart('usuariosNuevos');
+            if (chartUsuariosNuevos) {
+                chartUsuariosNuevos.destroy();
+            }
+            var chartUsuariosPorPais = Chart.getChart('usuariosPorPais');
+            if (chartUsuariosPorPais) {
+                chartUsuariosPorPais.destroy();
+            }
+            var chartUsuarioPorGenero = Chart.getChart('usuarioPorGenero');
+            if (chartUsuarioPorGenero) {
+                chartUsuarioPorGenero.destroy();
+            }
+            var chartUsuariosPorGrupo = Chart.getChart('usuariosPorGrupo');
+            if (chartUsuariosPorGrupo) {
+                chartUsuariosPorGrupo.destroy();
+            }
+            var chartPorcentajeCorrectasUsur = Chart.getChart('porcentajeCorrectasUsur');
+            if (chartPorcentajeCorrectasUsur) {
+                chartPorcentajeCorrectasUsur.destroy();
+            }
+
             var labels1 = Object.keys(data.cantidadDeJugadoresTotales);
             var values1 = Object.values(data.cantidadDeJugadoresTotales);
 
@@ -35,9 +72,9 @@ function mostrarGraficos() {
             var labels2 = Object.keys(data.cantidadDePartidasJugadas);
             var values2 = Object.values(data.cantidadDePartidasJugadas);
 
-            var lineChartCtx = document.getElementById('partidasJugadas');
-            new Chart(lineChartCtx, {
-                type: 'line',
+            var ctx2 = document.getElementById('partidasJugadas');
+            new Chart(ctx2, {
+                type: 'bar',
                 data: {
                     labels: labels2,
                     datasets: [{
@@ -49,20 +86,7 @@ function mostrarGraficos() {
                     }]
                 },
                 options: {
-                    scales: {
-                        x: {
-                            title: {
-                                display: true,
-                                text: 'Mes'
-                            }
-                        },
-                        y: {
-                            title: {
-                                display: true,
-                                text: 'Cantidad'
-                            }
-                        }
-                    }
+
                 }
             });
 
@@ -90,9 +114,9 @@ function mostrarGraficos() {
             var labels4 = Object.keys(data.cantidadDePreguntasDadasDeAlta);
             var values4 = Object.values(data.cantidadDePreguntasDadasDeAlta);
 
-            var ctx2 = document.getElementById('preguntasDadasDeAlta');
-            new Chart(ctx2, {
-                type: 'bar',
+            var lineChartCtx2 = document.getElementById('preguntasDadasDeAlta');
+            new Chart(lineChartCtx2, {
+                type: 'line',
                 data: {
                     labels: labels4,
                     datasets: [{
@@ -104,15 +128,28 @@ function mostrarGraficos() {
                     }]
                 },
                 options: {
-                    // Opciones adicionales de configuración
+                    scales: {
+                        x: {
+                            title: {
+                                display: true,
+                                text: 'Mes'
+                            }
+                        },
+                        y: {
+                            title: {
+                                display: true,
+                                text: 'Cantidad'
+                            }
+                        }
+                    }
                 }
             });
 
             var labels5 = Object.keys(data.cantidadDeUsuariosNuevos);
             var values5 = Object.values(data.cantidadDeUsuariosNuevos);
 
-            var lineChartCtx2 = document.getElementById('usuariosNuevos');
-            new Chart(lineChartCtx2, {
+            var lineChartCtx3 = document.getElementById('usuariosNuevos');
+            new Chart(lineChartCtx3, {
                 type: 'line',
                 data: {
                     labels: labels5,
@@ -230,4 +267,18 @@ function mostrarGraficos() {
         }
 
     });
+}
+
+function genPDF(idDeEtiqueta){
+
+    var chartCanvas = document.getElementById(idDeEtiqueta);
+    var chartImage = chartCanvas.toDataURL();
+
+    var doc=new jsPDF();
+    var imageWidth = 100;
+    var imageHeight = (imageWidth / chartCanvas.width) * chartCanvas.height; // Mantener la relación de aspecto
+
+    doc.addImage(chartImage, 'JPEG', 20, 20, imageWidth, imageHeight);
+    doc.save('Test.pdf');
+
 }
