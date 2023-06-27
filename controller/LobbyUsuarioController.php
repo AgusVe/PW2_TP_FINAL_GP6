@@ -3,12 +3,14 @@
 class LobbyUsuarioController{
     private $renderer;
     private $perfilModel;
+    private $categoriaModel;
 
 
 
-    public function __construct($renderer, $perfilModel){
+    public function __construct($renderer, $perfilModel, $categoriaModel){
         $this->renderer = $renderer;
         $this->perfilModel=$perfilModel;
+        $this->categoriaModel = $categoriaModel;
 
     }
 
@@ -51,12 +53,23 @@ class LobbyUsuarioController{
             header("location: /");
             exit();
         }
-     if($_SESSION['rol']=2) {
-         $datos['editor'] = 2;
+         if($_SESSION['rol']=2) {
+             $datos['editor'] = 2;
+             $datos['categorias']=$this->categoriaModel->listar();
+             $this->renderer->render("agregarPregunta",$datos);
+         }
+    }
 
-         $this->renderer->render("agregarPregunta",$datos);
-     }
-     }
+    public function agregarCategoria(){
+        if(!isset($_SESSION['email'])){
+            header("location: /");
+            exit();
+        }
+        if($_SESSION['rol']=2) {
+            $datos['editor'] = 2;
+            $this->renderer->render("agregarCategoria",$datos);
+        }
+    }
 
     public function modificarPregunta(){
         if(!isset($_SESSION['email'])){

@@ -11,11 +11,9 @@
             <div class="form-group">
                 <label for="temas">Categoria:</label>
                 <select class="form-select" name="categoria" id="categoria">
-                    <option value="1">Historia</option>
-                    <option value="2">Entretenimiento</option>
-                    <option value="3">Arte</option>
-                    <option value="4">Ciencia</option>
-                    <option value="5">Geografia</option>
+                {{#categorias}}
+                        <option value="{{categoria_id}}">{{nombre}}</option>
+                {{/categorias}}
                 </select>
             </div>
 
