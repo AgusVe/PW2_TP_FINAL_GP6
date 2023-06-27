@@ -10,7 +10,7 @@ class RegistroModel{
 
     public function altaUsuario($valores){
         $insert = 'INSERT INTO `usuario`
-                   (nombre, apellido, nacimiento,grupoEdad, genero, pais, ciudad, email, contrasenia, hashRegistro, usuario, estado, fecha_Registro, idRol, url_imagen)' . $valores . ";";
+                   (nombre, apellido, nacimiento,grupoEdad, genero, pais, ciudad, latitud, longitud, email, contrasenia, hashRegistro, usuario, estado, fecha_Registro, idRol, url_imagen)' . $valores . ";";
         $this->database->execute($insert);
     }
     public function calcularGrupoEdad($email){

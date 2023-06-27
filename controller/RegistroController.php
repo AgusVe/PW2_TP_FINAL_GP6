@@ -36,6 +36,7 @@ class RegistroController
             $genero = $_POST['genero'];
             $pais = $_POST['pais'];
             $ciudad = $_POST['ciudad'];
+            $coordenadas = $_POST['direccion'];
             $email = $_POST['email'];
             $contrasenia = $_POST['contrasenia'];
             $contraseniaRepe = $_POST['contraseniaRepe'];
@@ -43,6 +44,11 @@ class RegistroController
             $estado = 0;
             $fechaRegistro = date("Y/m/d");
             $idRol = 3;
+
+            $partesCoordenadas = explode(",", $coordenadas);
+
+            $latitud = trim($partesCoordenadas[0]); // Obtener la latitud
+            $longitud = trim($partesCoordenadas[1]); // Obtener la longitud
 
             /*CALCULCAR GRUPO DE EDAD*/
             $fechaRegistroParaUsarLaFuncionDiffMasAdelante = DateTime::createFromFormat('Y/m/d', $fechaRegistro);
@@ -127,7 +133,7 @@ class RegistroController
 
             $hash_de_registro = hash("md5", time());
 
-            $valores = "VALUES ('$nombre', '$apellido', '$fechaNac','$grupoEdad', '$genero', '$pais', '$ciudad', '$email', '$contraseniaHasheada','$hash_de_registro', '$usuario', '$estado', '$fechaRegistro', '$idRol', '$target_file')";
+            $valores = "VALUES ('$nombre', '$apellido', '$fechaNac','$grupoEdad', '$genero', '$pais', '$ciudad', '$latitud','$longitud', '$email', '$contraseniaHasheada','$hash_de_registro', '$usuario', '$estado', '$fechaRegistro', '$idRol', '$target_file')";
             $this->registroModel->altaUsuario($valores);
             $this->generarQr($usuario);
 

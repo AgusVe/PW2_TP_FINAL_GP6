@@ -1,4 +1,4 @@
-{{> header_logueado}}
+{{>header_logueado}}
 <div class="container">
     <div class="lobby-container">
         <h1>Alta de Categoria</h1>
@@ -12,6 +12,9 @@
                 <input type="color" id="color" name="color" value="#000000">
                 <span class="color-sample" id="color-sample"></span>
             </div>
+            {{#errors}}
+                <p style="color:red">{{categoria}}</p>
+            {{/errors}}
             <button type="submit" class="btn btn-primary" name="add">Enviar</button>
         </form>
     </div>

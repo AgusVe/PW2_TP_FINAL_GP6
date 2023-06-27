@@ -38,6 +38,9 @@ class PreguntaController{
                 $erroresEncontrados = $errors;
 
                 $data = array('errors' => $erroresEncontrados);
+                if($_SESSION['rol']=2) {
+                    $data['editor'] = 2;
+                }
                 $this->renderer->render("agregarPregunta", $data);
                 exit;
             }

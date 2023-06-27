@@ -18,7 +18,6 @@ class CategoriaController{
             $categoria = $_POST['categoria'];
             $color = $_POST['color'];
 
-
             if (empty($_POST['categoria'])) {
                 $errors['categoria'] = 'Por favor indique una categoria';
             }
@@ -27,6 +26,9 @@ class CategoriaController{
                 $erroresEncontrados = $errors;
 
                 $data = array('errors' => $erroresEncontrados);
+                if($_SESSION['rol']=2) {
+                    $data['editor'] = 2;
+                }
                 $this->renderer->render("agregarCategoria", $data);
                 exit;
             }
