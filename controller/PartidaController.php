@@ -68,7 +68,7 @@ class PartidaController
         }
 
         if($arrDatosPartida['terminada'] == 1) {
-            $this->redirigir();
+            $this->redirigirHome();
             return;
         }
 
@@ -97,7 +97,7 @@ class PartidaController
 
         $arrDatosPartida = $this->partidaModel->obtenerPartida($idPartida);
 
-       if(!isset($arrDatosPartida['idPartida'])) {
+        if(!isset($arrDatosPartida['idPartida'])) {
             $this->redirigirHome();
             return;
         }
@@ -130,10 +130,26 @@ class PartidaController
             //Si me llegó la respuesta correcta a la pregunta planteada, entonces marco la respuesta como correcta
             if(isset($_REQUEST['id_pregunta']) && $_REQUEST['id_pregunta'] == $arrDatosPartida['idPreguntaActual']) {
                 $strRespuesta = "";
+                $fueraDeTiempo = false;
                 if(isset($_REQUEST['respuesta'])) {
                     $strRespuesta = $_REQUEST['respuesta'];
                 }
-                if(is_array($arrDatosPreguntaRespondida) && isset($arrDatosPreguntaRespondida['respuesta_correcta']) && $arrDatosPreguntaRespondida['respuesta_correcta'] == $strRespuesta){
+
+                if(isset($_REQUEST['tiempo'])) {
+                    $strTiempo = $_REQUEST['tiempo'];
+                }
+
+                /*Control del tiempo dese backend - La marca en rojo igual para no saber si era correcta o no*/
+                $tiempoActual = time();
+                $tiempoInicioPregunta = $strTiempo;
+                $tiempoLimite = 10;
+
+                $tiempoTranscurrido = $tiempoActual - $tiempoInicioPregunta;
+                if ($tiempoTranscurrido > $tiempoLimite) {
+                    $fueraDeTiempo = true;
+                }
+
+                if(is_array($arrDatosPreguntaRespondida) && isset($arrDatosPreguntaRespondida['respuesta_correcta']) && $arrDatosPreguntaRespondida['respuesta_correcta'] == $strRespuesta && $fueraDeTiempo === false){
                     //Respuesta es correcta
                     $bRespuestaCorrecta = true;
                     $this->partidaModel->actualizarPuntaje($idPartida);

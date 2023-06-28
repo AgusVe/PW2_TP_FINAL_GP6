@@ -2,6 +2,7 @@ let tiempo_valor = 10;
 let tiempo_contador;
 let time;
 let strRespuestaUsuario = null;
+let strTiempo = null;
 let arrDatosPregunta = null;
 
 next();
@@ -13,7 +14,7 @@ function next() {
     // Realizar una petición AJAX para obtener los datos de preguntas JSON
     let strURL = '/partida/next?id='+idPartida;
     if(arrDatosPregunta != null) {
-        strURL = strURL + "&id_pregunta="+arrDatosPregunta['pregunta_id']+"&respuesta="+strRespuestaUsuario;
+        strURL = strURL + "&id_pregunta="+arrDatosPregunta['pregunta_id']+"&respuesta="+strRespuestaUsuario+"&tiempo="+strTiempo;
     }
 
     $.ajax({
@@ -143,6 +144,7 @@ function opcionSeleccionada(respuesta) {
 
 /* CONTADOR DE TIEMPO */
 function startTimer(tiempo_valor) {
+    strTiempo = Math.floor(Date.now() / 1000);
     time = tiempo_valor;
     tiempo_contador = setInterval(timer, 1000);
 }
