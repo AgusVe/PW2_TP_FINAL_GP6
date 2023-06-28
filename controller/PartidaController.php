@@ -34,7 +34,7 @@ class PartidaController
 
         $idUsuario = $_SESSION['id'];
         $fecha = date("Y/m/d");
-
+        unset($_SESSION['id_pregunta']);
         $intIdPartida = $this->partidaModel->generarPartida($idUsuario, $fecha);
         $_SESSION['id_partida'] = $intIdPartida;
         header('location: ./jugar?id='.$intIdPartida);
@@ -60,7 +60,10 @@ class PartidaController
 
         $arrDatosPartida = $this->partidaModel->obtenerPartida($idPartida);
 
-
+        if(isset($_SESSION['id_pregunta'])) {
+            $this->redirigirHome();
+            return;
+        }
 
         if(!isset($arrDatosPartida['idPartida'])) {
             $this->redirigirHome();
@@ -106,6 +109,7 @@ class PartidaController
             $this->redirigirHome();
             return;
         }
+
 
         //Valido que el usuario logueado coincida con el "dueño" de la partida
         if($arrDatosPartida['idUsuario'] != $_SESSION['id']) {
@@ -181,6 +185,7 @@ class PartidaController
         if($arrDevolucion['pregunta_anterior'] == null || ($arrDevolucion['pregunta_anterior'] != null && $arrDevolucion['pregunta_anterior'] ['resultado'] == true) ) {
 
             $arrDatosPregunta = $this->preguntaModel->obtenerPregunta($idUsuario);
+            $_SESSION['id_pregunta'] = $arrDatosPregunta['pregunta_id'];
             $this->partidaModel->actualizarPreguntaPartida($idPartida, $arrDatosPregunta['pregunta_id'], $idUsuario);
             $arrDatosPregunta['respuestas'] = [];
 
