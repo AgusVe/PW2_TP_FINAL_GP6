@@ -23,6 +23,8 @@ function next() {
         dataType: 'json',
         success: function(response) {
 
+
+
             const quiz_box = document.querySelector(".quiz-box");
 
             arrDatosPregunta = response.pregunta_nueva;

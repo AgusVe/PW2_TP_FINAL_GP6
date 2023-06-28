@@ -70,7 +70,7 @@ th {
     border-radius:150px;
 }
 .containerImgPuntaje{
-    display: flex;
+    /*display: flex;*/
     justify-content: space-between;
     margin-left:27em;
 }

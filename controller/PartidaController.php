@@ -38,7 +38,7 @@ class PartidaController
         $intIdPartida = $this->partidaModel->generarPartida($idUsuario, $fecha);
         $_SESSION['id_partida'] = $intIdPartida;
         header('location: ./jugar?id='.$intIdPartida);
-        return;
+        exit();
     }
 
     public function jugar() {
@@ -55,12 +55,16 @@ class PartidaController
 
         $idPartida = $_REQUEST['id'];
 
-        $idUsuario = $_SESSION['id'];
-
 
         $arrDatosPartida = $this->partidaModel->obtenerPartida($idPartida);
 
+        /*Valida que haya tocado F5 en base a si se asigno una pregunta previamente*/
         if(isset($_SESSION['id_pregunta'])) {
+            /*Marco la partida como terminada*/
+            $num_partida = $arrDatosPartida['idPartida'];
+            $id_usuario = $arrDatosPartida['idUsuario'];
+            $this->partidaModel->marcarComoTerminada($num_partida,$id_usuario);
+
             $this->redirigirHome();
             return;
         }
@@ -115,7 +119,6 @@ class PartidaController
         if($arrDatosPartida['idUsuario'] != $_SESSION['id']) {
             $this->redirigirHome();
             return;
-
         }
 
         $arrDevolucion=[];
