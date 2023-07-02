@@ -56,7 +56,18 @@ class PreguntaModel{
                     LIMIT 1";
         }
 
-        return $this->database->getOne($sql);
+        $resultado = $this->database->getOne($sql);
+
+        if($resultado == null){
+            $sql = "SELECT p.pregunta_id, p.enunciado, p.categoria_id, p.respuestaA, p.respuestaB, p.respuestaC, p.respuestaD, p.respuesta_correcta, c.color
+                    FROM preguntas p
+                    JOIN categoria c ON p.categoria_id = c.categoria_id
+                    ORDER BY RAND()
+                    LIMIT 1";
+            $resultado = $this->database->getOne($sql);
+        }
+
+        return $resultado;
     }
 
     public function obtenerNivelUsuario($idUsuarioActual){

@@ -5,16 +5,12 @@ class PartidaController
     private $partidaModel;
     private $preguntaModel;
     private $renderer;
-    private $configuration;
 
     public function __construct($partidaModel, $preguntaModel, $renderer)
     {
         $this->partidaModel = $partidaModel;
         $this->preguntaModel = $preguntaModel;
         $this->renderer = $renderer;
-
-        include_once("helpers/Configuration.php");
-        $this->configuration = new Configuration();
 
     }
 
@@ -23,13 +19,6 @@ class PartidaController
         if (!isset($_SESSION['email'])) {
             header("location: /");
             exit();
-        }
-
-        if($this->configuration->getConfigParameter('permitir_multiples_partidas') != 1){
-            if(isset($_SESSION['id_partida']) && $_SESSION['id_partida'] > 0) {
-                header('location: ./jugar?id='.$_SESSION['id_partida']);
-                return;
-            }
         }
 
         $idUsuario = $_SESSION['id'];
