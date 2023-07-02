@@ -119,7 +119,7 @@ class PreguntaModel{
 
     public function agregarPreguntaEnBD($valores){
         $insert = 'INSERT INTO `preguntas`
-                   (enunciado, respuestaA, respuestaB, respuestaC, respuestaD, respuesta_correcta, categoria_id,preguntaSugerida)' . $valores . ";";
+                   (enunciado, respuestaA, respuestaB, respuestaC, respuestaD, respuesta_correcta, categoria_id,preguntaSugerida,fecha)' . $valores . ";";
         $this->database->execute($insert);
     }
 

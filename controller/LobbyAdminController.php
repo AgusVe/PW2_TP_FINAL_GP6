@@ -26,13 +26,14 @@ class LobbyAdminController
 
 
         $datos['datosUsur'] = $this->perfilModel->obtenerDatos($_SESSION["id"]);
+        $datos['admin'] = 1;
 
         echo $this->renderer->render("lobbyAdmin", $datos);
     }
 
     public function datosParaGraficos()
     {
-        if (isset($_POST['filtroFecha'])){
+        if ($_POST['filtroFecha'] != ''){
             $fecha = $_POST['filtroFecha'];
         } else {
             $fecha = date("Y/m/d");

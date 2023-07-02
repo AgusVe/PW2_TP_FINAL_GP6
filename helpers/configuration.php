@@ -16,6 +16,7 @@ include_once('controller/RankingController.php');
 include_once('controller/PerfilController.php');
 include_once('controller/LobbyAdminController.php');
 include_once('controller/PreguntaController.php');
+include_once('controller/CategoriaController.php');
 
 
 
@@ -26,6 +27,7 @@ include_once('model/PartidaModel.php');
 include_once('model/RankingModel.php');
 include_once('model/PerfilModel.php');
 include_once ('model/LobbyAdminModel.php');
+include_once('model/CategoriaModel.php');
 
 class configuration{
 
@@ -68,7 +70,7 @@ class configuration{
         return new LoginController($this->getRenderer());
     }
     public function getLobbyUsuarioController(){
-        return new LobbyUsuarioController($this->getRenderer(),new PerfilModel($this->getDataBase()));
+        return new LobbyUsuarioController($this->getRenderer(),new PerfilModel($this->getDataBase()),new CategoriaModel($this->getDataBase()));
     }
 
     public function getSesionController(){
@@ -96,6 +98,10 @@ class configuration{
     }
     public function getPreguntaController(){
         return new PreguntaController(new PreguntaModel($this->getDataBase()),$this->getRenderer());
+    }
+
+    public function getCategoriaController(){
+        return new CategoriaController(new CategoriaModel($this->getDataBase()),$this->getRenderer());
     }
 
 

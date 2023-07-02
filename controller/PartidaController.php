@@ -35,11 +35,11 @@ class PartidaController
 
         $idUsuario = $_SESSION['id'];
         $fecha = date("Y/m/d");
-
+        unset($_SESSION['id_pregunta']);
         $intIdPartida = $this->partidaModel->generarPartida($idUsuario, $fecha);
         $_SESSION['id_partida'] = $intIdPartida;
         header('location: ./jugar?id='.$intIdPartida);
-        return;
+        exit();
     }
 
     public function jugar() {
@@ -56,12 +56,19 @@ class PartidaController
 
         $idPartida = $_REQUEST['id'];
 
-        $idUsuario = $_SESSION['id'];
-
 
         $arrDatosPartida = $this->partidaModel->obtenerPartida($idPartida);
 
+        /*Valida que haya tocado F5 en base a si se asigno una pregunta previamente*/
+        if(isset($_SESSION['id_pregunta'])) {
+            /*Marco la partida como terminada*/
+            $num_partida = $arrDatosPartida['idPartida'];
+            $id_usuario = $arrDatosPartida['idUsuario'];
+            $this->partidaModel->marcarComoTerminada($num_partida,$id_usuario);
 
+            $this->redirigirHome();
+            return;
+        }
 
         if(!isset($arrDatosPartida['idPartida'])) {
             $this->redirigirHome();
@@ -69,7 +76,7 @@ class PartidaController
         }
 
         if($arrDatosPartida['terminada'] == 1) {
-            $this->redirigir();
+            $this->redirigirHome();
             return;
         }
 
@@ -98,7 +105,7 @@ class PartidaController
 
         $arrDatosPartida = $this->partidaModel->obtenerPartida($idPartida);
 
-       if(!isset($arrDatosPartida['idPartida'])) {
+        if(!isset($arrDatosPartida['idPartida'])) {
             $this->redirigirHome();
             return;
         }
@@ -108,11 +115,11 @@ class PartidaController
             return;
         }
 
+
         //Valido que el usuario logueado coincida con el "dueño" de la partida
         if($arrDatosPartida['idUsuario'] != $_SESSION['id']) {
             $this->redirigirHome();
             return;
-
         }
 
         $arrDevolucion=[];
@@ -131,10 +138,26 @@ class PartidaController
             //Si me llegó la respuesta correcta a la pregunta planteada, entonces marco la respuesta como correcta
             if(isset($_REQUEST['id_pregunta']) && $_REQUEST['id_pregunta'] == $arrDatosPartida['idPreguntaActual']) {
                 $strRespuesta = "";
+                $fueraDeTiempo = false;
                 if(isset($_REQUEST['respuesta'])) {
                     $strRespuesta = $_REQUEST['respuesta'];
                 }
-                if(is_array($arrDatosPreguntaRespondida) && isset($arrDatosPreguntaRespondida['respuesta_correcta']) && $arrDatosPreguntaRespondida['respuesta_correcta'] == $strRespuesta){
+
+                if(isset($_REQUEST['tiempo'])) {
+                    $strTiempo = $_REQUEST['tiempo'];
+                }
+
+                /*Control del tiempo dese backend - La marca en rojo igual para no saber si era correcta o no*/
+                $tiempoActual = time();
+                $tiempoInicioPregunta = $strTiempo;
+                $tiempoLimite = 10;
+
+                $tiempoTranscurrido = $tiempoActual - $tiempoInicioPregunta;
+                if ($tiempoTranscurrido > $tiempoLimite) {
+                    $fueraDeTiempo = true;
+                }
+
+                if(is_array($arrDatosPreguntaRespondida) && isset($arrDatosPreguntaRespondida['respuesta_correcta']) && $arrDatosPreguntaRespondida['respuesta_correcta'] == $strRespuesta && $fueraDeTiempo === false){
                     //Respuesta es correcta
                     $bRespuestaCorrecta = true;
                     $this->partidaModel->actualizarPuntaje($idPartida);
@@ -166,6 +189,7 @@ class PartidaController
         if($arrDevolucion['pregunta_anterior'] == null || ($arrDevolucion['pregunta_anterior'] != null && $arrDevolucion['pregunta_anterior'] ['resultado'] == true) ) {
 
             $arrDatosPregunta = $this->preguntaModel->obtenerPregunta($idUsuario);
+            $_SESSION['id_pregunta'] = $arrDatosPregunta['pregunta_id'];
             $this->partidaModel->actualizarPreguntaPartida($idPartida, $arrDatosPregunta['pregunta_id'], $idUsuario);
             $arrDatosPregunta['respuestas'] = [];
 

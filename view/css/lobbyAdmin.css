@@ -70,7 +70,7 @@ th {
     border-radius:150px;
 }
 .containerImgPuntaje{
-    display: flex;
+    /*display: flex;*/
     justify-content: space-between;
     margin-left:27em;
 }
@@ -91,6 +91,14 @@ th {
 }
 .btn-container{
     display: inline-grid;
+}
+.form-filtro{
+    display: flex;
+    align-items: self-end;
+}
+.boton-filtro{
+    padding: 10px;
+    margin-left: 10px;
 }
 .button{
     margin-bottom:1em;

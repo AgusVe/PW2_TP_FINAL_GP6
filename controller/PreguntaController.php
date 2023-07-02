@@ -15,27 +15,53 @@ class PreguntaController{
 
         $pregunta = $this->preguntaModel->buscarPregunta();
 
-        //Consultar el nivel del usuario y devolverlo $nivel
-
-        //Ir a buscar una pregunta a la base de datos que matchee con la logica de nivel
-
-        //verificar si la respondio
     }
 
     public function procesarFormulario(){
         if (isset($_POST['add'])) {
+            $errors = array();
             $enunciado = $_POST['pregunta'];
             $opcionA = $_POST['opcionA'];
             $opcionB = $_POST['opcionB'];
             $opcionC = $_POST['opcionC'];
             $opcionD = $_POST['opcionD'];
-            $respuesta = $_POST['respuesta'];
             $categoria = $_POST['categoria'];
             $preguntaSugerida=1;
+            $fecha = date("Y/m/d");
 
 
+            if (empty($_POST['opcionCorrecta'])) {
+                $errors['opcionCorrecta'] = 'Por favor indique una opcion correcta antes de avanzar';
+            }
 
-            $valores = "VALUES ('$enunciado', '$opcionA', '$opcionB', '$opcionC', '$opcionD', '$respuesta', '$categoria','$preguntaSugerida')";
+            if (count($errors) > 0) {
+                $erroresEncontrados = $errors;
+
+                $data = array('errors' => $erroresEncontrados);
+                if($_SESSION['rol']=2) {
+                    $data['editor'] = 2;
+                }
+                $this->renderer->render("agregarPregunta", $data);
+                exit;
+            }
+
+            switch ($_POST['opcionCorrecta']){
+                case "A":
+                    $respuesta = $_POST['opcionA'];
+                    break;
+                case "B":
+                    $respuesta = $_POST['opcionB'];
+                    break;
+                case "C":
+                    $respuesta = $_POST['opcionC'];
+                    break;
+                case "D":
+                    $respuesta = $_POST['opcionD'];
+                    break;
+            }
+
+
+            $valores = "VALUES ('$enunciado', '$opcionA', '$opcionB', '$opcionC', '$opcionD', '$respuesta', '$categoria','$preguntaSugerida','$fecha')";
             $this->preguntaModel->agregarPreguntaEnBD($valores);
 
             header('location: /pregunta/exito');
@@ -169,11 +195,13 @@ class PreguntaController{
             $respuesta = $_POST['respuesta'];
             $categoria = $_POST['categoria'];
             $preguntaSugerida=1;
+            $fecha = date("Y/m/d");
+
 
 
             $flag = "Aceptar";
 
-            $valores = "VALUES ('$enunciado', '$opcionA', '$opcionB', '$opcionC', '$opcionD', '$respuesta', '$categoria','$preguntaSugerida')";
+            $valores = "VALUES ('$enunciado', '$opcionA', '$opcionB', '$opcionC', '$opcionD', '$respuesta', '$categoria','$preguntaSugerida','$fecha')";
             $this->preguntaModel->agregarPreguntaEnBD($valores);
             $this->preguntaModel->actualizarSugerencia($flag,$id);
 
