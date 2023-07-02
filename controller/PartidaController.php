@@ -65,7 +65,7 @@ class PartidaController
             $id_usuario = $arrDatosPartida['idUsuario'];
             $this->partidaModel->marcarComoTerminada($num_partida,$id_usuario);
 
-            $this->redirigirHome();
+            $this->errorDePartida();
             return;
         }
 
@@ -222,6 +222,10 @@ class PartidaController
     private function redirigirHome() {
         header("location: /lobbyUsuario");
         exit();
+    }
+
+    private function errorDePartida(){
+        $this->renderer->render("partida_error");
     }
 
     public function acumularpuntos(){
