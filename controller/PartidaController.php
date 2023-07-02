@@ -5,7 +5,6 @@ class PartidaController
     private $partidaModel;
     private $preguntaModel;
     private $renderer;
-    private $configuration;
 
     public function __construct($partidaModel, $preguntaModel, $renderer)
     {
