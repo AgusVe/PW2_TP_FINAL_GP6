@@ -234,9 +234,8 @@ CREATE TABLE `usuario` (
 --
 -- Volcado de datos para la tabla `usuario`
 --
-
 INSERT INTO `usuario` (`idUsuario`, `nombre`, `apellido`, `nacimiento`, `grupoEdad`, `genero`, `pais`, `ciudad`, `latitud`, `longitud`, `email`, `contrasenia`, `hashRegistro`, `usuario`, `estado`, `qr`, `fecha_registro`, `idRol`, `url_imagen`, `puntosTotales`) VALUES
-(21, 'Leo', 'Messi', '1992-01-03', 'mayor', 'M', 'Argentina', 'Lomas del Mirador', '-34.6656778', '-58.552274', 'ivandp6880@gmail.com', '81dc9bdb52d04dc20036dbd8313ed055', 'fcd2324cb4e9be6e33aabfeb9be8c424', 'lmessi', 1, '', '2023-06-13', 3, './uploads/lmessi.jpg', 5),
+(21, 'Leo', 'Messi', '1992-01-03', 'mayor', 'M', 'Argentina', 'Lomas del Mirador', '-34.6656778', '-58.552274', 'ivandp6880@gmail.com', '81dc9bdb52d04dc20036dbd8313ed055', 'fcd2324cb4e9be6e33aabfeb9be8c424', 'lmessi', 1, '', '2023-06-13', 3, './uploads/lmessi.jpg', 12),
 (22, 'Ivan', 'Del Pino', '1992-01-03', 'menor', 'M', 'Argentina', 'Ramos Mejia', '-34.6390979', '-58.5679998', 'ivangdelpino4@gmail.com', '81dc9bdb52d04dc20036dbd8313ed055', '9c011f5f48c9a41931c39c2d416714ee', 'ivan6880', 1, '', '2023-06-20', 2, './uploads/ivan6880.jpg', 0),
 (23, 'El admin', 'apellido Admin', '1983-02-10', 'mayor', 'X', 'Brasil', 'Fortaleza ', '-3.7325021226167485', '-38.52579858170485', 'admin@gmail.com', '81dc9bdb52d04dc20036dbd8313ed055', '8222e1552ec49ba4afaeb7e7c32da819', 'EL admin', 1, '', '2023-06-23', 1, './uploads/EL admin.jpg', 0),
 (28, 'Ale', 'Paz', '1992-09-05', 'menor', 'M', 'Argentina', 'San Justo', '-34.6876029887841', '-58.56415346470932', 'alepaz@gmail.com', '81dc9bdb52d04dc20036dbd8313ed055', '7e0a842089712fe856ca1d0aa557b5db', 'ale_paz', 1, '', '2023-06-26', 3, './uploads/ale_paz.png', 0),

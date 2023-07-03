@@ -43,8 +43,9 @@ class LobbyUsuarioController{
             exit();
         }
         if($_SESSION['rol']=3) {
-            $datos['editor'] = 3;
+            $datos['usuarioComun'] = 3;
             $datos['datosUsur']=$this->perfilModel->obtenerDatos($_SESSION["id"]);
+            $datos['categorias']=$this->categoriaModel->listar();
             $this->renderer->render("sugerirPregunta",$datos);
         }
     }

@@ -5,7 +5,6 @@ class PartidaController
     private $partidaModel;
     private $preguntaModel;
     private $renderer;
-    private $configuration;
 
     public function __construct($partidaModel, $preguntaModel, $renderer)
     {
@@ -13,10 +12,6 @@ class PartidaController
         $this->preguntaModel = $preguntaModel;
         $this->renderer = $renderer;
 
-
-        /*include_once("helpers/Configuration.php");
-        $this->configuration = new Configuration();*/
-        
     }
 
     public function nuevaPartida()
@@ -26,12 +21,6 @@ class PartidaController
             exit();
         }
 
-        /*if($this->configuration->getConfigParameter('permitir_multiples_partidas') != 1){
-            if(isset($_SESSION['id_partida']) && $_SESSION['id_partida'] > 0) {
-                header('location: ./jugar?id='.$_SESSION['id_partida']);
-                return;
-            }
-        }*/
 
         $idUsuario = $_SESSION['id'];
         $fecha = date("Y/m/d");
@@ -66,7 +55,7 @@ class PartidaController
             $id_usuario = $arrDatosPartida['idUsuario'];
             $this->partidaModel->marcarComoTerminada($num_partida,$id_usuario);
 
-            $this->redirigirHome();
+            $this->errorDePartida();
             return;
         }
 
@@ -223,6 +212,10 @@ class PartidaController
     private function redirigirHome() {
         header("location: /lobbyUsuario");
         exit();
+    }
+
+    private function errorDePartida(){
+        $this->renderer->render("partida_error");
     }
 
     public function acumularpuntos(){

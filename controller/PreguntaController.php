@@ -139,14 +139,44 @@ class PreguntaController{
     public function agregarSugerencia(){
 
         if (isset($_POST['add'])) {
+            $errors = array();
             $usuario = $_POST['usuario'];
             $enunciado = $_POST['pregunta'];
             $opcionA = $_POST['opcionA'];
             $opcionB = $_POST['opcionB'];
             $opcionC = $_POST['opcionC'];
             $opcionD = $_POST['opcionD'];
-            $respuesta = $_POST['respuesta'];
             $categoria = $_POST['categoria'];
+
+            if (empty($_POST['opcionCorrecta'])) {
+                $errors['opcionCorrecta'] = 'Por favor indique una opcion correcta antes de avanzar';
+            }
+
+            if (count($errors) > 0) {
+                $erroresEncontrados = $errors;
+
+                $data = array('errors' => $erroresEncontrados);
+                if($_SESSION['rol']=3) {
+                    $data['usuarioComun'] = 3;
+                }
+                $this->renderer->render("agregarPregunta", $data);
+                exit;
+            }
+
+            switch ($_POST['opcionCorrecta']){
+                case "A":
+                    $respuesta = $_POST['opcionA'];
+                    break;
+                case "B":
+                    $respuesta = $_POST['opcionB'];
+                    break;
+                case "C":
+                    $respuesta = $_POST['opcionC'];
+                    break;
+                case "D":
+                    $respuesta = $_POST['opcionD'];
+                    break;
+            }
 
             $valores = "VALUES ('$enunciado', '$opcionA', '$opcionB', '$opcionC', '$opcionD', '$respuesta', '$categoria','$usuario')";
             $this->preguntaModel->agregarSugerenciaEnBD($valores);
